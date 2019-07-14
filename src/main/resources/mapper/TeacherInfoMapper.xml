@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myclass.dao.TeacherInfoMapper">
+
+    <resultMap type="TeacherInfo" id="TeacherInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="loginName" column="loginName" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="pwd" column="pwd" jdbcType="VARCHAR"/>
+        <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="lastLoginTime" column="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="getTeacherInfoByLoginNameAndPwd" resultMap="TeacherInfoMap">
+        select id,loginName,`name`,pwd,createTime,lastLoginTime,remark from teacherInfo
+        <where>
+            loginName=#{loginName} and pwd=#{pwd}
+        </where>
+    </select>
+
+</mapper>

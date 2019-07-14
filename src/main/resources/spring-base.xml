@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+         http://www.springframework.org/schema/context/spring-context.xsd">
+	<!-- 读取数据库配置文件 -->
+        <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+	        <property name="location">
+	            <value>classpath:database.properties</value>
+	        </property>
+        </bean> 
+
+	<!-- 数据源 -->
+
+	   <bean id="dataSource"
+        class="com.alibaba.druid.pool.DruidDataSource" init-method="init"
+        destroy-method="close">
+        <property name="url" value="${url}" />
+        <property name="username" value="${user}" />
+        <property name="password" value="${password}" />
+        <property name="filters" value="stat" />
+        <property name="maxActive" value="20" />
+        <property name="initialSize" value="1" />
+        <property name="maxWait" value="60000" />
+        <property name="minIdle" value="1" />
+        <property name="timeBetweenEvictionRunsMillis" value="3000" />
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <property name="validationQuery" value="SELECT 'x'" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="false" />
+        <property name="testOnReturn" value="false" />
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize"
+            value="20" />
+    </bean>
+
+	<!-- 事务管理 -->
+<!-- 	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean> -->
+
+	<!-- 扫描切面注解 -->
+<!-- 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->
+
+	<!-- 事务通知器 -->
+<!-- 	<tx:advice id="txAdivce"
+		transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*" propagation="REQUIRED"
+				rollback-for="Exception" />
+		</tx:attributes>
+	</tx:advice> -->
+
+	<!-- 通过AOP实现事务，proxy-target-class="true"代表支持基于类的代理 -->
+<!-- 	<aop:config proxy-target-class="true">
+		<aop:pointcut
+			expression="execution(* cn.cm.service.*.*(..))" id="transService" />
+		<aop:advisor advice-ref="txAdivce"
+			pointcut-ref="transService" />
+	</aop:config> -->
+
+	<!-- SqlSession工厂Bean -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="configLocation" value="classpath:mybatis.xml"/>
+		<property name="mapperLocations">
+		  <array>
+		      <value>classpath:mapper/*.xml</value>
+		  </array>
+		</property>
+	</bean>
+
+	<!-- Mapper自动扫描创建 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="sqlSessionFactoryBeanName"
+			value="sqlSessionFactory"></property>
+		<!-- 要扫描的mapper所在的包 -->
+		<property name="basePackage" value="com.myclass.dao"></property>
+	</bean>
+	
+	<context:component-scan base-package="com.myclass"></context:component-scan>
+</beans>
