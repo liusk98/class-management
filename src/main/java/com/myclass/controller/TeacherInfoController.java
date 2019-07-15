@@ -3,6 +3,7 @@ package com.myclass.controller;
 import com.myclass.entity.TeacherInfo;
 import com.myclass.service.TeacherInfoService;
 import org.apache.log4j.Logger;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +33,7 @@ public class TeacherInfoController {
 
     /**
      * 打开登录页面
+     *
      * @return 登录页面
      */
     @GetMapping("login.html")
@@ -64,4 +66,24 @@ public class TeacherInfoController {
         modelAndView.setViewName("backstage/index");
         return modelAndView;
     }
+
+    @GetMapping("insert.html")
+    public ModelAndView insert(ModelAndView modelAndView) {
+        modelAndView.setViewName("backstage/insert");
+        return modelAndView;
+    }
+
+    @PostMapping("insert.do")
+    public ModelAndView insert(TeacherInfo teacherInfo, ModelAndView modelAndView) {
+        try {
+            modelAndView.setViewName("backstage/insert");
+            teacherInfoService.insertTeacherInfo(teacherInfo);
+            modelAndView.addObject("msg","新增成功");
+        } catch (Exception e) {
+            modelAndView.addObject("msg",e);
+            logger.error("insert.do error:", e);
+        }
+        return modelAndView;
+    }
+
 }

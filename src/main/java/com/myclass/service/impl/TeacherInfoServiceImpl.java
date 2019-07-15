@@ -4,6 +4,7 @@ import com.myclass.entity.TeacherInfo;
 import com.young.encrypt.EncryptTool;
 import com.myclass.dao.TeacherInfoMapper;
 import com.myclass.service.TeacherInfoService;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -33,6 +34,28 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
     @Override
     public TeacherInfo login(String loginName, String pwd) throws Exception {
         pwd = EncryptTool.md5(pwd);
-        return teacherInfoMapper.getTeacherInfoByLoginNameAndPwd(loginName, pwd);
+        TeacherInfo teacherInfo = teacherInfoMapper.getTeacherInfoByLoginNameAndPwd(loginName, pwd);
+        if (teacherInfo != null) {
+            teacherInfoMapper.updateLastLoginTimeById(teacherInfo.getId());
+        }
+        return teacherInfo;
+    }
+
+    /**
+     * 新增一名教师数据
+     *
+     * @param teacherInfo
+     * @return
+     */
+    @Override
+    public boolean insertTeacherInfo(TeacherInfo teacherInfo) throws Exception {
+        try {
+            teacherInfo.setPwd(EncryptTool.md5("123456"));
+            return teacherInfoMapper.insertTeacherInfo(teacherInfo) > 0;
+        } catch (DuplicateKeyException e) {
+            throw new Exception("添加教师时出错:该登录名已经存在");
+        } catch (Exception e) {
+            throw new Exception(e);
+        }
     }
 }

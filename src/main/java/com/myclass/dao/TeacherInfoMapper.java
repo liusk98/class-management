@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
 public interface TeacherInfoMapper {
 
     /**
-     * 根据name和pwd获取Teacherinfo数据
+     * 根据name和pwd获取TeacherInfo数据
      *
      * @param loginName
      * @param pwd
@@ -22,4 +22,18 @@ public interface TeacherInfoMapper {
      */
     TeacherInfo getTeacherInfoByLoginNameAndPwd(@Param("loginName") String loginName, @Param("pwd") String pwd);
 
+    /**
+     * 新增TeacherInfo数据
+     * @param teacherInfo
+     * @return
+     * @date 2019/7/15 09:51
+     */
+    int insertTeacherInfo(TeacherInfo teacherInfo);
+
+    /**
+     * 修改TeacherInfo中lastLoginTime字段
+     * @param id
+     * @return
+     */
+    int updateLastLoginTimeById(Integer id);
 }

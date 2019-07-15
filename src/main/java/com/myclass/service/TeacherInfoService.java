@@ -22,4 +22,11 @@ public interface TeacherInfoService {
      */
     TeacherInfo login(String loginName, String pwd) throws Exception;
 
+    /**
+     * 新增一名教师数据
+     * @param teacherInfo
+     * @return
+     */
+    boolean insertTeacherInfo(TeacherInfo teacherInfo) throws Exception;
+
 }

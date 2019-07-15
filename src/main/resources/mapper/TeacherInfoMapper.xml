@@ -19,4 +19,13 @@
         </where>
     </select>
 
+    <insert id="insertTeacherInfo" parameterType="TeacherInfo">
+        insert into teacherInfo(loginName,`name`,pwd,createTime,remark) values (#{loginName},#{name},#{pwd},NOW(),#{remark});
+    </insert>
+
+    <update id="updateLastLoginTimeById" parameterType="Integer">
+        update teacherInfo
+        set lastLoginTime=NOW()
+        where id=#{id};
+    </update>
 </mapper>
