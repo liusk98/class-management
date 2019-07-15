@@ -33,4 +33,8 @@
         select id,loginName,`name`,pwd,createTime,lastLoginTime,remark
         from teacherInfo;
     </select>
+
+    <delete id="deleteTeacherInfoById" parameterType="Integer">
+        delete from teacherInfo where id=#{id};
+    </delete>
 </mapper>

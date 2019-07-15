@@ -38,4 +38,12 @@ public interface TeacherInfoService {
      */
     List<TeacherInfo> getAllTeacherInfo() throws Exception;
 
+    /**
+     * 根据id删除teacherInfo数据
+     * @param id
+     * @return 是否成功
+     * @throws Exception
+     */
+    boolean deleteTeacherInfoById(Integer id) throws Exception;
+
 }

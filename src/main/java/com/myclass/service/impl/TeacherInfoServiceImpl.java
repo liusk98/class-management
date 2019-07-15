@@ -71,4 +71,16 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
         return teacherInfoMapper.listTeacherInfo();
     }
 
+    /**
+     * 根据id删除teacherInfo数据
+     *
+     * @param id
+     * @return 是否成功
+     * @throws Exception
+     */
+    @Override
+    public boolean deleteTeacherInfoById(Integer id) throws Exception {
+        return teacherInfoMapper.deleteTeacherInfoById(id) > 0;
+    }
+
 }

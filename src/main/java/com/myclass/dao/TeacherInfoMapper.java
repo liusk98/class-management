@@ -40,8 +40,15 @@ public interface TeacherInfoMapper {
     int updateLastLoginTimeById(Integer id);
 
     /**
-     * 获取Teachernfo数据
+     * 获取TeacherInfo数据
      * @return 查到的全部数据
      */
     List<TeacherInfo> listTeacherInfo();
+
+    /**
+     * 根据id删除TeacherInfo数据
+     * @param id
+     * @return
+     */
+    int deleteTeacherInfoById(Integer id);
 }

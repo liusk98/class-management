@@ -98,5 +98,15 @@ public class TeacherInfoController {
         return modelAndView;
     }
 
+    @GetMapping("deleteTeacherInfo.do")
+    public String deleteTeacherInfo(Integer id) {
+        String msg = "";
+        try {
+            msg = (teacherInfoService.deleteTeacherInfoById(id)) ? "删除成功" : "删除失败";
+        } catch (Exception e) {
+            logger.error("deleteTeacherInfo error:" , e);
+        }
+        return msg;
+    }
 
 }
