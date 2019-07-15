@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * 教师表(TeacherInfo)(TeacherInfo)表控制层
@@ -75,6 +76,12 @@ public class TeacherInfoController {
     @GetMapping("list.html")
     public ModelAndView list(ModelAndView modelAndView) {
         modelAndView.setViewName("backstage/super/list");
+        try {
+            List<TeacherInfo> listTeacherInfo = teacherInfoService.getAllTeacherInfo();
+            modelAndView.addObject("listTeacherInfo", listTeacherInfo);
+        } catch (Exception e) {
+            logger.error("list getAllTeacherInfo:", e);
+        }
         return modelAndView;
     }
 
@@ -90,7 +97,6 @@ public class TeacherInfoController {
         }
         return modelAndView;
     }
-
 
 
 }

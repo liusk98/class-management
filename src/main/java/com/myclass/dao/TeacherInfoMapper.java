@@ -3,6 +3,8 @@ package com.myclass.dao;
 import com.myclass.entity.TeacherInfo;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * 教师表(TeacherInfo)(TeacherInfo)表数据库访问层
  *
@@ -36,4 +38,10 @@ public interface TeacherInfoMapper {
      * @return
      */
     int updateLastLoginTimeById(Integer id);
+
+    /**
+     * 获取Teachernfo数据
+     * @return 查到的全部数据
+     */
+    List<TeacherInfo> listTeacherInfo();
 }

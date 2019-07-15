@@ -8,6 +8,7 @@ import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 教师表(TeacherInfo)(TeacherInfo)表服务实现类
@@ -58,4 +59,16 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
             throw new Exception(e);
         }
     }
+
+    /**
+     * 获取全部教师信息
+     *
+     * @return 查询到的数据
+     * @throws Exception
+     */
+    @Override
+    public List<TeacherInfo> getAllTeacherInfo() throws Exception {
+        return teacherInfoMapper.listTeacherInfo();
+    }
+
 }

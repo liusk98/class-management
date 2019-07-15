@@ -28,4 +28,9 @@
         set lastLoginTime=NOW()
         where id=#{id};
     </update>
+
+    <select id="listTeacherInfo" resultMap="TeacherInfoMap">
+        select id,loginName,`name`,pwd,createTime,lastLoginTime,remark
+        from teacherInfo;
+    </select>
 </mapper>

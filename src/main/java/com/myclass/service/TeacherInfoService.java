@@ -3,6 +3,8 @@ package com.myclass.service;
 
 import com.myclass.entity.TeacherInfo;
 
+import java.util.List;
+
 /**
  * 教师表(TeacherInfo)(TeacherInfo)表服务接口
  *
@@ -28,5 +30,12 @@ public interface TeacherInfoService {
      * @return
      */
     boolean insertTeacherInfo(TeacherInfo teacherInfo) throws Exception;
+
+    /**
+     * 获取全部教师信息
+     * @return 查询到的数据
+     * @throws Exception
+     */
+    List<TeacherInfo> getAllTeacherInfo() throws Exception;
 
 }
