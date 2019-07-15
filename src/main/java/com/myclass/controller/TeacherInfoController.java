@@ -3,6 +3,7 @@ package com.myclass.controller;
 import com.myclass.entity.TeacherInfo;
 import com.myclass.service.TeacherInfoService;
 import org.apache.log4j.Logger;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,14 +38,16 @@ public class TeacherInfoController {
      * @return 登录页面
      */
     @GetMapping("login.html")
-    public ModelAndView login() {
+    public ModelAndView login(String backUri,HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("backstage/login");
+        request.getSession().invalidate();
+        request.getSession().setAttribute("backUri", backUri);
         return modelAndView;
     }
 
     @PostMapping("login.do")
-    public ModelAndView login(String loginName, String pwd, HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView("redirect:index.html");
+    public ModelAndView login(String loginName, String pwd, HttpServletRequest request, ModelAndView modelAndView) {
+        modelAndView.setViewName("redirect:index.html");
         TeacherInfo teacherinfo = null;
         try {
             teacherinfo = teacherInfoService.login(loginName, pwd);
@@ -52,6 +55,10 @@ public class TeacherInfoController {
                 modelAndView.setViewName("backstage/login");
                 modelAndView.addObject("error", "用户名或密码错误!");
                 return modelAndView;
+            }
+            String backUri = (String) request.getSession().getAttribute("backUri");
+            if (backUri != null) {
+                modelAndView.setViewName("redirect:" + backUri);
             }
         } catch (Exception e) {
             logger.error("login.do error:", e);
