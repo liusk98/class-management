@@ -37,8 +37,9 @@ public class TeacherInfoController {
      * @return 登录页面
      */
     @GetMapping("login.html")
-    public ModelAndView login() {
+    public ModelAndView login(HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("backstage/login");
+        request.getSession().invalidate();
         return modelAndView;
     }
 

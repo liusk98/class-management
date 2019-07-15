@@ -45,4 +45,16 @@
 	<mvc:resources location="/WEB-INF/statics/"
 		mapping="/statics/**"></mvc:resources>
 
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/teacherinfo/**"/>
+			<!-- 不拦截 -->
+			<mvc:exclude-mapping path="/teacherinfo/login.html"/>
+			<mvc:exclude-mapping path="/teacherinfo/login.do"/>
+			<bean class="com.myclass.interceptor.SessionInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
 </beans>
