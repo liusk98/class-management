@@ -25,6 +25,8 @@
 
     <!-- Custom Theme Style -->
     <link href="${pageContext.request.contextPath}/statics/css/custom.min.css" rel="stylesheet">
+    <!-- Green -->
+    <link href="${pageContext.request.contextPath}/statics/css/green.css" rel="stylesheet">
 </head>
 
 <body class="nav-md">
@@ -60,6 +62,7 @@
                             <li><a><i class="fa fa-home"></i> 管理员专用 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li><a href="insert.html">新增教师</a></li>
+                                    <li><a href="list.html">教师列表</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -147,7 +150,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="Profile Image" /></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -159,7 +162,7 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="Profile Image" /></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>

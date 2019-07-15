@@ -25,6 +25,8 @@
 <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
 <!-- Bootstrap -->
 <script src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
+<!-- ICheck -->
+<script src="${pageContext.request.contextPath}/statics/js/icheck.min.js"></script>
 <!-- FastClick -->
 <script src="${pageContext.request.contextPath}/statics/js/fastclick.js"></script>
 <!-- NProgress -->

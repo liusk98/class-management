@@ -3,7 +3,6 @@ package com.myclass.controller;
 import com.myclass.entity.TeacherInfo;
 import com.myclass.service.TeacherInfoService;
 import org.apache.log4j.Logger;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,14 +68,20 @@ public class TeacherInfoController {
 
     @GetMapping("insert.html")
     public ModelAndView insert(ModelAndView modelAndView) {
-        modelAndView.setViewName("backstage/insert");
+        modelAndView.setViewName("backstage/super/insert");
+        return modelAndView;
+    }
+
+    @GetMapping("list.html")
+    public ModelAndView list(ModelAndView modelAndView) {
+        modelAndView.setViewName("backstage/super/list");
         return modelAndView;
     }
 
     @PostMapping("insert.do")
     public ModelAndView insert(TeacherInfo teacherInfo, ModelAndView modelAndView) {
         try {
-            modelAndView.setViewName("backstage/insert");
+            modelAndView.setViewName("backstage/super/insert");
             teacherInfoService.insertTeacherInfo(teacherInfo);
             modelAndView.addObject("msg","新增成功");
         } catch (Exception e) {
@@ -85,5 +90,7 @@ public class TeacherInfoController {
         }
         return modelAndView;
     }
+
+
 
 }

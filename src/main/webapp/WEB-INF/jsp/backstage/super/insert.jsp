@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="../common/header.jsp" flush="true">
+<jsp:include page="../../common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="新增教师"/>
 </jsp:include>
 <div>
@@ -23,7 +23,7 @@
         </div>
         <div class="x_content">
             <br>
-            <form id="demo-form2" action="insert.do" method="post" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
+            <form action="insert.do" method="post" data-parsley-validate="" class="form-horizontal form-label-left">
                 <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">姓名<span
                             class="required">*</span>
@@ -61,4 +61,4 @@
         </div>
     </div>
 </div>
-<%@include file="../common/footer.jsp" %>
+<%@include file="../../common/footer.jsp" %>
