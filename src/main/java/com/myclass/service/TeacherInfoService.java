@@ -2,6 +2,7 @@ package com.myclass.service;
 
 
 import com.myclass.entity.TeacherInfo;
+import com.myclass.tools.PageData;
 
 import java.util.List;
 
@@ -32,13 +33,6 @@ public interface TeacherInfoService {
     boolean insertTeacherInfo(TeacherInfo teacherInfo) throws Exception;
 
     /**
-     * 获取全部教师信息
-     * @return 查询到的数据
-     * @throws Exception
-     */
-    List<TeacherInfo> getAllTeacherInfo() throws Exception;
-
-    /**
      * 根据id删除teacherInfo数据
      * @param id
      * @return 是否成功
@@ -46,4 +40,13 @@ public interface TeacherInfoService {
      */
     boolean deleteTeacherInfoById(Integer id) throws Exception;
 
+    /**
+     * 分页查询教师数据
+     * @param pageIndex
+     * @param pageSize
+     * @param orderCol
+     * @param orderType
+     * @return
+     */
+    PageData<TeacherInfo> getTeachers(int pageIndex, int pageSize, String orderCol, String orderType);
 }

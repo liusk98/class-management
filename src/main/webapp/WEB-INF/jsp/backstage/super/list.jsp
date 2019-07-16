@@ -11,6 +11,7 @@
 <jsp:include page="../../common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="教师列表"/>
 </jsp:include>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap-table.min.css">
 <div class="x_content">
     <table class="table table-hover">
         <thead>
@@ -51,3 +52,5 @@
        })
     }
 </script>
+<script src="${pageContext.request.contextPath}/statics/js/bootstrap-table.min.js"></script>
+<script src="${pageContext.request.contextPath}/statics/js/locale/bootstrap-table-zh-CN.js"></script>

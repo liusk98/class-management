@@ -1,6 +1,9 @@
 package com.myclass.service.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.myclass.entity.TeacherInfo;
+import com.myclass.tools.PageData;
 import com.young.encrypt.EncryptTool;
 import com.myclass.dao.TeacherInfoMapper;
 import com.myclass.service.TeacherInfoService;
@@ -60,16 +63,6 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
         }
     }
 
-    /**
-     * 获取全部教师信息
-     *
-     * @return 查询到的数据
-     * @throws Exception
-     */
-    @Override
-    public List<TeacherInfo> getAllTeacherInfo() throws Exception {
-        return teacherInfoMapper.listTeacherInfo();
-    }
 
     /**
      * 根据id删除teacherInfo数据
@@ -81,6 +74,30 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
     @Override
     public boolean deleteTeacherInfoById(Integer id) throws Exception {
         return teacherInfoMapper.deleteTeacherInfoById(id) > 0;
+    }
+
+    /**
+     * 分页查询教师数据
+     *
+     * @param pageIndex
+     * @param pageSize
+     * @param orderCol
+     * @param orderType
+     * @return
+     */
+    @Override
+    public PageData<TeacherInfo> getTeachers(int pageIndex, int pageSize, String orderCol, String orderType) {
+        // 设置分页插件
+        Page<TeacherInfo> page = PageHelper.startPage(pageIndex, pageSize);
+        //开始调用mapper查询
+        List<TeacherInfo> teacherInfoList = teacherInfoMapper.listTeacherInfo(pageIndex, pageSize);
+
+        PageData<TeacherInfo> teacherInfoPageData = new PageData<>();
+        //获取查询的总条数
+        teacherInfoPageData.setTotal(page.getTotal());
+        //获取当前页数据
+        teacherInfoPageData.setRows(teacherInfoList);
+        return teacherInfoPageData;
     }
 
 }
