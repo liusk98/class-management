@@ -2,11 +2,11 @@ package com.myclass.service.impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.myclass.dao.TeacherInfoMapper;
 import com.myclass.entity.TeacherInfo;
+import com.myclass.service.TeacherInfoService;
 import com.myclass.tools.PageData;
 import com.young.encrypt.EncryptTool;
-import com.myclass.dao.TeacherInfoMapper;
-import com.myclass.service.TeacherInfoService;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
@@ -91,7 +91,7 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
         Page<TeacherInfo> page = PageHelper.startPage(pageIndex, pageSize);
         //开始调用mapper查询
         List<TeacherInfo> teacherInfoList = teacherInfoMapper.listTeacherInfo(orderCol, orderType);
-        
+
         PageData<TeacherInfo> teacherInfoPageData = new PageData<>();
         //获取查询的总条数
         teacherInfoPageData.setTotal(page.getTotal());

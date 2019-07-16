@@ -32,7 +32,7 @@
     <select id="listTeacherInfo" resultMap="TeacherInfoMap">
         select id,loginName,`name`,pwd,createTime,lastLoginTime,remark
         from teacherInfo
-        order by CONVERT(`${orderCol}` using gbk) ${orderType};
+        order by CONVERT(`${orderCol}` using gbk) ${orderType}
     </select>
 
     <delete id="deleteTeacherInfoById" parameterType="Integer">

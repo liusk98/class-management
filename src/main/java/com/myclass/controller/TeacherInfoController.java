@@ -87,7 +87,7 @@ public class TeacherInfoController {
         return modelAndView;
     }
 
-    @GetMapping("teacherList")
+    @GetMapping("teacherList.json")
     public PageData<TeacherInfo> getTeachers(String sort, String order, int offset, int limit) {
         // 每页条数
         int pageSize = limit;

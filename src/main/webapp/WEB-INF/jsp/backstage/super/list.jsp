@@ -13,31 +13,26 @@
 </jsp:include>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap-table.min.css">
 <div class="x_content">
-    <table class="table table-hover">
+    <table id="teacherTable" class="table table-bordered table-striped table-hover"
+            data-toggle="table"
+            data-height="460"
+            data-pagination="true"
+            data-side-pagination="server"
+            data-sort-name="id"
+            data-sort-order="asc"
+            data-page-list="[5,10,25,50,100,200,All]"
+            data-url="${pageContext.request.contextPath}/teacherinfo/teacherList.json">
         <thead>
         <tr>
-            <th>教师编号</th>
-            <th>教师名称</th>
-            <th>登录名称</th>
-            <th>创建时间</th>
-            <th>上次登录时间</th>
-            <th>备注</th>
-            <th>操作</th>
+            <th data-field="id" data-sortable="true" data-width="10" data-width-unit="%">教师编号</th>
+            <th data-field="name" data-sortable="true">教师名称</th>
+            <th data-field="loginName" data-sortable="true">登录名称</th>
+            <th data-field="createTime" data-formatter="changeDateFormat" data-sortable="true">创建时间</th>
+            <th data-field="lastLoginTime" data-formatter="changeDateFormat" ddata-sortable="true">上次登录时间</th>
+            <th data-field="remark">备注</th>
+            <%--<th>操作</th>--%>
         </tr>
         </thead>
-        <tbody>
-        <c:forEach items="${requestScope.listTeacherInfo}" var="teacherInfo">
-            <tr id="tableTr${teacherInfo.id}">
-                <td>${teacherInfo.id}</td>
-                <td>${teacherInfo.name}</td>
-                <td>${teacherInfo.loginName}</td>
-                <td><fmt:formatDate value="${teacherInfo.createTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
-                <td><fmt:formatDate value="${teacherInfo.lastLoginTime}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
-                <td>${teacherInfo.remark}</td>
-                <td><button class="btn btn-primary">操作</button><button onclick="deleteById(${teacherInfo.id})" class="btn btn-warning">开除</button></td>
-            </tr>
-        </c:forEach>
-        </tbody>
     </table>
     <div><span>${requestScope.msg}</span></div>
 </div>
@@ -54,3 +49,23 @@
 </script>
 <script src="${pageContext.request.contextPath}/statics/js/bootstrap-table.min.js"></script>
 <script src="${pageContext.request.contextPath}/statics/js/locale/bootstrap-table-zh-CN.js"></script>
+<script type="text/javascript">
+    //转换日期格式(时间戳转换为datetime格式)
+    function changeDateFormat(cellval) {
+        var dateVal = cellval + "";
+        if (cellval != null) {
+            var date = new Date(parseInt(dateVal.replace("/Date(", "").replace(")/", ""), 10));
+            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+            var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+            var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+            var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+            return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
+        }
+    }
+</script>
+
+
+
+
+
