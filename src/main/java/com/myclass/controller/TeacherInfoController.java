@@ -4,7 +4,6 @@ import com.myclass.entity.TeacherInfo;
 import com.myclass.service.TeacherInfoService;
 import com.myclass.tools.PageData;
 import org.apache.log4j.Logger;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 
 /**
  * 教师表(TeacherInfo)(TeacherInfo)表控制层

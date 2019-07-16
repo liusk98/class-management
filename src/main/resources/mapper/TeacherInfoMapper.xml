@@ -9,18 +9,19 @@
         <result property="pwd" column="pwd" jdbcType="VARCHAR"/>
         <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
         <result property="lastLoginTime" column="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
     </resultMap>
 
     <select id="getTeacherInfoByLoginNameAndPwd" resultMap="TeacherInfoMap">
-        select id,loginName,`name`,pwd,createTime,lastLoginTime,remark from teacherInfo
+        select id,loginName,`name`,pwd,createTime,lastLoginTime,`status`,remark from teacherInfo
         <where>
             loginName=#{loginName} and pwd=#{pwd}
         </where>
     </select>
 
     <insert id="insertTeacherInfo" parameterType="TeacherInfo">
-        insert into teacherInfo(loginName,`name`,pwd,createTime,remark) values (#{loginName},#{name},#{pwd},NOW(),#{remark});
+        insert into teacherInfo(loginName,`name`,pwd,createTime,`status`,remark) values (#{loginName},#{name},#{pwd},NOW(),1,#{remark});
     </insert>
 
     <update id="updateLastLoginTimeById" parameterType="Integer">
@@ -30,7 +31,7 @@
     </update>
 
     <select id="listTeacherInfo" resultMap="TeacherInfoMap">
-        select id,loginName,`name`,pwd,createTime,lastLoginTime,remark
+        select id,loginName,`name`,pwd,createTime,lastLoginTime,`status`,remark
         from teacherInfo
         order by CONVERT(`${orderCol}` using gbk) ${orderType}
     </select>

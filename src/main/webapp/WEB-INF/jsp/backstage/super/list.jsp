@@ -28,7 +28,8 @@
             <th data-field="name" data-sortable="true">教师名称</th>
             <th data-field="loginName" data-sortable="true">登录名称</th>
             <th data-field="createTime" data-formatter="changeDateFormat" data-sortable="true">创建时间</th>
-            <th data-field="lastLoginTime" data-formatter="changeDateFormat" ddata-sortable="true">上次登录时间</th>
+            <th data-field="lastLoginTime" data-formatter="changeDateFormat" data-sortable="true">上次登录时间</th>
+            <th data-field="status" data-formatter="changeStatusFormat">状态</th>
             <th data-field="remark">备注</th>
             <%--<th>操作</th>--%>
         </tr>
@@ -62,6 +63,17 @@
             var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
             return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
         }
+    }
+
+    //状态转换
+    function changeStatusFormat(status) {
+        var statusName = "";
+        if (status == 0) {
+            statusName = "禁用";
+        } else if (status == 1) {
+            statusName = "启用";
+        }
+        return statusName;
     }
 </script>
 

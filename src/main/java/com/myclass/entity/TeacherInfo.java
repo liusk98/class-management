@@ -13,27 +13,27 @@ import java.util.Date;
 public class TeacherInfo {
     /**
      * 教师id,流水号
-     */    
+     */
     private Integer id;
 
     /**
      * 登录名
-     */    
+     */
     private String loginName;
 
     /**
      * 姓名
-     */    
+     */
     private String name;
 
     /**
      * 登陆密码
-     */    
+     */
     private String pwd;
 
     /**
      * 创建时间
-     */    
+     */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
 
@@ -44,11 +44,19 @@ public class TeacherInfo {
     private Date lastLoginTime;
 
     /**
+     * 教师状态
+     * 0 禁用
+     * 1 启用
+     */
+    private Integer status;
+
+    /**
      * 备注
-     */    
+     */
     private String remark;
 
-    public TeacherInfo() {}
+    public TeacherInfo() {
+    }
 
     public Integer getId() {
         return id;
@@ -96,6 +104,14 @@ public class TeacherInfo {
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public String getRemark() {
