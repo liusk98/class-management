@@ -90,8 +90,8 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
         // 设置分页插件
         Page<TeacherInfo> page = PageHelper.startPage(pageIndex, pageSize);
         //开始调用mapper查询
-        List<TeacherInfo> teacherInfoList = teacherInfoMapper.listTeacherInfo(pageIndex, pageSize);
-
+        List<TeacherInfo> teacherInfoList = teacherInfoMapper.listTeacherInfo(orderCol, orderType);
+        
         PageData<TeacherInfo> teacherInfoPageData = new PageData<>();
         //获取查询的总条数
         teacherInfoPageData.setTotal(page.getTotal());

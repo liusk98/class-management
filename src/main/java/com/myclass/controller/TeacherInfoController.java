@@ -2,6 +2,7 @@ package com.myclass.controller;
 
 import com.myclass.entity.TeacherInfo;
 import com.myclass.service.TeacherInfoService;
+import com.myclass.tools.PageData;
 import org.apache.log4j.Logger;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,13 +84,17 @@ public class TeacherInfoController {
     @GetMapping("list.html")
     public ModelAndView list(ModelAndView modelAndView) {
         modelAndView.setViewName("backstage/super/list");
-        try {
-            List<TeacherInfo> listTeacherInfo = teacherInfoService.getAllTeacherInfo();
-            modelAndView.addObject("listTeacherInfo", listTeacherInfo);
-        } catch (Exception e) {
-            logger.error("list getAllTeacherInfo:", e);
-        }
         return modelAndView;
+    }
+
+    @GetMapping("teacherList")
+    public PageData<TeacherInfo> getTeachers(String sort, String order, int offset, int limit) {
+        // 每页条数
+        int pageSize = limit;
+        // 当前页码
+        int pageIndex = offset / limit + 1;
+        PageData<TeacherInfo> teachers = teacherInfoService.getTeachers(pageIndex, pageSize, sort, order);
+        return teachers;
     }
 
     @PostMapping("insert.do")

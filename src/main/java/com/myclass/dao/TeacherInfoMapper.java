@@ -41,9 +41,11 @@ public interface TeacherInfoMapper {
 
     /**
      * 获取TeacherInfo数据
+     * @param orderCol
+     * @param orderType
      * @return 查到的全部数据
      */
-    List<TeacherInfo> listTeacherInfo();
+    List<TeacherInfo> listTeacherInfo(@Param("orderCol") String orderCol, @Param("orderType") String orderType);
 
     /**
      * 根据id删除TeacherInfo数据
