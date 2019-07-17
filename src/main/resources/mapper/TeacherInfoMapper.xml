@@ -39,4 +39,14 @@
     <delete id="deleteTeacherInfoById" parameterType="Integer">
         delete from teacherInfo where id=#{id};
     </delete>
+
+    <update id="updatePwdById">
+        update teacherInfo
+        <set>
+            pwd=#{pwd}
+        </set>
+        <where>
+            id=#{id} and pwd=#{oldPwd}
+        </where>
+    </update>
 </mapper>

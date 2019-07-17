@@ -37,7 +37,7 @@ public class TeacherInfoController {
      * @return 登录页面
      */
     @GetMapping("login.html")
-    public ModelAndView login(String backUri,HttpServletRequest request) {
+    public ModelAndView login(String backUri, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("backstage/login");
         request.getSession().invalidate();
         request.getSession().setAttribute("backUri", backUri);
@@ -85,6 +85,12 @@ public class TeacherInfoController {
         return modelAndView;
     }
 
+    @GetMapping("updatePwd.html")
+    public ModelAndView updatePwd(ModelAndView modelAndView) {
+        modelAndView.setViewName("backstage/updatePwd");
+        return modelAndView;
+    }
+
     @GetMapping("teacherList.json")
     public PageData<TeacherInfo> getTeachers(String sort, String order, int offset, int limit) {
         // 每页条数
@@ -100,9 +106,9 @@ public class TeacherInfoController {
         try {
             modelAndView.setViewName("backstage/super/insert");
             teacherInfoService.insertTeacherInfo(teacherInfo);
-            modelAndView.addObject("msg","新增成功");
+            modelAndView.addObject("msg", "新增成功");
         } catch (Exception e) {
-            modelAndView.addObject("msg",e);
+            modelAndView.addObject("msg", e);
             logger.error("insert.do error:", e);
         }
         return modelAndView;
@@ -114,9 +120,25 @@ public class TeacherInfoController {
         try {
             msg = (teacherInfoService.deleteTeacherInfoById(id)) ? "删除成功" : "删除失败";
         } catch (Exception e) {
-            logger.error("deleteTeacherInfo error:" , e);
+            logger.error("deleteTeacherInfo error:", e);
         }
         return msg;
+    }
+
+    @PostMapping("updatePwd.do")
+    public ModelAndView updatePwd(Integer id, String newPwd, String oldPwd) {
+        ModelAndView modelAndView = new ModelAndView("backstage/updatePwd");
+        try {
+            if (teacherInfoService.updateTeacherInfoPwdById(id, oldPwd, newPwd)) {
+                modelAndView.addObject("msg", "修改成功");
+            } else {
+                modelAndView.addObject("msg", "修改失败");
+            }
+        } catch (Exception e) {
+            logger.error("updatePwd.do error", e);
+        }
+        return modelAndView;
+
     }
 
 }

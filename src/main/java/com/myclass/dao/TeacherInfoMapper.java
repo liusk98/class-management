@@ -53,4 +53,12 @@ public interface TeacherInfoMapper {
      * @return
      */
     int deleteTeacherInfoById(Integer id);
+
+    /**
+     * 根据ID修改PWD数据
+     * @param id
+     * @param pwd
+     * @return
+     */
+    int updatePwdById(@Param("id") Integer id, @Param("pwd") String pwd, @Param("oldPwd") String oldPwd);
 }

@@ -100,4 +100,17 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
         return teacherInfoPageData;
     }
 
+    /**
+     * 根据id修改密码
+     *
+     * @param id
+     * @param oldPwd
+     * @param newPwd
+     * @return
+     */
+    @Override
+    public boolean updateTeacherInfoPwdById(Integer id, String oldPwd, String newPwd) throws Exception {
+        return teacherInfoMapper.updatePwdById(id, EncryptTool.md5(newPwd), EncryptTool.md5(oldPwd)) > 0;
+    }
+
 }

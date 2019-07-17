@@ -4,8 +4,6 @@ package com.myclass.service;
 import com.myclass.entity.TeacherInfo;
 import com.myclass.tools.PageData;
 
-import java.util.List;
-
 /**
  * 教师表(TeacherInfo)(TeacherInfo)表服务接口
  *
@@ -27,6 +25,7 @@ public interface TeacherInfoService {
 
     /**
      * 新增一名教师数据
+     *
      * @param teacherInfo
      * @return
      */
@@ -34,6 +33,7 @@ public interface TeacherInfoService {
 
     /**
      * 根据id删除teacherInfo数据
+     *
      * @param id
      * @return 是否成功
      * @throws Exception
@@ -42,6 +42,7 @@ public interface TeacherInfoService {
 
     /**
      * 分页查询教师数据
+     *
      * @param pageIndex
      * @param pageSize
      * @param orderCol
@@ -49,4 +50,13 @@ public interface TeacherInfoService {
      * @return
      */
     PageData<TeacherInfo> getTeachers(int pageIndex, int pageSize, String orderCol, String orderType);
+
+    /**
+     * 根据id修改密码
+     * @param id
+     * @param oldPwd
+     * @param newPwd
+     * @return
+     */
+    boolean updateTeacherInfoPwdById(Integer id, String oldPwd, String newPwd) throws Exception;
 }
