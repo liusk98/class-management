@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -27,6 +28,15 @@
     <link href="${pageContext.request.contextPath}/statics/css/custom.min.css" rel="stylesheet">
     <!-- Green -->
     <link href="${pageContext.request.contextPath}/statics/css/green.css" rel="stylesheet">
+
+    <c:if test="${param.needTable}">
+        <!-- Bootstrap Table -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap-table.min.css">
+    </c:if>
+    <c:if test="${param.needSwitch}">
+        <!-- Bootstrap Switch -->
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/statics/css/bootstrap-switch.min.css">
+    </c:if>
 </head>
 
 <body class="nav-md">
@@ -66,9 +76,15 @@
                                 </ul>
                             </li>
                         </ul>
+                         <ul class="nav side-menu">
+                            <li><a><i class="fa fa-book"></i> 数据字典 <span class="fa fa-chevron-down"></span></a>
+                                <ul class="nav child_menu">
+                                    <li><a href="addDD.html">新增数据字典</a></li>
+                                    <li><a href="listDD.html">查询数据字典</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
-
-
                 </div>
                 <!-- /sidebar menu -->
 

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myclass.dao.DataDictionaryMapper">
+
+    <resultMap id="DataDictionaryMap" type="DataDictionary">
+        <id property="ddid" column="ddid"/>
+    </resultMap>
+
+    <insert id="insertDataDictionary" parameterType="DataDictionary">
+        insert into dataDictionary
+        values (0,#{typeCode},#{typeName},#{valueId},#{valueName},#{createUser},now(),#{isenable},#{remark});
+    </insert>
+
+    <select id="listDataDictionary" resultMap="DataDictionaryMap">
+        select ddid,typeCode,typeName,valueId,valueName,createUser,createTime,isenable,remark
+        from dataDictionary
+        order by CONVERT(`${orderCol}` using gbk) ${orderType}
+    </select>
+</mapper>

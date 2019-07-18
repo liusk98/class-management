@@ -3,7 +3,7 @@
 <mapper namespace="com.myclass.dao.TeacherInfoMapper">
 
     <resultMap type="TeacherInfo" id="TeacherInfoMap">
-        <result property="id" column="id" jdbcType="INTEGER"/>
+        <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="loginName" column="loginName" jdbcType="VARCHAR"/>
         <result property="name" column="name" jdbcType="VARCHAR"/>
         <result property="pwd" column="pwd" jdbcType="VARCHAR"/>

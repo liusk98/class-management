@@ -1,13 +1,12 @@
 package com.myclass.controller;
 
+import com.myclass.entity.DataDictionary;
 import com.myclass.entity.TeacherInfo;
+import com.myclass.service.DataDictionaryService;
 import com.myclass.service.TeacherInfoService;
 import com.myclass.tools.PageData;
 import org.apache.log4j.Logger;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -24,6 +23,12 @@ import javax.servlet.http.HttpServletRequest;
 public class TeacherInfoController {
 
     private Logger logger = Logger.getLogger(TeacherInfoController.class);
+
+    /**
+     * 服务对象
+     */
+    @Resource
+    private DataDictionaryService dataDictionaryService;
 
     /**
      * 服务对象
@@ -91,6 +96,18 @@ public class TeacherInfoController {
         return modelAndView;
     }
 
+    @GetMapping("addDD.html")
+    public ModelAndView dataDictionaryInsert(ModelAndView modelAndView) {
+        modelAndView.setViewName("backstage/super/addDD");
+        return modelAndView;
+    }
+
+    @GetMapping("listDD.html")
+    public ModelAndView dataDictionaryList(ModelAndView modelAndView) {
+        modelAndView.setViewName("backstage/super/listDD");
+        return modelAndView;
+    }
+
     @GetMapping("teacherList.json")
     public PageData<TeacherInfo> getTeachers(String sort, String order, int offset, int limit) {
         // 每页条数
@@ -99,6 +116,16 @@ public class TeacherInfoController {
         int pageIndex = offset / limit + 1;
         PageData<TeacherInfo> teachers = teacherInfoService.getTeachers(pageIndex, pageSize, sort, order);
         return teachers;
+    }
+
+    @GetMapping("dataDictionaryList.json")
+    public PageData<DataDictionary> getDataDictionary(String sort, String order, int offset, int limit) {
+        // 每页条数
+        int pageSize = limit;
+        // 当前页码
+        int pageIndex = offset / limit + 1;
+        PageData<DataDictionary> dataDictionaryPageData = dataDictionaryService.listDataDictionary(pageIndex, pageSize, sort, order);
+        return dataDictionaryPageData;
     }
 
     @PostMapping("insert.do")
@@ -141,4 +168,15 @@ public class TeacherInfoController {
 
     }
 
+    @PostMapping("addDD.do")
+    public ModelAndView dataDictionaryInsert(DataDictionary dataDictionary, ModelAndView modelAndView) {
+        modelAndView.setViewName("backstage/super/addDD");
+        boolean insertDataDictionary = dataDictionaryService.insertDataDictionary(dataDictionary);
+        if (insertDataDictionary) {
+            modelAndView.addObject("msg", "添加成功!");
+        } else {
+            modelAndView.addObject("msg", "添加失败!");
+        }
+        return modelAndView;
+    }
 }
