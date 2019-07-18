@@ -37,4 +37,16 @@ public interface DataDictionaryService {
      */
     boolean insertDataDictionary(DataDictionary dataDictionary);
 
+    /**
+     * 功能描述:
+     * 〈修改数据字典启用状态〉
+     *
+     * @param id
+     * @param enable
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 19-7-19 上午10:44
+     */
+    boolean updateIsEnable(int id, boolean enable);
+
 }

@@ -27,8 +27,8 @@
             <th data-field="id" data-sortable="true" data-width="10" data-width-unit="%">教师编号</th>
             <th data-field="name" data-sortable="true">教师名称</th>
             <th data-field="loginName" data-sortable="true">登录名称</th>
-            <th data-field="createTime" data-formatter="changeDateFormat" data-sortable="true">创建时间</th>
-            <th data-field="lastLoginTime" data-formatter="changeDateFormat" data-sortable="true">上次登录时间</th>
+            <th data-field="createTime" data-sortable="true">创建时间</th>
+            <th data-field="lastLoginTime" data-sortable="true">上次登录时间</th>
             <th data-field="status" data-formatter="changeStatusFormat">状态</th>
             <th data-field="remark">备注</th>
             <%--<th>操作</th>--%>
@@ -51,19 +51,6 @@
     }
 </script>
 <script type="text/javascript">
-    //转换日期格式(时间戳转换为datetime格式)
-    function changeDateFormat(cellval) {
-        var dateVal = cellval + "";
-        if (cellval != null) {
-            var date = new Date(parseInt(dateVal.replace("/Date(", "").replace(")/", ""), 10));
-            var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
-            var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
-            var hours = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
-            var minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
-            var seconds = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-            return date.getFullYear() + "-" + month + "-" + currentDate + " " + hours + ":" + minutes + ":" + seconds;
-        }
-    }
 
     //状态转换
     function changeStatusFormat(status) {

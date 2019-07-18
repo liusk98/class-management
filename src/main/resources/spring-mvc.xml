@@ -21,6 +21,7 @@
 				</property>
 				<property name="features">
 					<list>
+						<value>WriteDateUseDateFormat</value>
 						<value>WriteMapNullValue</value>
 						<value>QuoteFieldNames</value>
 					</list>

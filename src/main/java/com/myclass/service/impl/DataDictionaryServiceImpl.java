@@ -62,4 +62,22 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
     public boolean insertDataDictionary(DataDictionary dataDictionary) {
         return dataDictionaryMapper.insertDataDictionary(dataDictionary) > 0;
     }
+
+    /**
+     * 功能描述:
+     * 〈修改数据字典启用状态〉
+     *
+     * @param id
+     * @param enable
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 19-7-19 上午10:44
+     */
+    @Override
+    public boolean updateIsEnable(int id, boolean enable) {
+        int oldStatus = (enable) ? 1 : 0;
+        int statusValue = (enable) ? 0 : 1;
+        return dataDictionaryMapper.updateIsEnable(id, oldStatus, statusValue) > 0;
+    }
+
 }

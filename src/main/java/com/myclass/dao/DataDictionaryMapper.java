@@ -32,4 +32,17 @@ public interface DataDictionaryMapper {
      * @date : 19-7-17 下午9:00
      */
     List<DataDictionary> listDataDictionary(@Param("orderCol") String orderCol, @Param("orderType") String orderType);
+
+    /**
+     * 功能描述:
+     * 〈更改数据字典启用状态〉
+     *
+     * @param id
+     * @param oldStatus
+     * @param statusValue
+     * @return int
+     * @author 蜀山剑仙
+     * @date 19-7-19 上午10:40
+     */
+    int updateIsEnable(@Param("id") Integer id, @Param("oldStatus") Integer oldStatus, @Param("statusValue") Integer statusValue);
 }

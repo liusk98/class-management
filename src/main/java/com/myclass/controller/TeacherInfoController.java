@@ -179,4 +179,10 @@ public class TeacherInfoController {
         }
         return modelAndView;
     }
+
+    @PostMapping("changeEnable")
+    public String changeEnable(Integer id, boolean state) {
+        String msg = (dataDictionaryService.updateIsEnable(id, state)) ? "true" : "false";
+        return msg;
+    }
 }

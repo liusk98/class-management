@@ -16,4 +16,14 @@
         from dataDictionary
         order by CONVERT(`${orderCol}` using gbk) ${orderType}
     </select>
+
+    <update id="updateIsEnable">
+        update dataDictionary
+        <set>
+            isenable=#{statusValue}
+        </set>
+        <where>
+            ddid=#{id} and isenable=#{oldStatus}
+        </where>
+    </update>
 </mapper>
