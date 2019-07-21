@@ -11,11 +11,6 @@ import java.util.Date;
 public class DataDictionary {
 
     /**
-     * 数据字典编号
-     */
-    private Integer ddid;
-
-    /**
      * 数据编码类型
      */
     private String typeCode;
@@ -56,14 +51,6 @@ public class DataDictionary {
      * 备注
      */
     private String remark;
-
-    public Integer getDdid() {
-        return ddid;
-    }
-
-    public void setDdid(Integer ddid) {
-        this.ddid = ddid;
-    }
 
     public String getTypeCode() {
         return typeCode;

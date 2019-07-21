@@ -99,6 +99,18 @@ public class TeacherInfoController {
     @GetMapping("addDD.html")
     public ModelAndView dataDictionaryInsert(ModelAndView modelAndView) {
         modelAndView.setViewName("backstage/super/addDD");
+        modelAndView.addObject("isEdit", false);
+        modelAndView.addObject("title", "添加");
+        return modelAndView;
+    }
+
+    @GetMapping("updateDataDictionary/{typeCode}/{valueId}")
+    public ModelAndView dataDictionaryUpdate(@PathVariable String typeCode,@PathVariable Integer valueId, ModelAndView modelAndView) {
+        modelAndView.setViewName("backstage/super/addDD");
+        DataDictionary dataDictionary = dataDictionaryService.getDataDictionaryByTypeCodeAndValueId(typeCode, valueId);
+        modelAndView.addObject("dataDictionary", dataDictionary);
+        modelAndView.addObject("isEdit", true);
+        modelAndView.addObject("title", "修改");
         return modelAndView;
     }
 
@@ -177,12 +189,28 @@ public class TeacherInfoController {
         } else {
             modelAndView.addObject("msg", "添加失败!");
         }
+        modelAndView.addObject("isEdit", false);
+        modelAndView.addObject("title", "添加");
         return modelAndView;
     }
 
     @PostMapping("changeEnable")
-    public String changeEnable(Integer id, boolean state) {
-        String msg = (dataDictionaryService.updateIsEnable(id, state)) ? "true" : "false";
+    public String changeEnable(String typeCode, Integer valueId, boolean enable) {
+        String msg = (dataDictionaryService.updateIsEnable(typeCode, valueId, enable)) ? "true" : "false";
         return msg;
+    }
+
+    @PostMapping("updateDataDictionary")
+    public ModelAndView updateDataDictionary(DataDictionary dataDictionary, ModelAndView modelAndView) {
+        boolean updateDataDictionary = dataDictionaryService.updateDataDictionary(dataDictionary);
+        if (updateDataDictionary) {
+            modelAndView.addObject("msg", "修改成功!");
+        } else {
+            modelAndView.addObject("msg", "修改失败!");
+        }
+       // modelAndView.addObject("isEdit", true);
+       // modelAndView.addObject("title", "修改");
+        modelAndView = dataDictionaryUpdate(dataDictionary.getTypeCode(), dataDictionary.getValueId(), modelAndView);
+        return modelAndView;
     }
 }

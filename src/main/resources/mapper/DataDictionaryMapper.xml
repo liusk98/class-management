@@ -3,16 +3,15 @@
 <mapper namespace="com.myclass.dao.DataDictionaryMapper">
 
     <resultMap id="DataDictionaryMap" type="DataDictionary">
-        <id property="ddid" column="ddid"/>
     </resultMap>
 
     <insert id="insertDataDictionary" parameterType="DataDictionary">
         insert into dataDictionary
-        values (0,#{typeCode},#{typeName},#{valueId},#{valueName},#{createUser},now(),#{isenable},#{remark});
+        values (#{typeCode},#{typeName},#{valueId},#{valueName},#{createUser},now(),#{isenable},#{remark});
     </insert>
 
     <select id="listDataDictionary" resultMap="DataDictionaryMap">
-        select ddid,typeCode,typeName,valueId,valueName,createUser,createTime,isenable,remark
+        select typeCode,typeName,valueId,valueName,createUser,createTime,isenable,remark
         from dataDictionary
         order by CONVERT(`${orderCol}` using gbk) ${orderType}
     </select>
@@ -23,7 +22,38 @@
             isenable=#{statusValue}
         </set>
         <where>
-            ddid=#{id} and isenable=#{oldStatus}
+            typeCode=#{typeCode}
+          and
+            valueId=#{valueId}
+          and
+            isenable=#{oldStatus}
+        </where>
+    </update>
+
+    <select id="getDataDictionaryById" resultMap="DataDictionaryMap">
+        select typeCode,typeName,valueId,valueName,createUser,createTime,isenable,remark
+        from dataDictionary
+        <where>
+          typeCode=#{typeCode}
+            and
+          valueId=#{valueId}
+        </where>
+    </select>
+
+    <update id="updateDataDictionary" parameterType="DataDIctionary">
+        update dataDictionary
+        <set>
+            typeCode=#{typeCode},
+            typeName=#{typeName},
+            valueId=#{valueId},
+            valueName=#{valueName},
+            isenable=#{isenable},
+            remark=#{remark}
+        </set>
+        <where>
+            typeCode=#{typeCode}
+            and
+            valueId=#{valueId}
         </where>
     </update>
 </mapper>

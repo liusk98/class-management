@@ -36,13 +36,36 @@ public interface DataDictionaryMapper {
     /**
      * 功能描述:
      * 〈更改数据字典启用状态〉
-     *
-     * @param id
+     * @param valueId
+     * @param typeCode
      * @param oldStatus
      * @param statusValue
      * @return int
      * @author 蜀山剑仙
      * @date 19-7-19 上午10:40
      */
-    int updateIsEnable(@Param("id") Integer id, @Param("oldStatus") Integer oldStatus, @Param("statusValue") Integer statusValue);
+    int updateIsEnable(@Param("typeCode") String typeCode, @Param("valueId") Integer valueId, @Param("oldStatus") Integer oldStatus, @Param("statusValue") Integer statusValue);
+
+    /**
+     * 功能描述:
+     * 〈根据ID查询数据字典数据〉
+     *
+     * @param typeCode
+     * @param valueId
+     * @return com.myclass.entity.DataDictionary
+     * @author 蜀山剑仙
+     * @date 19-7-19 上午11:21
+     */
+    DataDictionary getDataDictionaryById(@Param("typeCode") String typeCode, @Param("valueId") Integer valueId);
+
+    /**
+     * 功能描述:
+     * 〈修改数据字典数据〉
+     *
+     * @param dataDictionary
+     * @return int
+     * @author 蜀山剑仙
+     * @date 19-7-19 上午11:25
+     */
+    int updateDataDictionary(DataDictionary dataDictionary);
 }

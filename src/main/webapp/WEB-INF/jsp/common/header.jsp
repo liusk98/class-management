@@ -71,16 +71,16 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> 管理员专用 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="insert.html">新增教师</a></li>
-                                    <li><a href="list.html">教师列表</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/insert.html">新增教师</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/list.html">教师列表</a></li>
                                 </ul>
                             </li>
                         </ul>
                          <ul class="nav side-menu">
                             <li><a><i class="fa fa-book"></i> 数据字典 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="addDD.html">新增数据字典</a></li>
-                                    <li><a href="listDD.html">查询数据字典</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/addDD.html">新增数据字典</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/listDD.html">查询数据字典</a></li>
                                 </ul>
                             </li>
                         </ul>

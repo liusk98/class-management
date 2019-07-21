@@ -17,14 +17,13 @@
            data-height="460"
            data-pagination="true"
            data-side-pagination="server"
-           data-sort-name="ddid"
+           data-sort-name="valueId"
            data-sort-order="asc"
            data-loadsuccess="test"
            data-page-list="[5,10,25,50,100,200,All]"
            data-url="${pageContext.request.contextPath}/teacherinfo/dataDictionaryList.json">
         <thead>
         <tr>
-            <th data-field="ddid" data-sortable="true" data-width="10" data-width-unit="%">字典编号</th>
             <th data-field="typeCode" data-sortable="true">类型编码</th>
             <th data-field="typeName" data-sortable="true">类型名称</th>
             <th data-field="valueId" data-sortable="true">类型的值</th>
@@ -56,11 +55,12 @@
                 size: "mini",        //设置控件大小，从小到大
                 //当开关状态改变时触发
                 onSwitchChange: function (event, state) {
-                    var id = $(this).parents("tr").children("td:eq(0)").text();
+                    var typeCode = $(this).parents("tr").children("td:eq(0)").text();
+                    var valueId = $(this).parents("tr").children("td:eq(2)").text();
                     currentSwitch = $(this);
                     $.ajax({
                         url: "${pageContext.request.contextPath}/teacherinfo/changeEnable",
-                        data: {"id": id, "state": state},
+                        data: {"typeCode": typeCode, "valueId" : valueId, enable : state},
                         type: "POST",
                         dataType: "text",
                         success: function (data) {
@@ -80,7 +80,7 @@
     function changeStatusFormat(status, row, index) {
         var statusName = "";
         if (status == 0) {
-            statusName = "<input id='create-switch" + index + "' type='checkbox' name='chkStatus' checked>";
+            statusName = "<input id='create-switch" + index + "' type='checkbox' name='chkStatus'>";
         } else if (status == 1) {
             statusName = "<input id='create-switch" + index + "' type='checkbox' name='chkStatus' checked>";
         }
@@ -89,6 +89,6 @@
 
     //操作列
     function rowsOperate(value, row, index) {
-
+        return '<a href="${pageContext.request.contextPath}/teacherinfo/updateDataDictionary/'+row.typeCode+'/'+row.valueId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>';
     }
 </script>

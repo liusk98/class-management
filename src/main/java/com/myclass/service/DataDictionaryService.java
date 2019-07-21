@@ -41,12 +41,36 @@ public interface DataDictionaryService {
      * 功能描述:
      * 〈修改数据字典启用状态〉
      *
-     * @param id
+     * @param typeCode
+     * @param valueId
      * @param enable
      * @return boolean
      * @author 蜀山剑仙
      * @date 19-7-19 上午10:44
      */
-    boolean updateIsEnable(int id, boolean enable);
+    boolean updateIsEnable(String typeCode,Integer valueId, boolean enable);
+
+    /**
+     * 功能描述:
+     * 〈根据ID查询数据字典〉
+     *
+     * @param typeCode
+     * @param valueId
+     * @return com.myclass.entity.DataDictionary
+     * @author 蜀山剑仙
+     * @date 19-7-19 上午11:29
+     */
+    DataDictionary getDataDictionaryByTypeCodeAndValueId(String typeCode,Integer valueId);
+
+    /**
+     * 功能描述:
+     * 〈修改数据字典数据〉
+     *
+     * @param dataDictionary
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 19-7-19 上午11:30
+     */
+    boolean updateDataDictionary(DataDictionary dataDictionary);
 
 }
