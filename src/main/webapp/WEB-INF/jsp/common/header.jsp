@@ -45,7 +45,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>班级后台管理</span></a>
+                    <a href="${pageContext.request.contextPath}/indexTeacherInfo.html" class="site_title"><i class="fa fa-paw"></i> <span>班级后台管理</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -71,16 +71,16 @@
                         <ul class="nav side-menu">
                             <li><a><i class="fa fa-home"></i> 管理员专用 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/insert.html">新增教师</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/list.html">教师列表</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/backstage/teacherInfo/insert.html">新增教师</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/backstage/teacherInfo/list.html">教师列表</a></li>
                                 </ul>
                             </li>
                         </ul>
                          <ul class="nav side-menu">
                             <li><a><i class="fa fa-book"></i> 数据字典 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
-                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/addDD.html">新增数据字典</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/listDD.html">查询数据字典</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/backstage/dataDictionary/insertDataDictionary.html">新增数据字典</a></li>
+                                    <li><a href="${pageContext.request.contextPath}/backstage/dataDictionary/listDataDictionary.html">查询数据字典</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -130,7 +130,7 @@
                                     </a>
                                 </li>
                                 <li><a href="updatePwd.html">修改密码</a></li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i>注销</a></li>
+                                <li><a href="loginTeacherInfo.html"><i class="fa fa-sign-out pull-right"></i>注销</a></li>
                             </ul>
                         </li>
 
