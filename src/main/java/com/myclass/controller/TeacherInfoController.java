@@ -66,6 +66,7 @@ public class TeacherInfoController {
             }
         } catch (Exception e) {
             logger.error("login.do error:", e);
+            modelAndView.addObject("error", e.getMessage());
         }
         request.getSession().setAttribute("teacher", teacherinfo);
         return modelAndView;
@@ -208,8 +209,6 @@ public class TeacherInfoController {
         } else {
             modelAndView.addObject("msg", "修改失败!");
         }
-       // modelAndView.addObject("isEdit", true);
-       // modelAndView.addObject("title", "修改");
         modelAndView = dataDictionaryUpdate(dataDictionary.getTypeCode(), dataDictionary.getValueId(), modelAndView);
         return modelAndView;
     }

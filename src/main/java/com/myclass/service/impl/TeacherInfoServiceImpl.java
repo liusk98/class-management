@@ -39,7 +39,9 @@ public class TeacherInfoServiceImpl implements TeacherInfoService {
     public TeacherInfo login(String loginName, String pwd) throws Exception {
         pwd = EncryptTool.md5(pwd);
         TeacherInfo teacherInfo = teacherInfoMapper.getTeacherInfoByLoginNameAndPwd(loginName, pwd);
-        if (teacherInfo != null) {
+        if (teacherInfo.getStatus() == 0) {
+            throw new Exception("该用户已被封禁,请联系管理员");
+        } else if (teacherInfo != null) {
             teacherInfoMapper.updateLastLoginTimeById(teacherInfo.getId());
         }
         return teacherInfo;
