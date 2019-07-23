@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -45,7 +45,8 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>班级后台管理</span></a>
+                    <a href="${pageContext.request.contextPath}/indexTeacherInfo.html" class="site_title"><i
+                            class="fa fa-paw"></i> <span>班级后台管理</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -53,7 +54,8 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="..." class="img-circle profile_img">
+                        <img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="..."
+                             class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
@@ -62,28 +64,52 @@
                 </div>
                 <!-- /menu profile quick info -->
 
-                <br />
+                <br/>
 
                 <!-- sidebar menu -->
                 <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                     <div class="menu_section">
                         <h3>General</h3>
-                        <ul class="nav side-menu">
-                            <li><a><i class="fa fa-home"></i> 管理员专用 <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/insert.html">新增教师</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/list.html">教师列表</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                         <ul class="nav side-menu">
-                            <li><a><i class="fa fa-book"></i> 数据字典 <span class="fa fa-chevron-down"></span></a>
-                                <ul class="nav child_menu">
-                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/addDD.html">新增数据字典</a></li>
-                                    <li><a href="${pageContext.request.contextPath}/teacherinfo/listDD.html">查询数据字典</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                        <c:if test="${teacher.level == 1}">
+                            <ul class="nav side-menu">
+                                <li><a><i class="fa fa-home"></i> 管理员专用 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/backstage/teacherInfo/insert.html">新增教师</a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/backstage/teacherInfo/list.html">教师列表</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav side-menu">
+                                <li><a><i class="fa fa-book"></i> 数据字典 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/backstage/dataDictionary/insertDataDictionary.html">新增数据字典</a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/backstage/dataDictionary/listDataDictionary.html">查询数据字典</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </c:if>
+                        <c:if test="${teacher.level < 1}">
+                            <ul class="nav side-menu">
+                                <li><a><i class="fa fa-home"></i> 班级管理 <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li>
+                                            <a href="#">班级管理</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">班级信息</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </c:if>
                     </div>
                 </div>
                 <!-- /sidebar menu -->
@@ -117,8 +143,10 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="">
-                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                <img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="">${sessionScope.teacher.name}
+                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                               aria-expanded="false">
+                                <img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg"
+                                     alt="">${sessionScope.teacher.name}
                                 <span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -129,20 +157,23 @@
                                         <span>Settings</span>
                                     </a>
                                 </li>
-                                <li><a href="updatePwd.html">修改密码</a></li>
-                                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i>注销</a></li>
+                                <li><a href="${pageContext.request.contextPath}/backstage/updatePwd.html">修改密码</a></li>
+                                <li><a href="${pageContext.request.contextPath}/loginTeacherInfo.html"><i class="fa fa-sign-out pull-right"></i>注销</a></li>
                             </ul>
                         </li>
 
                         <li role="presentation" class="dropdown">
-                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                            <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
+                               aria-expanded="false">
                                 <i class="fa fa-envelope-o"></i>
                                 <span class="badge bg-green">6</span>
                             </a>
                             <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                                 <li>
                                     <a>
-                                        <span class="image"><img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img
+                                                src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg"
+                                                alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -154,7 +185,9 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img
+                                                src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg"
+                                                alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -166,7 +199,9 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img
+                                                src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg"
+                                                alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>
@@ -178,7 +213,9 @@
                                 </li>
                                 <li>
                                     <a>
-                                        <span class="image"><img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="Profile Image" /></span>
+                                        <span class="image"><img
+                                                src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg"
+                                                alt="Profile Image"/></span>
                                         <span>
                           <span>John Smith</span>
                           <span class="time">3 mins ago</span>

@@ -26,7 +26,7 @@
             </div>
             <div class="x_content">
                 <br>
-                <form action="${pageContext.request.contextPath}/teacherinfo/<c:if test="${isEdit}">updateDataDictionary</c:if><c:if test="${not isEdit}">addDD.do</c:if>" method="post" id="demo-form2"
+                <form action="${pageContext.request.contextPath}/backstage/dataDictionary/<c:if test="${isEdit}">updateDataDictionary</c:if><c:if test="${not isEdit}">insertDataDictionary.do</c:if>" method="post" id="demo-form2"
                       data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">TYPE_CODE<span

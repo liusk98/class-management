@@ -44,6 +44,11 @@ public class TeacherInfo {
     private Date lastLoginTime;
 
     /**
+     * 教师权限
+     */
+    private int level;
+
+    /**
      * 教师状态
      * 0 禁用
      * 1 启用
@@ -104,6 +109,14 @@ public class TeacherInfo {
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public Integer getStatus() {

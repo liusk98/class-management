@@ -21,7 +21,7 @@
            data-sort-order="asc"
            data-loadsuccess="test"
            data-page-list="[5,10,25,50,100,200,All]"
-           data-url="${pageContext.request.contextPath}/teacherinfo/dataDictionaryList.json">
+           data-url="${pageContext.request.contextPath}/backstage/dataDictionary/dataDictionaryList.json">
         <thead>
         <tr>
             <th data-field="typeCode" data-sortable="true">类型编码</th>
@@ -59,7 +59,7 @@
                     var valueId = $(this).parents("tr").children("td:eq(2)").text();
                     currentSwitch = $(this);
                     $.ajax({
-                        url: "${pageContext.request.contextPath}/teacherinfo/changeEnable",
+                        url: "${pageContext.request.contextPath}/backstage/dataDictionary/changeEnableDataDictionary",
                         data: {"typeCode": typeCode, "valueId" : valueId, enable : state},
                         type: "POST",
                         dataType: "text",
@@ -89,6 +89,6 @@
 
     //操作列
     function rowsOperate(value, row, index) {
-        return '<a href="${pageContext.request.contextPath}/teacherinfo/updateDataDictionary/'+row.typeCode+'/'+row.valueId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>';
+        return '<a href="${pageContext.request.contextPath}/backstage/dataDictionary/updateDataDictionary/'+row.typeCode+'/'+row.valueId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>';
     }
 </script>

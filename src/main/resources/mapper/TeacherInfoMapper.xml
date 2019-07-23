@@ -14,7 +14,7 @@
     </resultMap>
 
     <select id="getTeacherInfoByLoginNameAndPwd" resultMap="TeacherInfoMap">
-        select id,loginName,`name`,pwd,createTime,lastLoginTime,`status`,remark from teacherInfo
+        select id,loginName,`name`,pwd,createTime,lastLoginTime,level,`status`,remark from teacherInfo
         <where>
             loginName=#{loginName} and pwd=#{pwd}
         </where>
@@ -31,7 +31,7 @@
     </update>
 
     <select id="listTeacherInfo" resultMap="TeacherInfoMap">
-        select id,loginName,`name`,pwd,createTime,lastLoginTime,`status`,remark
+        select id,loginName,`name`,pwd,createTime,lastLoginTime,level,`status`,remark
         from teacherInfo
         order by CONVERT(`${orderCol}` using gbk) ${orderType}
     </select>

@@ -13,12 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author joe
  */
 public class SessionInterceptor extends HandlerInterceptorAdapter {
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         TeacherInfo teacherInfo = (TeacherInfo) request.getSession().getAttribute("teacher");
         if (teacherInfo == null) {
             String backUri = request.getServletPath();
-            response.sendRedirect(String.valueOf(request.getContextPath()) + "/teacherinfo/login.html?backUri="+backUri);
+            response.sendRedirect(String.valueOf(request.getContextPath()) + "/loginTeacherInfo.html?backUri="+backUri);
             return false;
         }
         return true;

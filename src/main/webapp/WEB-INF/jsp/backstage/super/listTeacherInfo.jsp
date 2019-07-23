@@ -21,7 +21,7 @@
             data-sort-name="id"
             data-sort-order="asc"
             data-page-list="[5,10,25,50,100,200,All]"
-            data-url="${pageContext.request.contextPath}/teacherinfo/teacherList.json">
+            data-url="${pageContext.request.contextPath}/backstage/teacherInfo/teacherList.json">
         <thead>
         <tr>
             <th data-field="id" data-sortable="true" data-width="10" data-width-unit="%">教师编号</th>

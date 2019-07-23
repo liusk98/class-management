@@ -28,7 +28,7 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form action="${pageContext.request.contextPath}/teacherinfo/login.do" method="post">
+                <form action="${pageContext.request.contextPath}/loginTeacherInfo.do" method="post">
                     <h1>教师管理后台登录</h1>
                     <div class="error"><span>${requestScope.error}</span></div>
                     <div>
@@ -76,7 +76,7 @@
                         <input type="password" class="form-control" placeholder="Password" required="" />
                     </div>
                     <div>
-                        <a class="btn btn-default submit" href="index.html">Submit</a>
+                        <a class="btn btn-default submit" href="indexTeacherInfo.html">Submit</a>
                     </div>
 
                     <div class="clearfix"></div>
