@@ -58,6 +58,7 @@ public interface TeacherInfoMapper {
      * 根据ID修改PWD数据
      * @param id
      * @param pwd
+     * @param oldPwd
      * @return
      */
     int updatePwdById(@Param("id") Integer id, @Param("pwd") String pwd, @Param("oldPwd") String oldPwd);
