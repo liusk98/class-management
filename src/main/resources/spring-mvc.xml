@@ -50,6 +50,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/backstage/**"/>
+            <mvc:mapping path="/indexTeacherInfo.html"/>
             <!-- 不拦截 -->
             <mvc:exclude-mapping path="/login*"/>
             <bean class="com.myclass.interceptor.SessionInterceptor"/>

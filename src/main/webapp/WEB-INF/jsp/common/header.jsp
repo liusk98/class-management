@@ -96,15 +96,15 @@
                                 </li>
                             </ul>
                         </c:if>
-                        <c:if test="${teacher.level < 1}">
+                        <c:if test="${teacher.level == 0}">
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> 班级管理 <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li>
-                                            <a href="#">班级管理</a>
+                                            <a href="${pageContext.request.contextPath}/backstage/classInfo/insertClassInfo.html">新增班级</a>
                                         </li>
                                         <li>
-                                            <a href="#">班级信息</a>
+                                            <a href="${pageContext.request.contextPath}/backstage/classInfo/listClassInfo.html">班级信息</a>
                                         </li>
                                     </ul>
                                 </li>
