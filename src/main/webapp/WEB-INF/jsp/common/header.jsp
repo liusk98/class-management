@@ -109,6 +109,18 @@
                                     </ul>
                                 </li>
                             </ul>
+                            <ul class="nav side-menu">
+                                <li><a><i class="fa fa-rouble"></i> 学生管理 <span class="fa fa-chevron-down"></span> </a>
+                                    <ul class="nav child_menu" style="display: block;">
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/backstage/studentInfo/insertStudentInfo.html">新增学生</a>
+                                        </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/backstage/studentInfo/listStudentInfo.html">学生列表</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </c:if>
                     </div>
                 </div>

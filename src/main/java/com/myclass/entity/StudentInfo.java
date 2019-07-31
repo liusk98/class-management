@@ -43,7 +43,7 @@ public class StudentInfo {
     /**
      * 身份证号
      */
-    private String idcard;
+    private String idCard;
 
     /**
      * 生日
@@ -179,12 +179,12 @@ public class StudentInfo {
         this.sex = sex;
     }
 
-    public String getIdcard() {
-        return idcard;
+    public String getIdCard() {
+        return idCard;
     }
 
-    public void setIdcard(String idcard) {
-        this.idcard = idcard;
+    public void setIdCard(String idCard) {
+        this.idCard = idCard;
     }
 
     public Date getBirthday() {
