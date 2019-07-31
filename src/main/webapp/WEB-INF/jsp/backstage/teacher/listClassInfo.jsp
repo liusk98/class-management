@@ -38,7 +38,7 @@
 </jsp:include>
 <script type="text/javascript">
     function rowsOperate(value, row, index) {
-        return '<a href="${pageContext.request.contextPath}/backstage/dataDictionary/updateDataDictionary/'+row.typeCode+'/'+row.valueId+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>';
+        return '<a href="${pageContext.request.contextPath}/backstage/classInfo/updateClassInfo.html/'+row.id+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 修改 </a>';
     }
 </script>
 

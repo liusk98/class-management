@@ -101,6 +101,11 @@ public class StudentInfo {
     private Date createTime;
 
     /**
+     * 创建教师
+     */
+    private Integer createTeacher;
+
+    /**
      * 上次登录时间
      */
     private Date lastLoginTime;
@@ -268,6 +273,14 @@ public class StudentInfo {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getCreateTeacher() {
+        return createTeacher;
+    }
+
+    public void setCreateTeacher(Integer createTeacher) {
+        this.createTeacher = createTeacher;
     }
 
     public Date getLastLoginTime() {

@@ -47,6 +47,21 @@ public class ClassInfoController {
         return modelAndView;
     }
 
+    @GetMapping("updateClassInfo.html/{id}")
+    public ModelAndView updateClassInfo(@PathVariable Integer id, ModelAndView modelAndView) {
+        modelAndView.setViewName("backstage/teacher/insertClassInfo");
+        DataDictionary dataDictionary = new DataDictionary();
+        dataDictionary.setTypeCode("GRADE");
+        dataDictionary.setIsenable(1);
+        List<DataDictionary> listGrade = dataDictionaryService.listDataDictionaryByTypeCode(dataDictionary);
+        ClassInfo classInfo = classInfoService.getClassInfo(id);
+        modelAndView.addObject("classInfo", classInfo);
+        modelAndView.addObject("listGrade", listGrade);
+        modelAndView.addObject("isEdit", true);
+        modelAndView.addObject("title", "修改");
+        return modelAndView;
+    }
+
     @GetMapping("listClassInfo.html")
     public ModelAndView listClassInfo(ModelAndView modelAndView) {
         modelAndView.setViewName("backstage/teacher/listClassInfo");
@@ -80,6 +95,18 @@ public class ClassInfoController {
             modelAndView.addObject("msg", "创建失败");
         }
         return insertClassInfo(modelAndView);
+    }
+
+    @PostMapping("updateClassInfo.do")
+    public ModelAndView updateClassInfo(ClassInfo classInfo, ModelAndView modelAndView) {
+        // 获取创建人信息
+        boolean result = classInfoService.updateClassInfo(classInfo);
+        if (result) {
+            modelAndView.addObject("msg", "修改成功");
+        } else {
+            modelAndView.addObject("msg", "修改失败");
+        }
+        return updateClassInfo(classInfo.getId(), modelAndView);
     }
 
 }

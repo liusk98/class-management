@@ -16,6 +16,33 @@
         values (0, #{name}, #{gradeID}, #{createTeacher.id}, now(), #{remark});
     </insert>
 
+    <update id="updateClassInfo" parameterType="ClassInfo">
+        update classInfo
+        <set>
+            name = #{name} ,
+            gradeID = #{gradeID},
+            remark = #{remark}
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getClassInfo" resultMap="ClassInfoMap">
+        select
+            classInfo.id,
+            classInfo.name,
+            classInfo.gradeID,
+            classInfo.createTeacher,
+            classInfo.createTime,
+            classInfo.remark
+        from
+            classInfo
+        <where>
+            <if test="id != null and id != 0">
+                and id = #{id}
+            </if>
+        </where>
+    </select>
+
     <select id="listClassInfo" resultMap="ClassInfoMap">
         select id, name, gradeID, createTeacher, createTime, remark, gradeName, teacherName from (
         select classInfo.id,
@@ -40,4 +67,5 @@
         </where>
         order by CONVERT(`${orderCol}` using gbk) ${orderType}
     </select>
+
 </mapper>

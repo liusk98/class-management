@@ -26,6 +26,28 @@ public interface ClassInfoService {
 
     /**
      * 功能描述:
+     * 〈修改班级信息〉
+     *
+     * @param classInfo
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/7/31 下午1:40
+     */
+    boolean updateClassInfo(ClassInfo classInfo);
+
+    /**
+     * 功能描述:
+     * 〈根据id获取classInfo数据〉
+     *
+     * @param id
+     * @return com.myclass.entity.ClassInfo
+     * @author 蜀山剑仙
+     * @date 2019/7/31 下午1:52
+     */
+    ClassInfo getClassInfo(Integer id);
+
+    /**
+     * 功能描述:
      * 〈分页查询班级信息〉
      *
      * @param pageIndex

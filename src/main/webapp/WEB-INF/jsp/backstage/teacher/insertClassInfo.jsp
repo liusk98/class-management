@@ -23,7 +23,7 @@
             </div>
             <div class="x_content">
                 <br>
-                <form action="${pageContext.request.contextPath}/backstage/classInfo/<c:if test="${isEdit}">updateClassInfo</c:if><c:if test="${not isEdit}">insertClassInfo.do</c:if>" method="post" id="demo-form2"
+                <form action="${pageContext.request.contextPath}/backstage/classInfo/<c:if test="${isEdit}">updateClassInfo.do</c:if><c:if test="${not isEdit}">insertClassInfo.do</c:if>" method="post" id="demo-form2"
                       data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">班级名称<span
@@ -43,7 +43,7 @@
                             <select id="last-name" name="gradeID" class="form-control col-xs-5">
                                 <option>--请选择年级--</option>
                                 <c:forEach items="${listGrade}" var="grade">
-                                    <option value="${grade.valueId}">${grade.valueName}</option>
+                                    <option value="${grade.valueId}" <c:if test="${classInfo.gradeID == grade.valueId}">selected</c:if>>${grade.valueName}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -55,13 +55,15 @@
                         </div>
                     </div>
                     <div class="ln_solid"></div>
+                    <c:if test="${isEdit}">
+                        <input type="hidden" name="id" value="${classInfo.id}">
+                    </c:if>
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                             <button type="submit" class="btn btn-primary">${title}</button>
                             <button type="reset" class="btn btn-success">重置</button>
                         </div>
                     </div>
-
                 </form>
                 <span class="message">${msg}</span>
             </div>

@@ -25,6 +25,28 @@ public interface ClassInfoMapper {
 
     /**
      * 功能描述:
+     * 〈修改班级信息〉
+     *
+     * @param classInfo
+     * @return int
+     * @author 蜀山剑仙
+     * @date 2019/7/31 下午1:27
+     */
+    int updateClassInfo(ClassInfo classInfo);
+
+    /**
+     * 功能描述:
+     * 〈根据id查找ClassInfo数据〉
+     *
+     * @param id
+     * @return com.myclass.entity.ClassInfo
+     * @author 蜀山剑仙
+     * @date 2019/7/31 下午1:47
+     */
+    ClassInfo getClassInfo(@Param("id") Integer id);
+
+    /**
+     * 功能描述:
      * 〈查询ClassInfo数据〉
      *
      * @param orderCol
