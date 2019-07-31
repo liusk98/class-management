@@ -5,6 +5,7 @@ import com.myclass.entity.DataDictionary;
 import com.myclass.entity.TeacherInfo;
 import com.myclass.service.ClassInfoService;
 import com.myclass.service.DataDictionaryService;
+import com.myclass.tools.PageData;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -50,6 +51,16 @@ public class ClassInfoController {
     public ModelAndView listClassInfo(ModelAndView modelAndView) {
         modelAndView.setViewName("backstage/teacher/listClassInfo");
         return modelAndView;
+    }
+
+    @GetMapping("classInfo.json")
+    public PageData<ClassInfo> getTeachers(Integer gradeID,String sort, String order, int offset, int limit) {
+        // 每页条数
+        int pageSize = limit;
+        // 当前页码
+        int pageIndex = offset / limit + 1;
+        PageData<ClassInfo> classInfoPageData = classInfoService.pageDataClassInfo(gradeID,pageIndex, pageSize, sort, order);
+        return classInfoPageData;
     }
 
     @PostMapping("insertClassInfo.do")

@@ -1,8 +1,11 @@
 package com.myclass.service.impl;
 
-import com.myclass.entity.ClassInfo;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.myclass.dao.ClassInfoMapper;
+import com.myclass.entity.ClassInfo;
 import com.myclass.service.ClassInfoService;
+import com.myclass.tools.PageData;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,5 +34,34 @@ public class ClassInfoServiceImpl implements ClassInfoService {
     @Override
     public boolean insertClassInfo(ClassInfo classInfo) {
         return classInfoMapper.insertClassInfo(classInfo) > 0;
+    }
+
+    /**
+     * 功能描述:
+     * 〈分页查询班级信息〉
+     *
+     * @param pageIndex
+     * @param pageSize
+     * @param orderCol
+     * @param orderType
+     * @param gradeID
+     * @return com.myclass.tools.PageData<com.myclass.entity.ClassInfo>
+     * @author 蜀山剑仙
+     * @date 2019/7/31 上午10:38
+     */
+    @Override
+    public PageData<ClassInfo> pageDataClassInfo(Integer gradeID, int pageIndex, int pageSize, String orderCol, String orderType) {
+        // 设置分页插件
+        Page<ClassInfo> page = PageHelper.startPage(pageIndex, pageSize);
+        ClassInfo classInfo = new ClassInfo();
+        classInfo.setGradeID(gradeID);
+        //开始调用mapper查询
+        List<ClassInfo> teacherInfoList = classInfoMapper.listClassInfo(classInfo, orderCol, orderType);
+        PageData<ClassInfo> classInfoPageData = new PageData<>();
+        //获取查询的总条数
+        classInfoPageData.setTotal(page.getTotal());
+        //获取当前页数据
+        classInfoPageData.setRows(teacherInfoList);
+        return classInfoPageData;
     }
 }

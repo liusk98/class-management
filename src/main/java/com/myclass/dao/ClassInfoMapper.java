@@ -22,4 +22,17 @@ public interface ClassInfoMapper {
      * @date 2019/7/30 上午11:17
      */
     int insertClassInfo(ClassInfo classInfo);
+
+    /**
+     * 功能描述:
+     * 〈查询ClassInfo数据〉
+     *
+     * @param orderCol
+     * @param orderType
+     * @param classInfo
+     * @return java.util.List<com.myclass.entity.ClassInfo>
+     * @author 蜀山剑仙
+     * @date 2019/7/31 上午10:41
+     */
+    List<ClassInfo> listClassInfo(@Param("classInfo") ClassInfo classInfo, @Param("orderCol") String orderCol, @Param("orderType") String orderType);
 }

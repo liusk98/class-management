@@ -7,6 +7,7 @@
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
         <association property="createTeacher" column="createTeacher" javaType="TeacherInfo">
             <id property="id" column="createTeacher" jdbcType="INTEGER"/>
+            <result property="name" column="teacherName" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
 
@@ -14,4 +15,29 @@
         insert into classInfo(id, name, gradeID, createTeacher, createTime, remark)
         values (0, #{name}, #{gradeID}, #{createTeacher.id}, now(), #{remark});
     </insert>
+
+    <select id="listClassInfo" resultMap="ClassInfoMap">
+        select id, name, gradeID, createTeacher, createTime, remark, gradeName, teacherName from (
+        select classInfo.id,
+        classInfo.name,
+        classInfo.gradeID,
+        classInfo.createTeacher,
+        classInfo.createTime,
+        classInfo.remark,
+        dataDictionary.valueName as gradeName,
+        teacherInfo.name as teacherName
+        from classInfo classInfo
+        left join dataDictionary dataDictionary on typeCode = 'GRADE' and dataDictionary.valueId = classInfo.gradeID
+        left join teacherInfo teacherInfo on teacherInfo.id = classInfo.createTeacher
+        ) t1
+        <where>
+            <if test="classInfo.gradeID != null and classInfo.gradeID != 0">
+                and classInfo.gradeID = #{classInfo.gradeID}
+            </if>
+            <if test="classInfo.remark != null and classInfo.remark != ''">
+                and classInfo.remark like concat('%',#{classInfo.remark},'%')
+            </if>
+        </where>
+        order by CONVERT(`${orderCol}` using gbk) ${orderType}
+    </select>
 </mapper>
