@@ -1,6 +1,7 @@
 package com.myclass.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 班级表(ClassInfo)(ClassInfo)实体类
@@ -15,14 +16,31 @@ public class ClassInfo implements Serializable {
      * 教师id,流水号
      */
     private Integer id;
+
     /**
      * 班级名称
      */
     private String name;
+
     /**
      * 所属年级编号
      */
     private Integer gradeID;
+
+    /**
+     * 所属年级名称
+     */
+    private String gradeName;
+
+    /**
+     * 创建人
+     */
+    private TeacherInfo createTeacher;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
     /**
      * 备注
@@ -59,5 +77,29 @@ public class ClassInfo implements Serializable {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getGradeName() {
+        return gradeName;
+    }
+
+    public void setGradeName(String gradeName) {
+        this.gradeName = gradeName;
+    }
+
+    public TeacherInfo getCreateTeacher() {
+        return createTeacher;
+    }
+
+    public void setCreateTeacher(TeacherInfo createTeacher) {
+        this.createTeacher = createTeacher;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

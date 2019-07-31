@@ -25,13 +25,15 @@ public interface DataDictionaryMapper {
     /**
      * 功能描述:
      * 〈查询数据字典数据〉
+     *
      * @param orderType
      * @param orderCol
+     * @param dataDictionary
      * @return : java.util.List<com.myclass.entity.DataDictionary>
      * @author : 蜀山剑仙
      * @date : 19-7-17 下午9:00
      */
-    List<DataDictionary> listDataDictionary(@Param("orderCol") String orderCol, @Param("orderType") String orderType);
+    List<DataDictionary> listDataDictionary(@Param("dataDictionary") DataDictionary dataDictionary, @Param("orderCol") String orderCol, @Param("orderType") String orderType);
 
     /**
      * 功能描述:

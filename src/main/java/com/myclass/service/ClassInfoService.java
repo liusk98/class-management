@@ -11,4 +11,14 @@ import java.util.List;
  */
 public interface ClassInfoService {
 
+    /**
+     * 功能描述:
+     * 〈新增班级信息〉
+     *
+     * @param classInfo
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/7/30 上午11:26
+     */
+    boolean insertClassInfo(ClassInfo classInfo);
 }

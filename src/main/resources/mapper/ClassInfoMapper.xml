@@ -1,0 +1,17 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myclass.dao.ClassInfoMapper">
+    <resultMap type="ClassInfo" id="ClassInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="gradeID" column="gradeID" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <association property="createTeacher" column="createTeacher" javaType="TeacherInfo">
+            <id property="id" column="createTeacher" jdbcType="INTEGER"/>
+        </association>
+    </resultMap>
+
+    <insert id="insertClassInfo" parameterType="ClassInfo">
+        insert into classInfo(id, name, gradeID, createTeacher, createTime, remark)
+        values (0, #{name}, #{gradeID}, #{createTeacher.id}, now(), #{remark});
+    </insert>
+</mapper>

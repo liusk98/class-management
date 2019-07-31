@@ -3,6 +3,8 @@ package com.myclass.service;
 import com.myclass.entity.DataDictionary;
 import com.myclass.tools.PageData;
 
+import java.util.List;
+
 /**
  * DataDictionaryService
  *
@@ -72,5 +74,16 @@ public interface DataDictionaryService {
      * @date 19-7-19 上午11:30
      */
     boolean updateDataDictionary(DataDictionary dataDictionary);
+
+    /**
+     * 功能描述:
+     * 〈根据dataDictionary查询此类型数据字典数据〉
+     *
+     * @param dataDictionary
+     * @return java.util.List<com.myclass.entity.DataDictionary>
+     * @author 蜀山剑仙
+     * @date 2019/7/31 上午9:51
+     */
+    List<DataDictionary> listDataDictionaryByTypeCode(DataDictionary dataDictionary);
 
 }

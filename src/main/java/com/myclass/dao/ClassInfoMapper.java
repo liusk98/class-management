@@ -12,4 +12,14 @@ import java.util.List;
  */
 public interface ClassInfoMapper {
 
+    /**
+     * 功能描述:
+     * 〈新增班级信息〉
+     *
+     * @param classInfo
+     * @return int
+     * @author 蜀山剑仙
+     * @date 2019/7/30 上午11:17
+     */
+    int insertClassInfo(ClassInfo classInfo);
 }

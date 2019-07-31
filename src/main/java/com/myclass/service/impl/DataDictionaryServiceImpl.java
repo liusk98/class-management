@@ -42,7 +42,7 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
         // 设置分页插件
         Page<DataDictionary> page = PageHelper.startPage(pageIndex, pageSize);
         // 开始调用mapper查询
-        List<DataDictionary> dataDictionaries = dataDictionaryMapper.listDataDictionary(orderCol, orderType);
+        List<DataDictionary> dataDictionaries = dataDictionaryMapper.listDataDictionary(null, orderCol, orderType);
         PageData<DataDictionary> dataDictionaryPageData = new PageData<>();
         dataDictionaryPageData.setTotal(page.getTotal());
         dataDictionaryPageData.setRows(dataDictionaries);
@@ -108,6 +108,20 @@ public class DataDictionaryServiceImpl implements DataDictionaryService {
     @Override
     public boolean updateDataDictionary(DataDictionary dataDictionary) {
         return dataDictionaryMapper.updateDataDictionary(dataDictionary) > 0;
+    }
+
+    /**
+     * 功能描述:
+     * 〈根据dataDictionary查询此类型数据字典数据〉
+     *
+     * @param dataDictionary
+     * @return java.util.List<com.myclass.entity.DataDictionary>
+     * @author 蜀山剑仙
+     * @date 2019/7/31 上午9:51
+     */
+    @Override
+    public List<DataDictionary> listDataDictionaryByTypeCode(DataDictionary dataDictionary) {
+        return dataDictionaryMapper.listDataDictionary(dataDictionary, "typeCode", "asc");
     }
 
 }

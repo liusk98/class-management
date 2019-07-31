@@ -13,7 +13,34 @@
     <select id="listDataDictionary" resultMap="DataDictionaryMap">
         select typeCode,typeName,valueId,valueName,createUser,createTime,isenable,remark
         from dataDictionary
-        order by CONVERT(`${orderCol}` using gbk) ${orderType}
+        <where>
+            <if test="dataDictionary.typeCode != null and dataDictionary.typeCode != ''">
+                and typeCode = #{dataDictionary.typeCode}
+            </if>
+            <if test="dataDictionary.typeName != null and dataDictionary.typeName != ''">
+                and typeName = #{dataDictionary.typeName}
+            </if>
+            <if test="dataDictionary.valueId != null and dataDictionary.valueId != 0">
+                and valueId = #{dataDictionary.valueId}
+            </if>
+            <if test="dataDictionary.valueName != null and dataDictionary.valueName != ''">
+                and valueName = #{dataDictionary.valueName}
+            </if>
+            <if test="dataDictionary.createUser != null and dataDictionary.createUser != 0">
+                and createUser = #{dataDictionary.createUser}
+            </if>
+            <if test="dataDictionary.isenable != null">
+                and isenable = #{dataDictionary.isenable}
+            </if>
+            <if test="dataDictionary.remark != null">
+                and remark = #{dataDictionary.remark}
+            </if>
+        </where>
+        order by
+        <if test="orderCol != null and orderCol != ''">
+            CONVERT(`${orderCol}` using gbk)
+        </if>
+         ${orderType}
     </select>
 
     <update id="updateIsEnable">

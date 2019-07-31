@@ -19,4 +19,17 @@ public class ClassInfoServiceImpl implements ClassInfoService {
     @Resource
     private ClassInfoMapper classInfoMapper;
 
+    /**
+     * 功能描述:
+     * 〈新增班级信息〉
+     *
+     * @param classInfo
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/7/30 上午11:26
+     */
+    @Override
+    public boolean insertClassInfo(ClassInfo classInfo) {
+        return classInfoMapper.insertClassInfo(classInfo) > 0;
+    }
 }
