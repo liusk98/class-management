@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: joe
@@ -11,20 +12,40 @@
     <jsp:param name="needTable" value="true"/>
 </jsp:include>
 <div class="x_content">
-    <table id="classInfoTable" class="table table-bordered table-striped table-hover"
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <select id="grade" class="form-control">
+            <option value="0">--全部年级--</option>
+            <c:forEach items="${listGrade}" var="grade">
+                <option value="${grade.valueId}">${grade.valueName}</option>
+            </c:forEach>
+        </select>
+    </div>
+    <div class="col-md-3 col-sm-3 col-xs-6">
+        <select name="classID" class="form-control">
+            <option value="0">--全部班级--</option>
+        </select>
+    </div>
+    <div class="col-xs-5">
+        <button class="btn btn-default" onclick="myQuery()">查询</button>
+    </div>
+    <table id="studentInfoTable" class="table table-bordered table-striped table-hover"
            data-toggle="table"
            data-height="460"
            data-pagination="true"
            data-side-pagination="server"
-           data-sort-name="id"
+           data-sort-name="stuNo"
+           data-query-params="queryParams"
            data-sort-order="asc"
            data-page-list="[5,10,25,50,100,200,All]"
-           data-url="${pageContext.request.contextPath}/backstage/classInfo/classInfo.json">
+           data-url="${pageContext.request.contextPath}/backstage/studentInfo/studentInfo.json">
         <thead>
         <tr>
-            <th data-field="id" data-sortable="true" data-width="10" data-width-unit="%">班级编号</th>
-            <th data-field="name" data-sortable="true">班级名称</th>
-            <th data-field="gradeName" data-sortable="true">年级</th>
+            <th data-field="stuNo" data-sortable="true" data-width="10" data-width-unit="%">学生编号</th>
+            <th data-field="loginName" data-sortable="true">登录名称</th>
+            <th data-field="name" data-sortable="true">学生名称</th>
+            <th data-field="sex" data-sortable="true">性别</th>
+            <th data-field="classId.name" data-sort-name="className" data-sortable="true">班级名称</th>
+            <th data-field="classId.gradeName" data-sort-name="gradeName" data-sortable="true">年级</th>
             <th data-field="createTeacher.name" data-sort-name="teacherName" data-sortable="true">创建人</th>
             <th data-field="createTime" data-sortable="true">创建时间</th>
             <th data-formatter="rowsOperate">操作</th>
@@ -37,8 +58,42 @@
     <jsp:param name="needTable" value="true"/>
 </jsp:include>
 <script type="text/javascript">
+
+    $(function () {
+        var grade = $("#grade");
+        $(grade).change(function () {
+            var gradeId = grade.val();
+            listClassInfo(gradeId);
+        });
+    });
+
+    function listClassInfo(gradeId) {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/backstage/classInfo/listClassInfo.json",
+            data: {gradeId: gradeId},
+            dataType: "json",
+            success: function (result) {
+                $(":input[name=classID]").html("<option value='0'>--全部班级--</option>");
+                $.each(result, function (index, item) {
+                    var value = "<option value='" + item.id + "'>" + item.name + "</option>";
+                    $(":input[name=classID]").append(value);
+                });
+            }
+        })
+    }
+
+    function myQuery() {
+        $("#studentInfoTable").bootstrapTable("refresh");
+    }
+
+    function queryParams(params) {
+        params.gradeId = $("#grade").val();
+        params.classId = $(":input[name=classID]").val();
+        return params;
+    }
+
     function rowsOperate(value, row, index) {
-        return '<a href="${pageContext.request.contextPath}/backstage/classInfo/updateClassInfo.html/'+row.id+'" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 修改 </a>';
+        return '<a href="${pageContext.request.contextPath}/backstage/classInfo/updateClassInfo.html/' + row.id + '" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 修改 </a>';
     }
 </script>
 

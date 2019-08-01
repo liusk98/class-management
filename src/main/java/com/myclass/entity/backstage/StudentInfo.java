@@ -36,6 +36,11 @@ public class StudentInfo {
     private Integer classID;
 
     /**
+     * 班级
+     */
+    private ClassInfo classId;
+
+    /**
      * 性别(男,女)
      */
     private char sex;
@@ -71,9 +76,19 @@ public class StudentInfo {
     private Integer isHeadPass;
 
     /**
+     * 头像是否通过审核名称
+     */
+    private String headStatusName;
+
+    /**
      * 省代码
      */
     private String provinceCode;
+
+    /**
+     * 省名称
+     */
+    private String provinceName;
 
     /**
      * 城市代码
@@ -81,9 +96,19 @@ public class StudentInfo {
     private String cityCode;
 
     /**
+     * 城市名称
+     */
+    private String cityName;
+
+    /**
      * 区域代码
      */
     private String areaCode;
+
+    /**
+     * 区域名称
+     */
+    private String areaName;
 
     /**
      * 详细地址
@@ -115,6 +140,11 @@ public class StudentInfo {
      * (0禁用,1启用)
      */
     private Integer status;
+
+    /**
+     * 状态名称
+     */
+    private String studentStatus;
 
     /**
      * 注册ip地址
@@ -169,6 +199,14 @@ public class StudentInfo {
 
     public void setClassID(Integer classID) {
         this.classID = classID;
+    }
+
+    public ClassInfo getClassId() {
+        return classId;
+    }
+
+    public void setClassId(ClassInfo classId) {
+        this.classId = classId;
     }
 
     public char getSex() {
@@ -321,5 +359,45 @@ public class StudentInfo {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getHeadStatusName() {
+        return headStatusName;
+    }
+
+    public void setHeadStatusName(String headStatusName) {
+        this.headStatusName = headStatusName;
+    }
+
+    public String getProvinceName() {
+        return provinceName;
+    }
+
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
+    public String getAreaName() {
+        return areaName;
+    }
+
+    public void setAreaName(String areaName) {
+        this.areaName = areaName;
+    }
+
+    public String getStudentStatus() {
+        return studentStatus;
+    }
+
+    public void setStudentStatus(String studentStatus) {
+        this.studentStatus = studentStatus;
     }
 }

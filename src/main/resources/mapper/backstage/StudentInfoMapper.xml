@@ -5,10 +5,67 @@
     <resultMap type="StudentInfo" id="StudentInfoMap">
         <result property="stuNo" column="stuNo" jdbcType="VARCHAR"/>
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
-        <association property="createTeacher" column="createTeacher">
+        <result property="classID" column="classID" jdbcType="INTEGER"/>
+        <association property="createTeacher" column="createTeacher" javaType="TeacherInfo">
             <id property="id" column="createTeacher"></id>
+            <result property="name" column="teacherName" jdbcType="VARCHAR"/>
+        </association>
+        <association property="classId" column="classID" javaType="ClassInfo">
+            <id property="id" column="classID" jdbcType="INTEGER"/>
+            <result property="name" column="className" jdbcType="VARCHAR"/>
+            <result property="gradeID" column="gradeID" jdbcType="INTEGER"/>
+            <result property="gradeName" column="gradeName" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
+
+    <sql id="queryFull">
+     select student.stuNo,
+        student.loginName,
+        student.name,
+        student.classID,
+        class.name as 'className',
+        class.gradeID,
+        dataGrade.valueName as 'gradeName',
+        IFNULL(student.sex, '?') as sex,
+        student.idCard,
+        student.birthday,
+        student.phone,
+        student.headImg,
+        student.headTemp,
+        student.isHeadPass,
+        dataHeadStatus.valueName as 'headStatusName',
+        student.provinceCode,
+        IFNULL(province.name, '未知') as 'provinceName',
+        student.cityCode,
+        city.name as 'cityName',
+        student.areaCode,
+        area.name as 'areaName',
+        student.address,
+        student.signature,
+        student.createTime,
+        student.createTeacher,
+        teacher.name as 'teacherName',
+        student.lastLoginTime,
+        student.status,
+        dataStatus.valueName as 'studentStatus',
+        student.ipAddress,
+        student.modifyTime,
+        student.remark
+        from studentInfo student
+        join classInfo class on class.id = student.classID
+        join teacherInfo teacher on teacher.id = student.createTeacher
+        join dataDictionary dataStatus
+        on dataStatus.typeCode = 'STU_STATUS' and
+        dataStatus.valueId = student.status
+        join dataDictionary dataGrade
+        on dataGrade.typeCode = 'GRADE' and dataGrade.valueId = class.gradeID
+        left join dataDictionary dataHeadStatus
+        on dataHeadStatus.typeCode = 'H_STATUS' and
+        dataHeadStatus.valueId = student.isHeadPass
+        left join province province on province.code = student.provinceCode
+        left join area area on area.code = student.areaCode
+        left join city city on city.code = student.cityCode
+    </sql>
 
     <insert id="insertStudentInfo" parameterType="StudentInfo">
         insert into studentInfo(stuNo, loginName, name, pwd, classID, idCard, createTime, createTeacher, status, remark)
@@ -93,11 +150,13 @@
     </update>
 
     <select id="getStudentInfo" resultMap="StudentInfoMap">
-        select
-        stuNo,
+        select stuNo,
         loginName,
         name,
         classID,
+        className,
+        gradeID,
+        gradeName,
         sex,
         idCard,
         birthday,
@@ -105,21 +164,29 @@
         headImg,
         headTemp,
         isHeadPass,
+        headStatusName,
         provinceCode,
+        provinceName,
         cityCode,
+        cityName,
         areaCode,
+        areaName,
         address,
         signature,
         createTime,
         createTeacher,
+        teacherName,
         lastLoginTime,
         status,
+        studentStatus,
         ipAddress,
         modifyTime,
         remark
-        from studentInfo
+        from (
+        <include refid="queryFull"></include>
+        ) t1
         <where>
-        stuNo = #{stuNo}
+            stuNo = #{stuNo}
         </where>
     </select>
 
@@ -132,6 +199,55 @@
     </select>
 
     <select id="listStudentInfo" resultMap="StudentInfoMap">
-
+        select stuNo,
+        loginName,
+        name,
+        classID,
+        className,
+        gradeID,
+        gradeName,
+        sex,
+        idCard,
+        birthday,
+        phone,
+        headImg,
+        headTemp,
+        isHeadPass,
+        headStatusName,
+        provinceCode,
+        provinceName,
+        cityCode,
+        cityName,
+        areaCode,
+        areaName,
+        address,
+        signature,
+        createTime,
+        createTeacher,
+        teacherName,
+        lastLoginTime,
+        status,
+        studentStatus,
+        ipAddress,
+        modifyTime,
+        remark
+        from (
+        <include refid="queryFull"></include>
+        ) t1
+        <where>
+            <if test="studentInfo != null">
+                <if test="studentInfo.classId != null">
+                    <if test="studentInfo.classId.id != 0 and studentInfo.classId.id != null">
+                        and classID = #{studentInfo.classId.id}
+                    </if>
+                    <if test="studentInfo.classId.gradeID != null and studentInfo.classId.gradeID != 0">
+                        and gradeID = #{studentInfo.classId.gradeID}
+                    </if>
+                </if>
+            </if>
+        </where>
+        <if test="orderCol != null and orderCol != '' and orderType != null and orderType != ''">
+            order by CONVERT(`${orderCol}` using gbk) ${orderType}
+        </if>
     </select>
 </mapper>

@@ -1,15 +1,19 @@
 package com.myclass.service.backstage.impl;
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.myclass.dao.backstage.ClassInfoMapper;
 import com.myclass.dao.backstage.StudentInfoMapper;
 import com.myclass.entity.backstage.ClassInfo;
 import com.myclass.entity.backstage.StudentInfo;
 import com.myclass.service.backstage.StudentInfoService;
+import com.myclass.tools.PageData;
 import com.myclass.tools.SysConfig;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Calendar;
+import java.util.List;
 
 /**
  * 学生信息表(StudentInfo)(Studentinfo)表服务实现类
@@ -81,6 +85,34 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     @Override
     public StudentInfo getStudentInfo(StudentInfo studentInfo) {
         return studentInfoMapper.getStudentInfo(studentInfo);
+    }
+
+    /**
+     * 功能描述:
+     * 〈分页查询Student数据〉
+     *
+     * @param studentInfo
+     * @param pageIndex
+     * @param pageSize
+     * @param orderCol
+     * @param orderType
+     * @return com.myclass.tools.PageData<com.myclass.entity.backstage.StudentInfo>
+     * @author 蜀山剑仙
+     * @date 2019/8/2 上午11:02
+     */
+    @Override
+    public PageData<StudentInfo> pageDataStudentInfo(StudentInfo studentInfo, int pageIndex, int pageSize, String orderCol, String orderType) {
+        // 设置分页插件
+        Page<StudentInfo> page = PageHelper.startPage(pageIndex, pageSize);
+        //开始调用mapper查询
+        List<StudentInfo> listStudentInfo = studentInfoMapper.listStudentInfo(studentInfo,orderCol, orderType);
+
+        PageData<StudentInfo> studentInfoPageData = new PageData<>();
+        //获取查询的总条数
+        studentInfoPageData.setTotal(page.getTotal());
+        //获取当前页数据
+        studentInfoPageData.setRows(listStudentInfo);
+        return studentInfoPageData;
     }
 
 }

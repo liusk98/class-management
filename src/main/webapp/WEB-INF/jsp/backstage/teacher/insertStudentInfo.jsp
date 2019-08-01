@@ -23,7 +23,8 @@
             </div>
             <div class="x_content">
                 <br>
-                <form action="${pageContext.request.contextPath}/backstage/studentInfo/<c:if test="${isEdit}">updateStudentInfo.do</c:if><c:if test="${not isEdit}">insertStudentInfo.do</c:if>" method="post" id="demo-form2"
+                <form action="${pageContext.request.contextPath}/backstage/studentInfo/<c:if test="${isEdit}">updateStudentInfo.do</c:if><c:if test="${not isEdit}">insertStudentInfo.do</c:if>"
+                      method="post" id="demo-form2"
                       data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="studentName">学生姓名<span
@@ -55,18 +56,18 @@
                                 <option>--请选择年级--</option>
                                 <c:forEach items="${listGrade}" var="grade">
                                     <option value="${grade.valueId}"
-                                    <c:if test="${isEdit}">
-                                        <c:if test="">selected</c:if>
-                                    </c:if>
+                                            <c:if test="${isEdit}">
+                                                <c:if test="">selected</c:if>
+                                            </c:if>
                                     >${grade.valueName}</option>
                                 </c:forEach>
                             </select>
-                            </div>
-                            <div class="col-md-3 col-sm-3 col-xs-6">
-                                <select name="classID" class="form-control">
-                                    <option value="0">--请选择班级--</option>
-                                </select>
-                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 col-xs-6">
+                            <select name="classID" class="form-control">
+                                <option value="0">--请选择班级--</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-xs-12">备注</label>
@@ -99,12 +100,13 @@
             listClassInfo(gradeId);
         });
     });
+
     function listClassInfo(gradeId) {
         $.ajax({
-            url:"${pageContext.request.contextPath}/backstage/classInfo/listClassInfo.json",
-            data:{gradeId:gradeId},
-            dataType:"json",
-            success:function (result) {
+            url: "${pageContext.request.contextPath}/backstage/classInfo/listClassInfo.json",
+            data: {gradeId: gradeId},
+            dataType: "json",
+            success: function (result) {
                 $(":input[name=classID]").html("<option value='0'>--请选择班级--</option>");
                 $.each(result, function (index, item) {
                     var value = "<option value='" + item.id + "'>" + item.name + "</option>";
