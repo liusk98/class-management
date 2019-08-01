@@ -78,6 +78,14 @@ public class ClassInfoController {
         return classInfoPageData;
     }
 
+    @GetMapping("listClassInfo.json")
+    public List<ClassInfo> listClassInfo(Integer gradeId) {
+        ClassInfo classInfo = new ClassInfo();
+        classInfo.setGradeID(gradeId);
+        List<ClassInfo> listClassInfo = classInfoService.listClassInfo(classInfo);
+        return listClassInfo;
+    }
+
     @PostMapping("insertClassInfo.do")
     public ModelAndView insertClassInfo(ClassInfo classInfo, ModelAndView modelAndView, HttpServletRequest request) {
         modelAndView.setViewName("backstage/teacher/insertClassInfo");
@@ -99,7 +107,6 @@ public class ClassInfoController {
 
     @PostMapping("updateClassInfo.do")
     public ModelAndView updateClassInfo(ClassInfo classInfo, ModelAndView modelAndView) {
-        // 获取创建人信息
         boolean result = classInfoService.updateClassInfo(classInfo);
         if (result) {
             modelAndView.addObject("msg", "修改成功");

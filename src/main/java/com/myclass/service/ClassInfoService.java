@@ -60,4 +60,15 @@ public interface ClassInfoService {
      * @date 2019/7/31 上午10:38
      */
     PageData<ClassInfo> pageDataClassInfo(Integer gradeID,int pageIndex, int pageSize, String orderCol, String orderType);
+
+    /**
+     * 功能描述:
+     * 〈根据ClassInfo查询〉
+     *
+     * @param classInfo
+     * @return java.util.List<com.myclass.entity.ClassInfo>
+     * @author 蜀山剑仙
+     * @date 2019/7/31 下午4:46
+     */
+    List<ClassInfo> listClassInfo(ClassInfo classInfo);
 }

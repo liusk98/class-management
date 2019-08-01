@@ -92,4 +92,18 @@ public class ClassInfoServiceImpl implements ClassInfoService {
         classInfoPageData.setRows(teacherInfoList);
         return classInfoPageData;
     }
+
+    /**
+     * 功能描述:
+     * 〈根据ClassInfo查询〉
+     *
+     * @param classInfo
+     * @return java.util.List<com.myclass.entity.ClassInfo>
+     * @author 蜀山剑仙
+     * @date 2019/7/31 下午4:46
+     */
+    @Override
+    public List<ClassInfo> listClassInfo(ClassInfo classInfo) {
+        return classInfoMapper.listClassInfo(classInfo, null, null);
+    }
 }

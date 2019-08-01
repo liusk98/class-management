@@ -9,6 +9,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../../common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="${title}班级"/>
+    <jsp:param name="needSwitch" value="true"/>
 </jsp:include>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
@@ -70,4 +71,27 @@
         </div>
     </div>
 </div>
-<%@include file="../../common/footer.jsp" %>
+<jsp:include page="../../common/footer.jsp" flush="true">
+    <jsp:param name="needSwitch" value="true"/>
+</jsp:include>
+<script type="text/javascript">
+    $(function () {
+        $("#chkIsEnable").bootstrapSwitch({
+            onText: "启用",        //设置on文本
+            offText: "禁用",       //设置off文本
+            onColor: "primary",   //设置on文本颜色
+            offColor: "danger",   //设置off文本颜色
+            size: "small",        //设置控件大小，从小到大
+            handleWidth: "35",    //设置控件宽度
+            //当开关状态改变时触发
+            onSwitchChange: function (event, state) {
+                var ProductId = event.target.defaultValue;
+                if (state == true) {
+                    $("#isenable").val(1);
+                } else {
+                    $("#isenable").val(0);
+                }
+            }
+        })
+    })
+</script>

@@ -6,8 +6,14 @@
         <result property="stuNo" column="stuNo" jdbcType="VARCHAR"/>
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
     </resultMap>
+
+    <insert id="insertStudentInfo" parameterType="StudentInfo">
+        insert into studentInfo(stuNo, loginName, name, pwd, classID, createTime, createTeacher, status, remark)
+        values (#{stuNo}, #{loginName}, #{name}, #{pwd}, #{classID}, now(), #{createTeacher}, #{status}, #{remark});
+    </insert>
+
     <!--通过主键修改数据-->
-    <update id="update">
+    <update id="updateStudentInfo" parameterType="StudentInfo">
         update myClass.studentInfo
         <set>
             <if test="loginName != null and loginName != ''">
@@ -83,4 +89,38 @@
         where stuNo = #{stuNo}
     </update>
 
+    <select id="getStudentInfo" resultMap="StudentInfoMap">
+        select
+        stuNo,
+        loginName,
+        name,
+        classID,
+        sex,
+        idCard,
+        birthday,
+        phone,
+        headImg,
+        headTemp,
+        isHeadPass,
+        provinceCode,
+        cityCode,
+        areaCode,
+        address,
+        signature,
+        createTime,
+        createTeacher,
+        lastLoginTime,
+        status,
+        ipAddress,
+        modifyTime,
+        remark
+        from studentInfo
+        <where>
+        stuNo = #{stuNo}
+        </where>
+    </select>
+
+    <select id="listStudentInfo" resultMap="StudentInfoMap">
+
+    </select>
 </mapper>

@@ -59,13 +59,15 @@
         ) t1
         <where>
             <if test="classInfo.gradeID != null and classInfo.gradeID != 0">
-                and classInfo.gradeID = #{classInfo.gradeID}
+                and gradeID = #{classInfo.gradeID}
             </if>
             <if test="classInfo.remark != null and classInfo.remark != ''">
-                and classInfo.remark like concat('%',#{classInfo.remark},'%')
+                and remark like concat('%',#{classInfo.remark},'%')
             </if>
         </where>
-        order by CONVERT(`${orderCol}` using gbk) ${orderType}
+        <if test="orderCol != null and orderCol != '' and orderType != null and orderType != ''">
+            order by CONVERT(`${orderCol}` using gbk) ${orderType}
+        </if>
     </select>
 
 </mapper>
