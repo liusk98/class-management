@@ -2,15 +2,21 @@ package com.myclass.controller;
 
 import com.myclass.entity.ClassInfo;
 import com.myclass.entity.DataDictionary;
+import com.myclass.entity.StudentInfo;
+import com.myclass.entity.TeacherInfo;
 import com.myclass.service.ClassInfoService;
 import com.myclass.service.DataDictionaryService;
 import com.myclass.service.StudentInfoService;
+import org.apache.log4j.Logger;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -22,6 +28,12 @@ import java.util.List;
 @RestController
 @RequestMapping("backstage/studentInfo")
 public class StudentInfoController {
+
+    /**
+     * 日志操作
+     */
+    private static Logger logger = Logger.getLogger(StudentInfoController.class);
+
     /**
      * 服务对象
      */
@@ -48,8 +60,8 @@ public class StudentInfoController {
         dataDictionary.setIsenable(1);
         List<DataDictionary> listGrade = dataDictionaryService.listDataDictionaryByTypeCode(dataDictionary);
         modelAndView.addObject("listGrade", listGrade);
-        modelAndView.addObject("isEdit", true);
-        modelAndView.addObject("title", "修改");
+        modelAndView.addObject("isEdit", false);
+        modelAndView.addObject("title", "添加");
         return modelAndView;
     }
 
@@ -59,5 +71,24 @@ public class StudentInfoController {
         return modelAndView;
     }
 
+    @PostMapping("insertStudentInfo.do")
+    public ModelAndView insertStudentInfo(StudentInfo studentInfo, ModelAndView modelAndView, HttpServletRequest request) {
+        TeacherInfo teacherInfo = (TeacherInfo) request.getSession().getAttribute("teacher");
+        studentInfo.setCreateTeacher(teacherInfo);
+        try {
+            boolean insertStudent = studentInfoService.insertStudent(studentInfo);
+            if (insertStudent) {
+                modelAndView.addObject("msg", "创建成功!");
+            } else {
+                modelAndView.addObject("msg", "创建失败!");
+            }
+        } catch (DuplicateKeyException e) {
+            logger.error("dup error:", e);
+            modelAndView.addObject("msg", "创建失败,身份证号码不能重复!");
+        } catch (Exception e) {
+            logger.error("新增学生时 error:", e);
+        }
+        return insertStudentInfo(modelAndView);
+    }
 
 }

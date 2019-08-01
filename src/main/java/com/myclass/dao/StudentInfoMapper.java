@@ -37,6 +37,17 @@ public interface StudentInfoMapper {
 
     /**
      * 功能描述:
+     * 〈获取班级最大的学号〉
+     *
+     * @param prefix
+     * @return java.lang.Integer
+     * @author 蜀山剑仙
+     * @date 2019/8/1 下午5:38
+     */
+    Integer getMaxStuNo(String prefix);
+
+    /**
+     * 功能描述:
      * 〈查找一个StudentInfo数据〉
      *
      * @param studentInfo

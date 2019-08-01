@@ -5,11 +5,14 @@
     <resultMap type="StudentInfo" id="StudentInfoMap">
         <result property="stuNo" column="stuNo" jdbcType="VARCHAR"/>
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <association property="createTeacher" column="createTeacher">
+            <id property="id" column="createTeacher"></id>
+        </association>
     </resultMap>
 
     <insert id="insertStudentInfo" parameterType="StudentInfo">
-        insert into studentInfo(stuNo, loginName, name, pwd, classID, createTime, createTeacher, status, remark)
-        values (#{stuNo}, #{loginName}, #{name}, #{pwd}, #{classID}, now(), #{createTeacher}, #{status}, #{remark});
+        insert into studentInfo(stuNo, loginName, name, pwd, classID, idCard, createTime, createTeacher, status, remark)
+        values (#{stuNo}, #{loginName}, #{name}, #{pwd}, #{classID}, #{idCard}, now(), #{createTeacher.id}, #{status}, #{remark});
     </insert>
 
     <!--通过主键修改数据-->
@@ -68,7 +71,7 @@
                 createTime = #{createTime},
             </if>
             <if test="createTeacher != null">
-                createTeacher = #{createTeacher},
+                createTeacher = #{createTeacher.id},
             </if>
             <if test="lastLoginTime != null">
                 lastLoginTime = #{lastLoginTime},
@@ -117,6 +120,14 @@
         from studentInfo
         <where>
         stuNo = #{stuNo}
+        </where>
+    </select>
+
+    <select id="getMaxStuNo" parameterType="String" resultType="Integer">
+        select MAX(CAST(SUBSTRING(stuNo, 9) as unsigned))
+        from studentInfo
+        <where>
+            stuNo like CONCAT(#{prefix}, '%');
         </where>
     </select>
 

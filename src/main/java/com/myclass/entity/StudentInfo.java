@@ -103,7 +103,7 @@ public class StudentInfo {
     /**
      * 创建教师
      */
-    private Integer createTeacher;
+    private TeacherInfo createTeacher;
 
     /**
      * 上次登录时间
@@ -275,11 +275,11 @@ public class StudentInfo {
         this.createTime = createTime;
     }
 
-    public Integer getCreateTeacher() {
+    public TeacherInfo getCreateTeacher() {
         return createTeacher;
     }
 
-    public void setCreateTeacher(Integer createTeacher) {
+    public void setCreateTeacher(TeacherInfo createTeacher) {
         this.createTeacher = createTeacher;
     }
 
