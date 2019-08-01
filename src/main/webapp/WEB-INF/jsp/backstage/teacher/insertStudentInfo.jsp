@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../../common/header.jsp" flush="true">
+<jsp:include page="../common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="${title}学生"/>
 </jsp:include>
 <div class="row">
@@ -90,7 +90,7 @@
         </div>
     </div>
 </div>
-<%@include file="../../common/footer.jsp" %>
+<%@include file="../common/footer.jsp" %>
 <script type="text/javascript">
     $(function () {
         var grade = $("#grade");

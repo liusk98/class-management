@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="../../common/header.jsp" flush="true">
+<jsp:include page="../common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="数据字典列表"/>
     <jsp:param name="needTable" value="true"/>
     <jsp:param name="needSwitch" value="true"/>
@@ -37,7 +37,7 @@
     </table>
     <div><span>${requestScope.msg}</span></div>
 </div>
-<jsp:include page="../../common/footer.jsp" flush="true">
+<jsp:include page="../common/footer.jsp" flush="true">
     <jsp:param name="needTable" value="true"/>
     <jsp:param name="needSwitch" value="true"/>
 </jsp:include>

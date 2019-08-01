@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<jsp:include page="../../common/header.jsp" flush="true">
+<jsp:include page="../common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="教师列表"/>
     <jsp:param name="needTable" value="true"/>
 </jsp:include>
@@ -37,7 +37,7 @@
     </table>
     <div><span>${requestScope.msg}</span></div>
 </div>
-<jsp:include page="../../common/footer.jsp" flush="true">
+<jsp:include page="../common/footer.jsp" flush="true">
     <jsp:param name="needTable" value="true"/>
 </jsp:include>
 <script type="text/javascript">

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="../../common/header.jsp" flush="true">
+<jsp:include page="../common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="新增教师"/>
 </jsp:include>
 <div>
@@ -61,4 +61,4 @@
         </div>
     </div>
 </div>
-<%@include file="../../common/footer.jsp" %>
+<%@include file="../common/footer.jsp" %>

@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<jsp:include page="../../common/header.jsp" flush="true">
+<jsp:include page="../common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="${title}数据字典"/>
     <jsp:param name="needSwitch" value="true"/>
 </jsp:include>
@@ -102,7 +102,7 @@
     </div>
 </div>
 
-<jsp:include page="../../common/footer.jsp" flush="true">
+<jsp:include page="../common/footer.jsp" flush="true">
     <jsp:param name="needSwitch" value="true"/>
 </jsp:include>
 <script type="text/javascript">

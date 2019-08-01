@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<jsp:include page="../common/header.jsp" flush="true">
+<jsp:include page="common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="更改密码"/>
 </jsp:include>
 <div class="x_content">
@@ -52,7 +52,7 @@
         <span style="color: lightblue">${msg}</span>
     </div>
 </div>
-<%@include file="../common/footer.jsp" %>
+<%@include file="common/footer.jsp" %>
 <script type="text/javascript">
     $(function () {
 
