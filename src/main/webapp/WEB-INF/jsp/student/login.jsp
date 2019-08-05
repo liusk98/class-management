@@ -1,14 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
-  User: Joe
-  Date: 2019/7/11
-  Time: 16:44
+  User: joe
+  Date: 2019/8/5
+  Time: 下午6:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>教师管理后台登录</title>
+    <title>学生登录</title>
     <!-- Bootstrap -->
     <link href="${pageContext.request.contextPath}/statics/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -28,8 +28,8 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form action="${pageContext.request.contextPath}/loginTeacherInfo.do" method="post">
-                    <h1>教师管理后台登录</h1>
+                <form action="${pageContext.request.contextPath}/loginStudentInfo.do" method="post">
+                    <h1>学生登录</h1>
                     <div class="error"><span>${requestScope.error}</span></div>
                     <div>
                         <input type="text" class="form-control" name="loginName" placeholder="Username" required="" />
@@ -38,9 +38,9 @@
                         <input type="password" class="form-control" name="pwd" placeholder="Password" required="" />
                     </div>
                     <div>
-                       <%-- <a class="btn btn-default submit" href="#">Log in</a>--%>
+                        <%-- <a class="btn btn-default submit" href="#">Log in</a>--%>
                         <button class="btn btn-default submit" type="submit">Log in</button>
-                        <a type="button" class="btn btn-warning" href="${pageContext.request.contextPath}/loginStudentInfo.html">转到学生登录</a>
+                        <a class="reset_pass" href="#">Lost your password?</a>
                     </div>
 
                     <div class="clearfix"></div>

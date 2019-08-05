@@ -37,6 +37,17 @@ public interface StudentInfoMapper {
 
     /**
      * 功能描述:
+     * 〈修改最后一次登录时间〉
+     *
+     * @param stuNo
+     * @return int
+     * @author 蜀山剑仙
+     * @date 2019/8/5 下午6:41
+     */
+    int updateLastLoginTimeByStuNo(String stuNo);
+
+    /**
+     * 功能描述:
      * 〈获取班级最大的学号〉
      *
      * @param prefix

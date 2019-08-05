@@ -21,6 +21,7 @@
     <sql id="queryFull">
      select student.stuNo,
         student.loginName,
+        student.pwd,
         student.name,
         student.classID,
         class.name as 'className',
@@ -149,9 +150,20 @@
         where stuNo = #{stuNo}
     </update>
 
+    <update id="updateLastLoginTimeByStuNo">
+        update myClass.studentInfo
+        <set>
+            lastLoginTime = now()
+        </set>
+        <where>
+            stuNo = #{stuNo}
+        </where>
+    </update>
+
     <select id="getStudentInfo" resultMap="StudentInfoMap">
         select stuNo,
         loginName,
+        pwd,
         name,
         classID,
         className,
@@ -186,7 +198,22 @@
         <include refid="queryFull"></include>
         ) t1
         <where>
-            stuNo = #{stuNo}
+            <!--<if test="studentInfo != null">-->
+                <if test="loginName != null and loginName != ''">
+                    and loginName = #{loginName}
+                </if>
+                <if test="pwd != null and pwd != ''">
+                    and pwd = #{pwd}
+                </if>
+                <if test="classId != null">
+                    <if test="classId.id != 0 and classId.id != null">
+                        and classID = #{classId.id}
+                    </if>
+                    <if test="classId.gradeID != null and classId.gradeID != 0">
+                        and gradeID = #{classId.gradeID}
+                    </if>
+                </if>
+         <!--</if>-->
         </where>
     </select>
 

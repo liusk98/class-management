@@ -13,6 +13,18 @@ public interface StudentInfoService {
 
     /**
      * 功能描述:
+     * 〈学生登录〉
+     *
+     * @param loginName
+     * @param pwd
+     * @return com.myclass.entity.backstage.StudentInfo
+     * @author 蜀山剑仙
+     * @date 2019/8/5 下午6:35
+     */
+    StudentInfo login(String loginName, String pwd) throws Exception;
+
+    /**
+     * 功能描述:
      * 〈新增一名学生〉
      *
      * @param studentInfo
