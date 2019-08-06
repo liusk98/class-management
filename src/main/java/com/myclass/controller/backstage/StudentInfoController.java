@@ -78,12 +78,7 @@ public class StudentInfoController {
     }
 
     @GetMapping("studentInfo.json")
-    public PageData<StudentInfo> jsonStudentInfo(Integer gradeId, Integer classId, String sort, String order, int offset, int limit) {
-        StudentInfo studentInfo = new StudentInfo();
-        ClassInfo classInfo = new ClassInfo();
-        classInfo.setId(classId);
-        classInfo.setGradeID(gradeId);
-        studentInfo.setClassId(classInfo);
+    public PageData<StudentInfo> jsonStudentInfo(StudentInfo studentInfo, String sort, String order, int offset, int limit) {
         // 每页条数
         int pageSize = limit;
         // 当前页码

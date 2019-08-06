@@ -19,9 +19,9 @@ import javax.servlet.http.HttpServletRequest;
  * @Date 19-7-23
  */
 @RestController
-public class MainController {
+public class BackstageMainController {
 
-    private Logger logger = Logger.getLogger(MainController.class);
+    private Logger logger = Logger.getLogger(BackstageMainController.class);
 
     /**
      * 服务对象

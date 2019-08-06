@@ -65,16 +65,21 @@ public class ClassInfoController {
     @GetMapping("listClassInfo.html")
     public ModelAndView listClassInfo(ModelAndView modelAndView) {
         modelAndView.setViewName("backstage/teacher/listClassInfo");
+        DataDictionary dataDictionary = new DataDictionary();
+        dataDictionary.setTypeCode("GRADE");
+        dataDictionary.setIsenable(1);
+        List<DataDictionary> listGrade = dataDictionaryService.listDataDictionaryByTypeCode(dataDictionary);
+        modelAndView.addObject("listGrade", listGrade);
         return modelAndView;
     }
 
     @GetMapping("classInfo.json")
-    public PageData<ClassInfo> getTeachers(Integer gradeID,String sort, String order, int offset, int limit) {
+    public PageData<ClassInfo> getTeachers(ClassInfo classInfo, String sort, String order, int offset, int limit) {
         // 每页条数
         int pageSize = limit;
         // 当前页码
         int pageIndex = offset / limit + 1;
-        PageData<ClassInfo> classInfoPageData = classInfoService.pageDataClassInfo(gradeID,pageIndex, pageSize, sort, order);
+        PageData<ClassInfo> classInfoPageData = classInfoService.pageDataClassInfo(classInfo, pageIndex, pageSize, sort, order);
         return classInfoPageData;
     }
 

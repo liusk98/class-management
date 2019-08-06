@@ -15,13 +15,10 @@
     <div class="col-md-3 col-sm-3 col-xs-6">
         <select id="grade" class="form-control">
             <option value="0">--全部年级--</option>
-            <c:forEach items="${listGrade}" var="grade">
-                <option value="${grade.valueId}">${grade.valueName}</option>
-            </c:forEach>
         </select>
     </div>
     <div class="col-md-3 col-sm-3 col-xs-6">
-        <select name="classID" class="form-control">
+        <select id="classID" class="form-control">
             <option value="0">--全部班级--</option>
         </select>
     </div>
@@ -58,37 +55,13 @@
     <jsp:param name="needTable" value="true"/>
 </jsp:include>
 <script type="text/javascript">
-
-    $(function () {
-        var grade = $("#grade");
-        $(grade).change(function () {
-            var gradeId = grade.val();
-            listClassInfo(gradeId);
-        });
-    });
-
-    function listClassInfo(gradeId) {
-        $.ajax({
-            url: "${pageContext.request.contextPath}/backstage/classInfo/listClassInfo.json",
-            data: {gradeId: gradeId},
-            dataType: "json",
-            success: function (result) {
-                $(":input[name=classID]").html("<option value='0'>--全部班级--</option>");
-                $.each(result, function (index, item) {
-                    var value = "<option value='" + item.id + "'>" + item.name + "</option>";
-                    $(":input[name=classID]").append(value);
-                });
-            }
-        })
-    }
-
     function myQuery() {
         $("#studentInfoTable").bootstrapTable("refresh");
     }
 
     function queryParams(params) {
-        params.gradeId = $("#grade").val();
-        params.classId = $(":input[name=classID]").val();
+        //params.classID = $(":input[name=classID]").val();
+        //params.classId.gradeID = array;
         return params;
     }
 
@@ -96,4 +69,7 @@
         return '<a href="${pageContext.request.contextPath}/backstage/classInfo/updateClassInfo.html/' + row.id + '" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> 修改 </a>';
     }
 </script>
-
+<jsp:include page="../common/gradeAndClass.jsp" flush="true">
+    <jsp:param name="gradeSelectId" value="grade"/>
+    <jsp:param name="classSelectId" value="classID"/>
+</jsp:include>

@@ -54,17 +54,10 @@
                         <div class="col-md-3 col-sm-3 col-xs-6">
                             <select id="grade" class="form-control">
                                 <option>--请选择年级--</option>
-                                <c:forEach items="${listGrade}" var="grade">
-                                    <option value="${grade.valueId}"
-                                            <c:if test="${isEdit}">
-                                                <c:if test="">selected</c:if>
-                                            </c:if>
-                                    >${grade.valueName}</option>
-                                </c:forEach>
                             </select>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-6">
-                            <select name="classID" class="form-control">
+                            <select name="classID" id="classID" class="form-control">
                                 <option value="0">--请选择班级--</option>
                             </select>
                         </div>
@@ -92,27 +85,8 @@
     </div>
 </div>
 <%@include file="../common/footer.jsp" %>
-<script type="text/javascript">
-    $(function () {
-        var grade = $("#grade");
-        $(grade).change(function () {
-            var gradeId = grade.val();
-            listClassInfo(gradeId);
-        });
-    });
-
-    function listClassInfo(gradeId) {
-        $.ajax({
-            url: "${pageContext.request.contextPath}/backstage/classInfo/listClassInfo.json",
-            data: {gradeId: gradeId},
-            dataType: "json",
-            success: function (result) {
-                $(":input[name=classID]").html("<option value='0'>--请选择班级--</option>");
-                $.each(result, function (index, item) {
-                    var value = "<option value='" + item.id + "'>" + item.name + "</option>";
-                    $(":input[name=classID]").append(value);
-                });
-            }
-        })
-    }
-</script>
+<jsp:include page="../common/gradeAndClass.jsp" flush="true">
+    <jsp:param name="gradeSelectId" value="grade"/>
+    <jsp:param name="classSelectId" value="classID"/>
+    <jsp:param name="gradeID" value="0"/>
+</jsp:include>

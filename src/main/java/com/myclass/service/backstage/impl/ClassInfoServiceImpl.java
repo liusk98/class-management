@@ -78,11 +78,9 @@ public class ClassInfoServiceImpl implements ClassInfoService {
      * @date 2019/7/31 上午10:38
      */
     @Override
-    public PageData<ClassInfo> pageDataClassInfo(Integer gradeID, int pageIndex, int pageSize, String orderCol, String orderType) {
+    public PageData<ClassInfo> pageDataClassInfo(ClassInfo classInfo, int pageIndex, int pageSize, String orderCol, String orderType) {
         // 设置分页插件
         Page<ClassInfo> page = PageHelper.startPage(pageIndex, pageSize);
-        ClassInfo classInfo = new ClassInfo();
-        classInfo.setGradeID(gradeID);
         //开始调用mapper查询
         List<ClassInfo> teacherInfoList = classInfoMapper.listClassInfo(classInfo, orderCol, orderType);
         PageData<ClassInfo> classInfoPageData = new PageData<>();

@@ -37,15 +37,12 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">所属年级<span
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="grade">所属年级<span
                                 class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <select id="last-name" name="gradeID" class="form-control col-xs-5">
+                            <select id="grade" name="gradeID" class="form-control col-xs-5">
                                 <option>--请选择年级--</option>
-                                <c:forEach items="${listGrade}" var="grade">
-                                    <option value="${grade.valueId}" <c:if test="${classInfo.gradeID == grade.valueId}">selected</c:if>>${grade.valueName}</option>
-                                </c:forEach>
                             </select>
                         </div>
                     </div>
@@ -95,3 +92,7 @@
         })
     })
 </script>
+<jsp:include page="../common/gradeAndClass.jsp" flush="true">
+    <jsp:param name="gradeSelectId" value="grade"/>
+    <jsp:param name="gradeID" value="${classInfo.gradeID}"/>
+</jsp:include>

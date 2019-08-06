@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * 数据字典Controller
@@ -51,6 +52,14 @@ public class DataDictionaryController {
         return modelAndView;
     }
 
+    @GetMapping("listDataDictionary.json")
+    public List<DataDictionary> listDataDictionary(String typeCode) {
+        DataDictionary dataDictionary = new DataDictionary();
+        dataDictionary.setTypeCode(typeCode);
+        dataDictionary.setIsenable(1);
+        List<DataDictionary> listDataDictionaryByTypeCode = dataDictionaryService.listDataDictionaryByTypeCode(dataDictionary);
+        return listDataDictionaryByTypeCode;
+    }
 
     @GetMapping("dataDictionaryList.json")
     public PageData<DataDictionary> getDataDictionary(String sort, String order, int offset, int limit) {

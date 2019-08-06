@@ -59,7 +59,7 @@ public interface ClassInfoService {
      * @author 蜀山剑仙
      * @date 2019/7/31 上午10:38
      */
-    PageData<ClassInfo> pageDataClassInfo(Integer gradeID,int pageIndex, int pageSize, String orderCol, String orderType);
+    PageData<ClassInfo> pageDataClassInfo(ClassInfo classInfo,int pageIndex, int pageSize, String orderCol, String orderType);
 
     /**
      * 功能描述:

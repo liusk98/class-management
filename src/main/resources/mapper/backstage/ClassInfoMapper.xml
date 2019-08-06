@@ -61,6 +61,9 @@
             <if test="classInfo.gradeID != null and classInfo.gradeID != 0">
                 and gradeID = #{classInfo.gradeID}
             </if>
+            <if test="classInfo.name != null and classInfo.name != ''">
+                and name like concat('%',#{classInfo.name},'%')
+            </if>
             <if test="classInfo.remark != null and classInfo.remark != ''">
                 and remark like concat('%',#{classInfo.remark},'%')
             </if>
