@@ -160,6 +160,19 @@
         </where>
     </update>
 
+    <update id="updateStatusBatch">
+        update studentInfo
+        <set>
+            status = #{status}
+        </set>
+        <where>
+            stuNo in
+            <foreach collection="arrStuNo" item="no" open="(" separator="," close=")">
+                #{no}
+            </foreach>
+        </where>
+    </update>
+
     <select id="getStudentInfo" resultMap="StudentInfoMap">
         select stuNo,
         loginName,

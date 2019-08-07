@@ -48,6 +48,18 @@ public interface StudentInfoMapper {
 
     /**
      * 功能描述:
+     * 〈批量修改status数据〉
+     *
+     * @param status
+     * @param arrStuNo
+     * @return int
+     * @author 蜀山剑仙
+     * @date 2019/8/7 下午2:56
+     */
+    int updateStatusBatch(@Param("status") int status, @Param("arrStuNo") String[] arrStuNo);
+
+    /**
+     * 功能描述:
      * 〈获取班级最大的学号〉
      *
      * @param prefix

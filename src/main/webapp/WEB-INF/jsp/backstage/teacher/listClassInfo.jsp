@@ -80,4 +80,5 @@
 </script>
 <jsp:include page="../common/gradeAndClass.jsp" flush="true">
     <jsp:param name="gradeSelectId" value="grade"/>
+    <jsp:param name="gradeID" value="0"/>
 </jsp:include>

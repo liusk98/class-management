@@ -103,6 +103,21 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     /**
      * 功能描述:
+     * 〈批量修改〉
+     *
+     * @param status
+     * @param arrStuNo
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/8/7 下午3:00
+     */
+    @Override
+    public boolean updateStatusBatch(int status, String[] arrStuNo) {
+        return studentInfoMapper.updateStatusBatch(status, arrStuNo) > 0;
+    }
+
+    /**
+     * 功能描述:
      * 〈获取一名学生信息〉
      *
      * @param studentInfo

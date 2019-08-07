@@ -23,9 +23,13 @@
         </select>
     </div>
     <div class="col-xs-5">
-        <button class="btn btn-default" onclick="myQuery()">查询</button>
+        <button class="btn btn-default" type="button" onclick="myQuery()">查询</button>
     </div>
-    <table id="studentInfoTable" class="table table-bordered table-striped table-hover"
+    <div class="row">
+        <button class="btn btn-primary" type="button" onclick="batchDisable()">禁用所选</button>
+    </div>
+    <table id="studentInfoTable"
+           class="table table-bordered table-striped table-hover bulk-action"
            data-toggle="table"
            data-height="460"
            data-pagination="true"
@@ -37,14 +41,15 @@
            data-url="${pageContext.request.contextPath}/backstage/studentInfo/studentInfo.json">
         <thead>
         <tr>
+            <th data-field="" data-checkbox="true"></th>
             <th data-field="stuNo" data-sortable="true" data-width="10" data-width-unit="%">学生编号</th>
             <th data-field="loginName" data-sortable="true">登录名称</th>
             <th data-field="name" data-sortable="true">学生名称</th>
-            <th data-field="sex" data-sortable="true">性别</th>
             <th data-field="classId.name" data-sort-name="className" data-sortable="true">班级名称</th>
             <th data-field="classId.gradeName" data-sort-name="gradeName" data-sortable="true">年级</th>
             <th data-field="createTeacher.name" data-sort-name="teacherName" data-sortable="true">创建人</th>
             <th data-field="createTime" data-sortable="true">创建时间</th>
+            <th data-field="status" data-formatter="changeStatusFormat" data-sortable="true">启用状态</th>
             <th data-formatter="rowsOperate">操作</th>
         </tr>
         </thead>
@@ -55,6 +60,38 @@
     <jsp:param name="needTable" value="true"/>
 </jsp:include>
 <script type="text/javascript">
+    function batchDisable() {
+        var listStuNo = $("#studentInfoTable").bootstrapTable("getSelections");
+        var arrStuNo = new Array();
+        $.each(listStuNo, function (index, item) {
+            arrStuNo.push(item.stuNo);
+        });
+        $.ajax({
+            url : "${pageContext.request.contextPath}/backstage/studentInfo/disable",
+            data : {"arrStuNo": arrStuNo},
+            type : "POST",
+            dataType : "text",
+            success : function (data) {
+                if (data == "true") {
+                    alert("成功");
+                    $("#studentInfoTable").bootstrapTable("refresh");
+                } else {
+                    alert("失败");
+                }
+            }
+        })
+    }
+
+    function changeStatusFormat(status) {
+        var statusName = "";
+        if (status == 0) {
+            statusName = "禁用";
+        } else if (status == 1) {
+            statusName = "启用";
+        }
+        return statusName;
+    }
+
     function myQuery() {
         $("#studentInfoTable").bootstrapTable("refresh");
     }
@@ -72,4 +109,5 @@
 <jsp:include page="../common/gradeAndClass.jsp" flush="true">
     <jsp:param name="gradeSelectId" value="grade"/>
     <jsp:param name="classSelectId" value="classID"/>
+    <jsp:param name="gradeID" value="0"/>
 </jsp:include>
