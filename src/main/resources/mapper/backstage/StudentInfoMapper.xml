@@ -276,6 +276,18 @@
         ) t1
         <where>
             <if test="studentInfo != null">
+                <if test="studentInfo.stuNo != null and studentInfo.stuNo != ''">
+                    and stuNo like concat('%',#{studentInfo.stuNo},'%')
+                </if>
+                <if test="studentInfo.name != null and studentInfo.name != ''">
+                    and name like concat('%',#{studentInfo.name},'%')
+                </if>
+                <if test="studentInfo.sex != null and studentInfo.sex != ''">
+                    and sex = #{studentInfo.sex}
+                </if>
+                <if test="studentInfo.phone != null and studentInfo.phone != ''">
+                    and phone like concat('%',#{studentInfo.phone},'%')
+                </if>
                 <if test="studentInfo.classId != null">
                     <if test="studentInfo.classId.id != 0 and studentInfo.classId.id != null">
                         and classID = #{studentInfo.classId.id}
