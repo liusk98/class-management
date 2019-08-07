@@ -17,7 +17,7 @@
                 if (gradeID == item.valueId) {
                     sel = "selected";
                 }
-                $("#${param.gradeSelectId}").append($("<option "+sel+">").val(item.valueId).text(item.valueName));
+                $("#${param.gradeSelectId}").append($("<option " + sel + ">").val(item.valueId).text(item.valueName));
             });
             </c:if>
             <c:if test="${param.gradeID == 0}">
@@ -30,11 +30,13 @@
         $("#${param.gradeSelectId}").change(function () {
             $("#${param.classSelectId}").empty();
             $("#${param.classSelectId}").append($("<option>").val(0).text("--班级--"));
-            $.getJSON("${pageContext.request.contextPath}/backstage/classInfo/listClassInfo.json?gradeId=" + $(this).val(), "", function (data) {
-                $(data).each(function (index, item) {
-                    $("#${param.classSelectId}").append($("<option>").val(item.id).text(item.name));
+            if ($(this).val() > 0) {
+                $.getJSON("${pageContext.request.contextPath}/backstage/classInfo/listClassInfo.json?gradeId=" + $(this).val(), "", function (data) {
+                    $(data).each(function (index, item) {
+                        $("#${param.classSelectId}").append($("<option>").val(item.id).text(item.name));
+                    })
                 })
-            })
+            }
         })
         </c:if>
     })

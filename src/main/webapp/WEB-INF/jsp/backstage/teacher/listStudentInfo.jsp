@@ -12,21 +12,29 @@
     <jsp:param name="needTable" value="true"/>
 </jsp:include>
 <div class="x_content">
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <select id="grade" class="form-control">
-            <option value="0">--全部年级--</option>
-        </select>
-    </div>
-    <div class="col-md-3 col-sm-3 col-xs-6">
-        <select id="classID" class="form-control">
-            <option value="0">--全部班级--</option>
-        </select>
-    </div>
-    <div class="col-xs-5">
-        <button class="btn btn-default" type="button" onclick="myQuery()">查询</button>
+    <div class="row">
+        <form class="form-inline">
+            <div class="form-group">
+                <label for="grade">年级</label>
+                <select id="grade" class="form-control">
+                    <option value="0">--全部年级--</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="classID">班级</label>
+                <select id="classID" class="form-control">
+                    <option value="0">--全部班级--</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-default" type="button" onclick="myQuery()">查询</button>
+            </div>
+        </form>
     </div>
     <div class="row">
-        <button class="btn btn-primary" type="button" onclick="batchDisable()">禁用所选</button>
+        <button class="btn btn-primary" type="button" onclick="batchEnable()">启用所选</button>
+        <button class="btn btn-danger" type="button" onclick="batchDisable()">禁用所选</button>
     </div>
     <table id="studentInfoTable"
            class="table table-bordered table-striped table-hover bulk-action"
@@ -43,12 +51,12 @@
         <tr>
             <th data-field="" data-checkbox="true"></th>
             <th data-field="stuNo" data-sortable="true" data-width="10" data-width-unit="%">学生编号</th>
-            <th data-field="loginName" data-sortable="true">登录名称</th>
             <th data-field="name" data-sortable="true">学生名称</th>
             <th data-field="classId.name" data-sort-name="className" data-sortable="true">班级名称</th>
             <th data-field="classId.gradeName" data-sort-name="gradeName" data-sortable="true">年级</th>
             <th data-field="createTeacher.name" data-sort-name="teacherName" data-sortable="true">创建人</th>
             <th data-field="createTime" data-sortable="true">创建时间</th>
+            <th data-field="lastLoginTime" data-sortable="true">上次登录时间</th>
             <th data-field="status" data-formatter="changeStatusFormat" data-sortable="true">启用状态</th>
             <th data-formatter="rowsOperate">操作</th>
         </tr>
@@ -60,6 +68,28 @@
     <jsp:param name="needTable" value="true"/>
 </jsp:include>
 <script type="text/javascript">
+    function batchEnable() {
+        var listStuNo = $("#studentInfoTable").bootstrapTable("getSelections");
+        var arrStuNo = new Array();
+        $.each(listStuNo, function (index, item) {
+            arrStuNo.push(item.stuNo);
+        });
+        $.ajax({
+            url: "${pageContext.request.contextPath}/backstage/studentInfo/enable",
+            data: {"arrStuNo": arrStuNo},
+            type: "POST",
+            dataType: "text",
+            success: function (data) {
+                if (data == "true") {
+                    alert("成功");
+                    $("#studentInfoTable").bootstrapTable("refresh");
+                } else {
+                    alert("失败");
+                }
+            }
+        })
+    }
+
     function batchDisable() {
         var listStuNo = $("#studentInfoTable").bootstrapTable("getSelections");
         var arrStuNo = new Array();
@@ -67,11 +97,11 @@
             arrStuNo.push(item.stuNo);
         });
         $.ajax({
-            url : "${pageContext.request.contextPath}/backstage/studentInfo/disable",
-            data : {"arrStuNo": arrStuNo},
-            type : "POST",
-            dataType : "text",
-            success : function (data) {
+            url: "${pageContext.request.contextPath}/backstage/studentInfo/disable",
+            data: {"arrStuNo": arrStuNo},
+            type: "POST",
+            dataType: "text",
+            success: function (data) {
                 if (data == "true") {
                     alert("成功");
                     $("#studentInfoTable").bootstrapTable("refresh");

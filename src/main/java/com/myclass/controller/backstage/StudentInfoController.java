@@ -111,6 +111,20 @@ public class StudentInfoController {
         return (studentInfoService.updateStatusBatch(0, arrStuNo)) ? "true" : "false";
     }
 
+    /**
+     * 功能描述:
+     * 〈批量启用多个学生〉
+     *
+     * @param arrStuNo
+     * @return java.lang.String
+     * @author 蜀山剑仙
+     * @date 2019/8/7 下午3:56
+     */
+    @PostMapping("enable")
+    public String batchEnable(@RequestParam(value = "arrStuNo[]") String[] arrStuNo) {
+        return (studentInfoService.updateStatusBatch(1, arrStuNo)) ? "true" : "false";
+    }
+
     @PostMapping("insertStudentInfo.do")
     public ModelAndView insertStudentInfo(StudentInfo studentInfo, ModelAndView modelAndView, HttpServletRequest request) {
         TeacherInfo teacherInfo = (TeacherInfo) request.getSession().getAttribute("teacher");
