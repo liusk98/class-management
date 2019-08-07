@@ -24,6 +24,8 @@
 
 <!-- jQuery -->
 <script src="${pageContext.request.contextPath}/statics/js/jquery.min.js"></script>
+<!-- jquery-extend -->
+<script src="${pageContext.request.contextPath}/statics/js/jquery-extends.js"></script>
 <!-- Bootstrap -->
 <script src="${pageContext.request.contextPath}/statics/js/bootstrap.min.js"></script>
 <!-- ICheck -->

@@ -43,7 +43,7 @@ public class StudentInfo {
     /**
      * 性别(男,女)
      */
-    private char sex;
+    private String sex;
 
     /**
      * 身份证号
@@ -209,11 +209,11 @@ public class StudentInfo {
         this.classId = classId;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 

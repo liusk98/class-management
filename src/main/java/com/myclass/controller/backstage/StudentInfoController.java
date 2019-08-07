@@ -1,6 +1,5 @@
 package com.myclass.controller.backstage;
 
-import com.myclass.entity.backstage.ClassInfo;
 import com.myclass.entity.backstage.DataDictionary;
 import com.myclass.entity.backstage.StudentInfo;
 import com.myclass.entity.backstage.TeacherInfo;
@@ -8,6 +7,7 @@ import com.myclass.service.backstage.ClassInfoService;
 import com.myclass.service.backstage.DataDictionaryService;
 import com.myclass.service.backstage.StudentInfoService;
 import com.myclass.tools.PageData;
+import com.myclass.tools.TableParams;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.*;
@@ -78,22 +78,14 @@ public class StudentInfoController {
      * 功能描述:
      * 〈分页查询返回json数据〉
      *
-     * @param studentInfo
-     * @param sort
-     * @param order
-     * @param offset
-     * @param limit
+     * @param tableParams
      * @return com.myclass.tools.PageData<com.myclass.entity.backstage.StudentInfo>
      * @author 蜀山剑仙
      * @date 2019/8/7 下午3:09
      */
-    @GetMapping("studentInfo.json")
-    public PageData<StudentInfo> jsonStudentInfo(StudentInfo studentInfo, String sort, String order, int offset, int limit) {
-        // 每页条数
-        int pageSize = limit;
-        // 当前页码
-        int pageIndex = offset / limit + 1;
-        PageData<StudentInfo> studentInfoPageData = studentInfoService.pageDataStudentInfo(studentInfo, pageIndex, pageSize, sort, order);
+    @PostMapping("studentInfo.json")
+    public PageData<StudentInfo> jsonStudentInfo(@RequestBody TableParams<StudentInfo> tableParams) {
+        PageData<StudentInfo> studentInfoPageData = studentInfoService.pageDataStudentInfo(tableParams.getData(),tableParams.getPageNumber(),tableParams.getPageSize(),tableParams.getSortName(),tableParams.getSortOrder());
         return studentInfoPageData;
     }
 

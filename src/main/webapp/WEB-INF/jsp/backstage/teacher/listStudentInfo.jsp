@@ -26,9 +26,48 @@
                     <option value="0">--全部班级--</option>
                 </select>
             </div>
-
             <div class="form-group">
-                <button class="btn btn-default" type="button" onclick="myQuery()">查询</button>
+                <label for="stuNo">学号</label>
+                <input class="form-control" type="text" id="stuNo"/>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="studentName">姓名</label>
+                <input class="form-control" type="text" id="studentName">
+            </div>
+            <div class="form-group">
+                <label for="sex">性别</label>
+                <select id="sex" class="form-control">
+                    <option value="">所有</option>
+                    <option value="男">男</option>
+                    <option value="女">女</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="phone">电话</label>
+                <input type="text" id="phone" class="form-control"/>
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="province">省份</label>
+                <select id="province" class="form-control">
+                    <option>请选择省份</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="city">城市</label>
+                <select id="city" class="form-control">
+                    <option>请选择城市</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="area">区域</label>
+                <select id="area" class="form-control">
+                    <option>请选择区域</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="button" onclick="myQuery()">查询</button>
             </div>
         </form>
     </div>
@@ -42,8 +81,14 @@
            data-height="460"
            data-pagination="true"
            data-side-pagination="server"
+           data-query-params-type=""
+           data-method="post"
+           data-content-type="application/x-www-form-urlencoded"
+           data-ajax="ajaxRequest"
            data-sort-name="stuNo"
-           data-query-params="queryParams"
+    <%--
+               data-query-params="queryParams"
+    --%>
            data-sort-order="asc"
            data-page-list="[5,10,25,50,100,200,All]"
            data-url="${pageContext.request.contextPath}/backstage/studentInfo/studentInfo.json">
@@ -54,6 +99,7 @@
             <th data-field="name" data-sortable="true">学生名称</th>
             <th data-field="classId.name" data-sort-name="className" data-sortable="true">班级名称</th>
             <th data-field="classId.gradeName" data-sort-name="gradeName" data-sortable="true">年级</th>
+            <th data-field="phone">电话号码</th>
             <th data-field="createTeacher.name" data-sort-name="teacherName" data-sortable="true">创建人</th>
             <th data-field="createTime" data-sortable="true">创建时间</th>
             <th data-field="lastLoginTime" data-sortable="true">上次登录时间</th>
@@ -126,10 +172,24 @@
         $("#studentInfoTable").bootstrapTable("refresh");
     }
 
-    function queryParams(params) {
-        //params.classID = $(":input[name=classID]").val();
-        //params.classId.gradeID = array;
-        return params;
+    function ajaxRequest(params) {
+        var stuNo = $("#stuNo").val();
+        var name = $("#studentName").val();
+        var gradeID = $("#grade").val();
+        var classID = $("#classID").val();
+        var sex = $("#sex").val();
+        var phone = $("#phone").val();
+        var student = {
+            "stuNo": stuNo,
+            "name": name,
+            "sex": sex,
+            "phone": phone,
+            "classId": {
+                "id": classID,
+                "gradeID": gradeID
+            }
+        };
+        $.sendTableRequest(params, student);
     }
 
     function rowsOperate(value, row, index) {
