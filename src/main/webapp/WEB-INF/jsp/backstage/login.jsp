@@ -32,15 +32,15 @@
                     <h1>教师管理后台登录</h1>
                     <div class="error"><span>${requestScope.error}</span></div>
                     <div>
-                        <input type="text" class="form-control" name="loginName" placeholder="Username" required="" />
+                        <input type="text" class="form-control" name="loginName" placeholder="Username" required=""/>
                     </div>
                     <div>
-                        <input type="password" class="form-control" name="pwd" placeholder="Password" required="" />
+                        <input type="password" class="form-control" name="pwd" placeholder="Password" required=""/>
                     </div>
                     <div>
-                       <%-- <a class="btn btn-default submit" href="#">Log in</a>--%>
+                        <%-- <a class="btn btn-default submit" href="#">Log in</a>--%>
                         <button class="btn btn-default submit" type="submit">Log in</button>
-                        <a type="button" class="btn btn-warning" href="${pageContext.request.contextPath}/loginStudentInfo.html">转到学生登录</a>
+                        <button type="button" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/loginStudentInfo.html'">转到学生登录</button>
                     </div>
 
                     <div class="clearfix"></div>
@@ -51,11 +51,12 @@
                         </p>
 
                         <div class="clearfix"></div>
-                        <br />
+                        <br/>
 
                         <div>
                             <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and
+                                Terms</p>
                         </div>
                     </div>
                 </form>
@@ -67,13 +68,13 @@
                 <form>
                     <h1>Create Account</h1>
                     <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
+                        <input type="text" class="form-control" placeholder="Username" required=""/>
                     </div>
                     <div>
-                        <input type="email" class="form-control" placeholder="Email" required="" />
+                        <input type="email" class="form-control" placeholder="Email" required=""/>
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
+                        <input type="password" class="form-control" placeholder="Password" required=""/>
                     </div>
                     <div>
                         <a class="btn btn-default submit" href="indexTeacherInfo.html">Submit</a>
@@ -87,11 +88,12 @@
                         </p>
 
                         <div class="clearfix"></div>
-                        <br />
+                        <br/>
 
                         <div>
                             <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                            <p>©2019 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and Terms</p>
+                            <p>©2019 All Rights Reserved. Gentelella Alela! is a Bootstrap 3 template. Privacy and
+                                Terms</p>
                         </div>
                     </div>
                 </form>
