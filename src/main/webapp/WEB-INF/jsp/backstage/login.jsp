@@ -38,8 +38,7 @@
                         <input type="password" class="form-control" name="pwd" placeholder="Password" required=""/>
                     </div>
                     <div>
-                        <%-- <a class="btn btn-default submit" href="#">Log in</a>--%>
-                        <button class="btn btn-default submit" type="submit">Log in</button>
+                        <button class="btn btn-default submit" type="submit">登录</button>
                         <button type="button" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/loginStudentInfo.html'">转到学生登录</button>
                     </div>
 

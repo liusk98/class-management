@@ -23,7 +23,7 @@ import java.util.List;
  * @author 蜀山剑仙
  * @since 2019-07-31 14:44:58
  */
-@RestController
+@RestController("backstage/StudentInfoController")
 @RequestMapping("backstage/studentInfo")
 public class StudentInfoController {
 

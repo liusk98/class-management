@@ -55,7 +55,20 @@
             <mvc:exclude-mapping path="/login*"/>
             <bean class="com.myclass.interceptor.backstage.SessionInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/student/**"/>
+            <mvc:mapping path="/indexStudentInfo.html"/>
+            <!-- 不拦截 -->
+            <mvc:exclude-mapping path="/login*"/>
+            <bean class="com.myclass.interceptor.student.SessionInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
+    <!-- spring调用上传相关代码的工具, id必须为multipartResolver -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="100000000"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
 
 </beans>

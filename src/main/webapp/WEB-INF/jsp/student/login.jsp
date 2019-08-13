@@ -39,8 +39,8 @@
                     </div>
                     <div>
                         <%-- <a class="btn btn-default submit" href="#">Log in</a>--%>
-                        <button class="btn btn-default submit" type="submit">Log in</button>
-                        <a class="reset_pass" href="#">Lost your password?</a>
+                        <button class="btn btn-default submit" type="submit">登录</button>
+                        <%--<a class="reset_pass" href="#">Lost your password?</a>--%>
                     </div>
 
                     <div class="clearfix"></div>

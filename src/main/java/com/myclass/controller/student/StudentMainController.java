@@ -29,8 +29,10 @@ public class StudentMainController {
     StudentInfoService studentInfoService;
 
     @GetMapping("loginStudentInfo.html")
-    public ModelAndView login(ModelAndView modelAndView) {
+    public ModelAndView login(ModelAndView modelAndView, String backUri, HttpServletRequest request) {
         modelAndView.setViewName("student/login");
+        request.getSession().invalidate();
+        request.getSession().setAttribute("backUri", backUri);
         return modelAndView;
     }
 
