@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="common/header.jsp" flush="true">
     <jsp:param name="pageTitle" value="首页"/>
 </jsp:include>
@@ -14,7 +15,14 @@
         <div class="profile_img">
             <div id="crop-avatar">
                 <!-- 头像 -->
-               <%-- <img class="img-responsive avatar-view" src="" alt="Avatar" title="Change the avatar"> --%>
+                <img class="img-responsive avatar-view" src="
+                    <c:if test="${empty student.headImg}">
+                    ${pageContext.request.contextPath}/statics/images/head/goku.jpg
+                    </c:if>
+                    <c:if test="${not empty student.headImg}">
+                    ${pageContext.request.contextPath}/statics/images/head/${student.headImg}
+                    </c:if>
+                    " alt="Avatar" title="Change the avatar">
             </div>
         </div>
         <h3>${sessionScope.student.name}</h3>
@@ -33,7 +41,8 @@
             </li>
         </ul>
 
-        <a class="btn btn-success" href="${pageContext.request.contextPath}/student/studentInfo/edit.html"><i class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+        <a class="btn btn-success" href="${pageContext.request.contextPath}/student/studentInfo/edit.html"><i
+                class="fa fa-edit m-right-xs"></i>Edit Profile</a>
         <br>
         <!-- start skills -->
         <!-- end of skills -->

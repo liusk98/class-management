@@ -140,12 +140,10 @@
             <if test="ipAddress != null and ipAddress != ''">
                 ipAddress = #{ipAddress},
             </if>
-            <if test="modifyTime != null">
-                modifyTime = #{modifyTime},
-            </if>
             <if test="remark != null and remark != ''">
                 remark = #{remark},
             </if>
+             modifyTime = now()
         </set>
         where stuNo = #{stuNo}
     </update>

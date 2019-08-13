@@ -149,7 +149,7 @@ public class StudentInfo {
     /**
      * 注册ip地址
      */
-    private String idAddress;
+    private String ipAddress;
 
     /**
      * 上次修改资料时间
@@ -337,12 +337,12 @@ public class StudentInfo {
         this.status = status;
     }
 
-    public String getIdAddress() {
-        return idAddress;
+    public String getIpAddress() {
+        return ipAddress;
     }
 
-    public void setIdAddress(String idAddress) {
-        this.idAddress = idAddress;
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
     }
 
     public Date getModifyTime() {
