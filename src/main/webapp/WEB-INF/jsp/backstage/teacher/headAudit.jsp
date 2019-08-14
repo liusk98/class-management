@@ -43,18 +43,33 @@
 </jsp:include>
 <script type="text/javascript">
     function headImg(value, row, index) {
-        return "<img height='110px' width='110px' src='${pageContext.request.contextPath}/"+row.headTemp+"' />";
+        return "<img height='110px' width='110px' src='${pageContext.request.contextPath}/" + row.headTemp + "' />";
     }
 
     function rowNumber(value, row, index) {
         var options = $('#studentInfoTable').bootstrapTable('getOptions');
         return options.pageSize * (options.pageNumber - 1) + index + 1;
     }
-    
+
     function rowsOperate(value, row, index) {
-        var permit = "<a class='btn btn-primary btn-xs' href=''><i class='glyphicon glyphicon-ok'></i> 通过</a>";
-        var ban = "<a class='btn btn-danger btn-xs' href=''><i class='glyphicon glyphicon-remove'></i>禁止</a>";
-        return permit+ban;
+        var permit = "<button class='btn btn-primary btn-xs' onclick='audit(" + row.stuNo + ",1)'><i class='glyphicon glyphicon-ok'></i> 通过</button>";
+        var ban = "<button class='btn btn-danger btn-xs' onclick='audit(" + row.stuNo + ",2)'><i class='glyphicon glyphicon-remove'></i>禁止</button>";
+        return permit + ban;
+    }
+
+    function audit(stuNo, result) {
+        $.ajax({
+            url: "${pageContext.request.contextPath}/backstage/studentInfo/audit",
+            data: {
+                stuNo: stuNo,
+                result: result
+            },
+            type: "GET",
+            dataType: "text",
+            success: function (data) {
+                alert(data);
+            }
+        })
     }
 
     function myQuery() {

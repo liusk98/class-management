@@ -123,6 +123,16 @@ public class StudentInfoController {
         return (studentInfoService.updateStatusBatch(1, arrStuNo)) ? "true" : "false";
     }
 
+    @GetMapping("audit")
+    public String auditHead(String stuNo, Integer result) {
+        if (result == 1) {
+            studentInfoService.passHead(stuNo);
+        } else {
+
+        }
+        return "success";
+    }
+
     @PostMapping("insertStudentInfo.do")
     public ModelAndView insertStudentInfo(StudentInfo studentInfo, ModelAndView modelAndView, HttpServletRequest request) {
         TeacherInfo teacherInfo = (TeacherInfo) request.getSession().getAttribute("teacher");

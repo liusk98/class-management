@@ -47,6 +47,18 @@ public interface StudentInfoService {
 
     /**
      * 功能描述:
+     * 〈修改学生待审核头像〉
+     *
+     * @param stuNo
+     * @param headPath
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/8/14 下午1:38
+     */
+    boolean updateHeadTemp(String stuNo, String headPath);
+
+    /**
+     * 功能描述:
      * 〈批量修改〉
      *
      * @param status
@@ -82,4 +94,15 @@ public interface StudentInfoService {
      * @date 2019/8/2 上午11:02
      */
     PageData<StudentInfo> pageDataStudentInfo(StudentInfo studentInfo, int pageIndex, int pageSize, String orderCol, String orderType);
+
+    /**
+     * 功能描述:
+     * 〈头像通过审核〉
+     *
+     * @param stuNo
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/8/14 下午3:50
+     */
+    public boolean passHead(String stuNo);
 }

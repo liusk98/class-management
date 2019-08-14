@@ -2,6 +2,7 @@ package com.myclass.controller.backstage;
 
 import com.myclass.entity.backstage.TeacherInfo;
 import com.myclass.service.backstage.TeacherInfoService;
+import com.myclass.tools.SysConfig;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,6 +38,9 @@ public class BackstageMainController {
     @GetMapping("loginTeacherInfo.html")
     public ModelAndView login(String backUri, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("backstage/login");
+        if (SysConfig.getRootPath() == null) {
+            SysConfig.setRootPath(request.getSession().getServletContext().getRealPath(""));
+        }
         request.getSession().invalidate();
         request.getSession().setAttribute("backUri", backUri);
         return modelAndView;

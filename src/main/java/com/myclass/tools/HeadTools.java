@@ -1,5 +1,7 @@
 package com.myclass.tools;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 
 /**
@@ -24,7 +26,8 @@ public class HeadTools {
             File oldFile = new File(fileFullName);
             String newFileName = fileFullName.replace("temp", "");
             File newFile = new File(newFileName);
-            oldFile.renameTo(newFile);
+            newFile.createNewFile();
+            //oldFile.renameTo(newFile);
             result = true;
         } catch (Exception e) {
             e.printStackTrace();
