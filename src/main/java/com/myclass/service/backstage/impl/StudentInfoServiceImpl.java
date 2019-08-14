@@ -7,6 +7,7 @@ import com.myclass.dao.backstage.StudentInfoMapper;
 import com.myclass.entity.backstage.ClassInfo;
 import com.myclass.entity.backstage.StudentInfo;
 import com.myclass.service.backstage.StudentInfoService;
+import com.myclass.tools.HeadTools;
 import com.myclass.tools.PageData;
 import com.myclass.tools.SysConfig;
 import com.young.encrypt.EncryptTool;
@@ -103,6 +104,25 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     /**
      * 功能描述:
+     * 〈修改学生待审核头像〉
+     *
+     * @param stuNo
+     * @param headPath
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/8/14 下午1:38
+     */
+    @Override
+    public boolean updateHeadTemp(String stuNo, String headPath) {
+        StudentInfo studentInfo = new StudentInfo();
+        studentInfo.setStuNo(stuNo);
+        studentInfo.setHeadTemp(headPath);
+        studentInfo.setIsHeadPass(0);
+        return this.updateStudent(studentInfo);
+    }
+
+    /**
+     * 功能描述:
      * 〈批量修改〉
      *
      * @param status
@@ -156,6 +176,35 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         //获取当前页数据
         studentInfoPageData.setRows(listStudentInfo);
         return studentInfoPageData;
+    }
+
+    /**
+     * 功能描述:
+     * 〈头像通过审核〉
+     *
+     * @param stuNo
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/8/14 下午3:50
+     */
+    @Override
+    public boolean passHead(String stuNo) {
+        StudentInfo studentInfoByStuNo = new StudentInfo();
+        studentInfoByStuNo.setStuNo(stuNo);
+        studentInfoByStuNo = studentInfoMapper.getStudentInfo(studentInfoByStuNo);
+        if (studentInfoByStuNo.getHeadImg() != null) {
+            HeadTools.deleteFile(SysConfig.getRootPath() + "WEB-INF/" + studentInfoByStuNo.getHeadImg());
+        }
+        if (HeadTools.renameHead(SysConfig.getRootPath() + "WEB-INF/" + studentInfoByStuNo.getHeadTemp())) {
+            StudentInfo studentInfo = new StudentInfo();
+            studentInfo.setStuNo(stuNo);
+            studentInfo.setIsHeadPass(1);
+            studentInfo.setHeadImg(studentInfoByStuNo.getHeadTemp().replace("temp", ""));
+            if (studentInfoMapper.updateStudentInfo(studentInfo) > 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

@@ -1,5 +1,7 @@
 package com.myclass.tools;
 
+import org.apache.commons.io.FileUtils;
+
 import java.io.File;
 
 /**
@@ -19,13 +21,11 @@ public class HeadTools {
      */
     public static boolean renameHead(String fileFullName) {
         boolean result = false;
-        fileFullName = fileFullName.replace("/", "\\");
         try {
             File oldFile = new File(fileFullName);
             String newFileName = fileFullName.replace("temp", "");
             File newFile = new File(newFileName);
-            oldFile.renameTo(newFile);
-            result = true;
+            result = oldFile.renameTo(newFile);
         } catch (Exception e) {
             e.printStackTrace();
         }
