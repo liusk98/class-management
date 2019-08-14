@@ -74,6 +74,12 @@ public class StudentInfoController {
         return modelAndView;
     }
 
+    @GetMapping("head/audit")
+    public ModelAndView headAudit(ModelAndView modelAndView) {
+        modelAndView.setViewName("backstage/teacher/headAudit");
+        return modelAndView;
+    }
+
     /**
      * 功能描述:
      * 〈分页查询返回json数据〉
@@ -98,7 +104,7 @@ public class StudentInfoController {
      * @author 蜀山剑仙
      * @date 2019/8/7 下午3:08
      */
-    @PostMapping("disable")
+    @PostMapping("status/disable")
     public String batchDisable(@RequestParam(value = "arrStuNo[]") String[] arrStuNo) {
         return (studentInfoService.updateStatusBatch(0, arrStuNo)) ? "true" : "false";
     }
@@ -112,7 +118,7 @@ public class StudentInfoController {
      * @author 蜀山剑仙
      * @date 2019/8/7 下午3:56
      */
-    @PostMapping("enable")
+    @PostMapping("status/enable")
     public String batchEnable(@RequestParam(value = "arrStuNo[]") String[] arrStuNo) {
         return (studentInfoService.updateStatusBatch(1, arrStuNo)) ? "true" : "false";
     }

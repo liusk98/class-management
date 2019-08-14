@@ -118,6 +118,9 @@
                                         <li>
                                             <a href="${pageContext.request.contextPath}/backstage/studentInfo/listStudentInfo.html">学生列表</a>
                                         </li>
+                                        <li>
+                                            <a href="${pageContext.request.contextPath}/backstage/studentInfo/head/audit">学生头像审核</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>

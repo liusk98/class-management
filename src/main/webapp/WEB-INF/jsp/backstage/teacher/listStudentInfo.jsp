@@ -121,7 +121,7 @@
             arrStuNo.push(item.stuNo);
         });
         $.ajax({
-            url: "${pageContext.request.contextPath}/backstage/studentInfo/enable",
+            url: "${pageContext.request.contextPath}/backstage/studentInfo/status/enable",
             data: {"arrStuNo": arrStuNo},
             type: "POST",
             dataType: "text",
@@ -143,7 +143,7 @@
             arrStuNo.push(item.stuNo);
         });
         $.ajax({
-            url: "${pageContext.request.contextPath}/backstage/studentInfo/disable",
+            url: "${pageContext.request.contextPath}/backstage/studentInfo/status/disable",
             data: {"arrStuNo": arrStuNo},
             type: "POST",
             dataType: "text",

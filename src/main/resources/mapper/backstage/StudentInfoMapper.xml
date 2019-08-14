@@ -286,6 +286,9 @@
                 <if test="studentInfo.phone != null and studentInfo.phone != ''">
                     and phone like concat('%',#{studentInfo.phone},'%')
                 </if>
+                <if test="studentInfo.isHeadPass != null">
+                    and isHeadPass = #{studentInfo.isHeadPass}
+                </if>
                 <if test="studentInfo.classId != null">
                     <if test="studentInfo.classId.id != 0 and studentInfo.classId.id != null">
                         and classID = #{studentInfo.classId.id}

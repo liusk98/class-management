@@ -27,7 +27,7 @@
                             ${pageContext.request.contextPath}/statics/images/head/goku.jpg
                          </c:if>
                          <c:if test="${not empty student.headImg}">
-                            ${pageContext.request.contextPath}/statics/images/head/${student.headImg}
+                            ${pageContext.request.contextPath}/${student.headImg}
                          </c:if>
                         "/>
                     </div>
@@ -48,7 +48,7 @@
         var formData = new FormData();
         formData.append("fileHead", $("#fileHead")[0].files[0]);
         $.ajax({
-            url: "${pageContext.request.contextPath}/student/studentInfo/uploadHead",
+            url: "${pageContext.request.contextPath}/student/studentInfo/upload/head",
             type: "POST",
             data: formData,
             contentType: false,

@@ -16,16 +16,29 @@
             <div id="crop-avatar">
                 <!-- 头像 -->
                 <img class="img-responsive avatar-view" src="
-                    <c:if test="${empty student.headImg}">
-                    ${pageContext.request.contextPath}/statics/images/head/goku.jpg
-                    </c:if>
-                    <c:if test="${not empty student.headImg}">
-                    ${pageContext.request.contextPath}/statics/images/head/${student.headImg}
-                    </c:if>
-                    " alt="Avatar" title="Change the avatar">
+                <c:if test="${sessionScope.student.stuNo == student.stuNo}">
+                    <c:choose>
+                        <c:when test="${student.isHeadPass == 0}">${pageContext.request.contextPath}/${student.headTemp}</c:when>
+                        <c:when test="${student.isHeadPass == 1 or student.isHeadPass == 2 and not empty student.headImg}">${pageContext.request.contextPath}/${student.headImg}</c:when>
+                        <c:otherwise>${pageContext.request.contextPath}/statics/images/head/goku.jpg</c:otherwise>
+                    </c:choose>
+                </c:if>
+                <c:if test="${sessionScope.student.stuNo != student.stuNo}">
+                    <c:choose>
+                        <c:when test="${student.isHeadPass == 1}">${pageContext.request.contextPath}/${student.headImg}</c:when>
+                        <c:when test="${student.isHeadPass == 2 or student.isHeadPass == 0 and not empty student.headImg}">${pageContext.request.contextPath}/${student.headImg}</c:when>
+                        <c:otherwise>${pageContext.request.contextPath}/statics/images/head/goku.jpg</c:otherwise>
+                    </c:choose>
+                </c:if>
+                    " alt="${student.name}" title="${student.name}">
+                <c:if test="${sessionScope.student.stuNo == student.stuNo and not empty student.isHeadPass and student.isHeadPass == 0}">
+                <div style="color: red">
+                    待审核
+                </div>
+                </c:if>
             </div>
         </div>
-        <h3>${sessionScope.student.name}</h3>
+        <h3>${student.name}</h3>
 
         <ul class="list-unstyled user_data">
             <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
@@ -40,9 +53,10 @@
                 <a href="http://www.liushaokang.cn/" target="_blank">www.kimlabs.com</a>
             </li>
         </ul>
-
+        <c:if test="${sessionScope.student.stuNo == student.stuNo}">
         <a class="btn btn-success" href="${pageContext.request.contextPath}/student/studentInfo/edit.html"><i
                 class="fa fa-edit m-right-xs"></i>Edit Profile</a>
+        </c:if>
         <br>
         <!-- start skills -->
         <!-- end of skills -->
