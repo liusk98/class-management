@@ -74,7 +74,7 @@
                             <li><a><i class="fa fa-home"></i> 学生 <span class="fa fa-chevron-down"></span></a>
                                 <ul class="nav child_menu">
                                     <li>
-                                        <a href="#">待续</a>
+                                        <a href="${pageContext.request.contextPath}/student/studentInfo/classmate.html">同班同学</a>
                                     </li>
                                     <li>
                                         <a href="#">待续</a>

@@ -2,6 +2,8 @@ package com.myclass.controller.student;
 
 import com.myclass.entity.backstage.StudentInfo;
 import com.myclass.service.backstage.StudentInfoService;
+import com.myclass.tools.PageData;
+import com.myclass.tools.TableParams;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.*;
@@ -40,6 +42,22 @@ public class StudentInfoController {
         studentInfo = studentInfoService.getStudentInfo(studentInfo);
         modelAndView.addObject("student", studentInfo);
         return modelAndView;
+    }
+
+    @GetMapping("classmate.html")
+    public ModelAndView listStudentInfo(ModelAndView modelAndView) {
+        modelAndView.setViewName("student/classmate");
+        return modelAndView;
+    }
+
+    @PostMapping("classmate.json")
+    public PageData<StudentInfo> listStudentInfo(@RequestBody TableParams<StudentInfo> tableParams,HttpServletRequest request) {
+        StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
+        StudentInfo studentInfoByClassID = new StudentInfo();
+        studentInfoByClassID.setClassID(student.getClassID());
+        tableParams.setData(studentInfoByClassID);
+        PageData<StudentInfo> studentInfoPageData = studentInfoService.pageDataStudentInfo(tableParams.getData(), tableParams.getPageNumber(), tableParams.getPageSize(), tableParams.getSortName(), tableParams.getSortOrder());
+        return studentInfoPageData;
     }
 
     @PostMapping("upload/head")
