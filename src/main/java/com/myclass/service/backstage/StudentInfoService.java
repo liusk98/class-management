@@ -104,5 +104,16 @@ public interface StudentInfoService {
      * @author 蜀山剑仙
      * @date 2019/8/14 下午3:50
      */
-    public boolean passHead(String stuNo);
+    boolean passHead(String stuNo);
+
+    /**
+     * 功能描述:
+     * 〈头像未通过审核〉
+     *
+     * @param stuNo
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/8/16 上午9:07
+     */
+    boolean refuseHead(String stuNo);
 }

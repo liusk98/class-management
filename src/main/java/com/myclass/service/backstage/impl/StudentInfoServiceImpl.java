@@ -207,4 +207,21 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         return false;
     }
 
+    /**
+     * 功能描述:
+     * 〈头像未通过审核〉
+     *
+     * @param stuNo
+     * @return boolean
+     * @author 蜀山剑仙
+     * @date 2019/8/16 上午9:07
+     */
+    @Override
+    public boolean refuseHead(String stuNo) {
+        StudentInfo studentInfo = new StudentInfo();
+        studentInfo.setStuNo(stuNo);
+        studentInfo.setIsHeadPass(2);
+        return studentInfoMapper.updateStudentInfo(studentInfo) > 0;
+    }
+
 }

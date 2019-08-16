@@ -91,7 +91,7 @@ public class StudentInfoController {
      */
     @PostMapping("studentInfo.json")
     public PageData<StudentInfo> jsonStudentInfo(@RequestBody TableParams<StudentInfo> tableParams) {
-        PageData<StudentInfo> studentInfoPageData = studentInfoService.pageDataStudentInfo(tableParams.getData(),tableParams.getPageNumber(),tableParams.getPageSize(),tableParams.getSortName(),tableParams.getSortOrder());
+        PageData<StudentInfo> studentInfoPageData = studentInfoService.pageDataStudentInfo(tableParams.getData(), tableParams.getPageNumber(), tableParams.getPageSize(), tableParams.getSortName(), tableParams.getSortOrder());
         return studentInfoPageData;
     }
 
@@ -128,7 +128,7 @@ public class StudentInfoController {
         if (result == 1) {
             studentInfoService.passHead(stuNo);
         } else {
-
+            studentInfoService.refuseHead(stuNo);
         }
         return "success";
     }
