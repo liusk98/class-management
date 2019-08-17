@@ -5,6 +5,7 @@ import com.myclass.service.backstage.StudentInfoService;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,7 +32,6 @@ public class StudentMainController {
     @GetMapping("loginStudentInfo.html")
     public ModelAndView login(ModelAndView modelAndView, String backUri, HttpServletRequest request) {
         modelAndView.setViewName("student/login");
-        request.getSession().invalidate();
         request.getSession().setAttribute("backUri", backUri);
         return modelAndView;
     }
@@ -66,4 +66,8 @@ public class StudentMainController {
         return modelAndView;
     }
 
+    @RequestMapping("logout")
+    public void logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+    }
 }

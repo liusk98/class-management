@@ -173,7 +173,7 @@
                                     </a>
                                 </li>
                                 <li><a href="${pageContext.request.contextPath}/backstage/updatePwd.html">修改密码</a></li>
-                                <li><a href="${pageContext.request.contextPath}/loginTeacherInfo.html"><i class="fa fa-sign-out pull-right"></i>注销</a></li>
+                                <li><a href="${pageContext.request.contextPath}/logout"><i class="fa fa-sign-out pull-right"></i>注销</a></li>
                             </ul>
                         </li>
 

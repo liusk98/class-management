@@ -41,7 +41,6 @@ public class BackstageMainController {
         if (SysConfig.getRootPath() == null) {
             SysConfig.setRootPath(request.getSession().getServletContext().getRealPath(""));
         }
-        request.getSession().invalidate();
         request.getSession().setAttribute("backUri", backUri);
         return modelAndView;
     }

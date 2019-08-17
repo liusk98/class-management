@@ -82,4 +82,11 @@ public class StudentInfoController {
         }
         return "success";
     }
+
+    @PostMapping("edit.do")
+    public boolean edit(@RequestBody StudentInfo studentInfo) {
+
+        return false;
+    }
+
 }
