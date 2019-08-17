@@ -26,8 +26,11 @@
                          <c:if test="${empty student.headImg}">
                             ${pageContext.request.contextPath}/statics/images/head/goku.jpg
                          </c:if>
-                         <c:if test="${not empty student.headImg}">
+                         <c:if test="${not empty student.headImg and student.isHeadPass == 1}">
                             ${pageContext.request.contextPath}/${student.headImg}
+                         </c:if>
+                         <c:if test="${student.isHeadPass == 0 and not empty student.headTemp}">
+                            ${pageContext.request.contextPath}/${student.headTemp}
                          </c:if>
                         "/>
                     </div>
@@ -54,25 +57,29 @@
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">学号</label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <input class="form-control" type="text" id="stuNo" value="${sessionScope.student.stuNo}" readonly />
+                            <input class="form-control" type="text" id="stuNo" value="${sessionScope.student.stuNo}"
+                                   readonly/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">学生姓名</label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <input class="form-control" type="text" id="name" value="${sessionScope.student.name}" readonly />
+                            <input class="form-control" type="text" id="name" value="${sessionScope.student.name}"
+                                   readonly/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">身份证号</label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <input class="form-control" type="text" id="idCard" value="${sessionScope.student.idCard}" readonly />
+                            <input class="form-control" type="text" id="idCard" value="${sessionScope.student.idCard}"
+                                   readonly/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">登录名</label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <input class="form-control" type="text" id="loginName" value="${sessionScope.student.loginName}" />
+                            <input class="form-control" type="text" id="loginName"
+                                   value="${sessionScope.student.loginName}"/>
                         </div>
                         <div class="col-xs-4"><span class="help-block" id="helpBlock">只允许修改一次</span></div>
                     </div>
@@ -91,41 +98,44 @@
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">生日</label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <input class="form-control" type="date" id="birthday" value="${sessionScope.student.birthday}" />
+                            <input class="form-control" type="date" id="birthday"
+                                   value="${sessionScope.student.birthday}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">电话</label>
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <input class="form-control" type="text" id="phone" value="${sessionScope.student.phone}" />
+                            <input class="form-control" type="text" id="phone" value="${sessionScope.student.phone}"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">所在地区</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <div class="row">
-                        <div class="col-md-4">
-                            <select id="province" class="form-control col-md-3"></select>
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-control col-md-3" id="city"></select>
-                        </div>
-                        <div class="col-md-4">
-                            <select class="form-control col-md-3" id="area"></select>
-                        </div>
+                                <div class="col-md-4">
+                                    <select class="form-control col-md-3" id="province"></select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control col-md-3" id="city"></select>
+                                </div>
+                                <div class="col-md-4">
+                                    <select class="form-control col-md-3" id="area"></select>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">详细地址</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea id="address" class="form-control col-xs-5">${sessionScope.student.address}</textarea>
+                            <textarea id="address"
+                                      class="form-control col-xs-5">${sessionScope.student.address}</textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">个性签名</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                            <textarea id="signature" class="form-control col-xs-5">${sessionScope.student.signature}</textarea>
+                            <textarea id="signature"
+                                      class="form-control col-xs-5">${sessionScope.student.signature}</textarea>
                         </div>
                     </div>
                     <div class="ln_solid"></div>
@@ -144,7 +154,7 @@
         </div>
     </div>
 </div>
-<jsp:include page="common/footer.jsp" flush="false"></jsp:include>
+<jsp:include page="common/footer.jsp"></jsp:include>
 <script type="text/javascript">
     function upload() {
         var formData = new FormData();
@@ -161,3 +171,11 @@
         })
     }
 </script>
+<jsp:include page="common/pca.jsp">
+    <jsp:param name="provinceSelectID" value="province"/>
+    <jsp:param name="citySelectID" value="city"/>
+    <jsp:param name="areaSelectID" value="area"/>
+    <jsp:param name="provinceCode" value="${student.provinceCode}"/>
+    <jsp:param name="cityCode" value="${student.cityCode}"/>
+    <jsp:param name="areaCode" value="${student.areaCode}"/>
+</jsp:include>
