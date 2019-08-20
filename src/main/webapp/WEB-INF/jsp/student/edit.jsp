@@ -13,7 +13,7 @@
     <jsp:param name="needSwitch" value="true"/>
 </jsp:include>
 <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-4 col-sm-4 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
                 <h2>头像</h2>
@@ -24,17 +24,17 @@
                     <div class="form-group">
                         <label>当前头像</label>
                         <br/>
-                        <img width="128px" height="128px" src="
-                         <c:if test="${empty student.headImg}">
+                        <img class="img-responsive avatar-view" src="
+                         <c:if test="${empty sessionScope.student.headImg}">
                             ${pageContext.request.contextPath}/statics/images/head/goku.jpg
                          </c:if>
-                         <c:if test="${not empty student.headImg and student.isHeadPass == 1}">
-                            ${pageContext.request.contextPath}/${student.headImg}
+                         <c:if test="${not empty sessionScope.student.headImg and sessionScope.student.isHeadPass == 1}">
+                            ${pageContext.request.contextPath}/${sessionScope.student.headImg}
                          </c:if>
-                         <c:if test="${student.isHeadPass == 0 and not empty student.headTemp}">
-                            ${pageContext.request.contextPath}/${student.headTemp}
-                         </c:if>
-                        "/>
+                         <c:if test="${sessionScope.student.isHeadPass == 0 and not empty sessionScope.student.headTemp}">
+                            ${pageContext.request.contextPath}/${sessionScope.student.headTemp}
+                         </c:if>"
+                        alt="${sessionScope.student.name}" title="${sessionScope.student.name}"/>
                     </div>
                     <div class="form-group">
                         <label for="fileHead">上传新头像</label>
@@ -46,9 +46,7 @@
             </div>
         </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-8 col-sm-8 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
                 <h2>资料</h2>
