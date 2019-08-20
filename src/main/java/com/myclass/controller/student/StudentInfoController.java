@@ -51,7 +51,7 @@ public class StudentInfoController {
     }
 
     @PostMapping("classmate.json")
-    public PageData<StudentInfo> listStudentInfo(@RequestBody TableParams<StudentInfo> tableParams,HttpServletRequest request) {
+    public PageData<StudentInfo> listStudentInfo(@RequestBody TableParams<StudentInfo> tableParams, HttpServletRequest request) {
         StudentInfo student = (StudentInfo) request.getSession().getAttribute("student");
         StudentInfo studentInfoByClassID = new StudentInfo();
         studentInfoByClassID.setClassID(student.getClassID());
@@ -84,8 +84,11 @@ public class StudentInfoController {
     }
 
     @PostMapping("edit.do")
-    public boolean edit(@RequestBody StudentInfo studentInfo) {
-
+    public boolean edit(@RequestBody StudentInfo studentInfo, HttpServletRequest request) {
+        if (studentInfoService.updateStudent(studentInfo)) {
+            request.getSession().setAttribute("student", studentInfoService.getStudentInfo(studentInfo));
+            return true;
+        }
         return false;
     }
 

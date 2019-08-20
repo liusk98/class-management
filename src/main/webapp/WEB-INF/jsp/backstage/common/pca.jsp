@@ -14,7 +14,7 @@
     $(function () {
         //加载省份列表
         $("#${param.provinceSelectID}").append($("<option>").val("0").text("--- 省份 ---"));
-        $.getJSON("${pageContext.request.contextPath}/backstage/province/province.json", function (data) {
+        $.getJSON("${pageContext.request.contextPath}/province/province.json", function (data) {
             $(data).each(function (index, item) {
                 let option = $("<option>").val(item.code).text(item.name);
                 if (option.val() === provinceCode) {
@@ -29,7 +29,7 @@
         $("#${param.provinceSelectID}").change(function () {
             $("#${param.citySelectID}").empty();
             $("#${param.citySelectID}").append($("<option>").val("0").text("--- 城市 ---"));
-            $.getJSON("${pageContext.request.contextPath}/backstage/city/city.json", {provincecode: $(this).val()}, function (data) {
+            $.getJSON("${pageContext.request.contextPath}/city/city.json", {provincecode: $(this).val()}, function (data) {
                 $(data).each(function (index, item) {
                     let option = $("<option>").val(item.code).text(item.name);
                     if (option.val() === cityCode) {
@@ -45,7 +45,7 @@
         $("#${param.citySelectID}").change(function () {
             $("#${param.areaSelectID}").empty();
             $("#${param.areaSelectID}").append($("<option>").val("0").text("--- 区域 ---"));
-            $.getJSON("${pageContext.request.contextPath}/backstage/area/area.json", {citycode: $(this).val() }, function (data) {
+            $.getJSON("${pageContext.request.contextPath}/area/area.json", {citycode: $(this).val() }, function (data) {
                 $(data).each(function (index, item) {
                     let option = $("<option>").val(item.code).text(item.name);
                     if (option.val() === areaCode) {

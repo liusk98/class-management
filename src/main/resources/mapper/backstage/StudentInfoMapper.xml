@@ -75,7 +75,7 @@
 
     <!--通过主键修改数据-->
     <update id="updateStudentInfo" parameterType="StudentInfo">
-        update myClass.studentInfo
+        update studentInfo
         <set>
             <if test="loginName != null and loginName != ''">
                 loginName = #{loginName},

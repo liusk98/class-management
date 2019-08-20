@@ -1,6 +1,7 @@
 package com.myclass.controller.student;
 
 import com.myclass.entity.backstage.StudentInfo;
+import com.myclass.entity.backstage.TeacherInfo;
 import com.myclass.service.backstage.StudentInfoService;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,8 +67,14 @@ public class StudentMainController {
         return modelAndView;
     }
 
-    @RequestMapping("logout")
-    public void logout(HttpServletRequest request) {
+    @GetMapping("logout")
+    public ModelAndView logout(HttpServletRequest request) {
+        ModelAndView modelAndView = new ModelAndView("redirect:loginStudentInfo.html");
+        StudentInfo studentInfo = (StudentInfo) request.getSession().getAttribute("student");
+        if (studentInfo == null) {
+            modelAndView.setViewName("redirect:loginTeacherInfo.html");
+        }
         request.getSession().invalidate();
+        return modelAndView;
     }
 }
