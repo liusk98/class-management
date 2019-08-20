@@ -41,8 +41,8 @@
     </bean>
 
     <!-- 静态资源映射 -->
-    <mvc:resources location="/WEB-INF/statics/" mapping="/statics/**"/>
-
+     <mvc:resources location="/WEB-INF/statics/" mapping="/statics/**"/>
+    <!-- <mvc:default-servlet-handler/> -->
 
     <mvc:interceptors>
         <mvc:interceptor>

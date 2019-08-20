@@ -17,7 +17,7 @@ import java.util.List;
  * @Date 2019/8/7
  */
 @RestController
-@RequestMapping("backstage")
+@RequestMapping()
 public class ProvinceCityAreaController {
 
     private Logger logger = Logger.getLogger(ProvinceCityAreaController.class);

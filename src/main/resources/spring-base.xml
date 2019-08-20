@@ -8,9 +8,7 @@
          http://www.springframework.org/schema/context/spring-context.xsd">
 	<!-- 读取数据库配置文件 -->
         <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-	        <property name="location">
-	            <value>classpath:database.properties</value>
-	        </property>
+	        <property name="location" value="classpath:database.properties"/>
         </bean> 
 
 	<!-- 数据源 -->
@@ -66,7 +64,7 @@
 	<!-- SqlSession工厂Bean -->
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="dataSource" ref="dataSource"></property>
+		<property name="dataSource" ref="dataSource"/>
 		<property name="configLocation" value="classpath:mybatis.xml"/>
 		<property name="mapperLocations">
 		  <array>
@@ -78,10 +76,10 @@
 	<!-- Mapper自动扫描创建 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="sqlSessionFactoryBeanName"
-			value="sqlSessionFactory"></property>
+			value="sqlSessionFactory"/>
 		<!-- 要扫描的mapper所在的包 -->
-		<property name="basePackage" value="com.myclass.dao"></property>
+		<property name="basePackage" value="com.myclass.dao"/>
 	</bean>
 	
-	<context:component-scan base-package="com.myclass"></context:component-scan>
+	<context:component-scan base-package="com.myclass"/>
 </beans>

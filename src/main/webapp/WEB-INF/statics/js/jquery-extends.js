@@ -22,9 +22,9 @@ $.extend({
 
 (function ($) {
     $.fn.serializeJson = function () {
-        var serializeObj = {};
-        var array = this.serializeArray();
-        var str = this.serialize();
+        let serializeObj = {};
+        let array = this.serializeArray();
+        let str = this.serialize();
         $(array).each(function () {
             if (serializeObj[this.name]) {
                 if ($.isArray(serializeObj[this.name])) {
