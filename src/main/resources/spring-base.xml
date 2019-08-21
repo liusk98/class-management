@@ -2,10 +2,11 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context
-         http://www.springframework.org/schema/context/spring-context.xsd">
+         http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 	<!-- 读取数据库配置文件 -->
         <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	        <property name="location" value="classpath:database.properties"/>
@@ -36,30 +37,29 @@
     </bean>
 
 	<!-- 事务管理 -->
-<!-- 	<bean id="transactionManager"
+ 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-		<property name="dataSource" ref="dataSource"></property>
-	</bean> -->
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
 
 	<!-- 扫描切面注解 -->
-<!-- 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->
+<!--	<aop:aspectj-autoproxy/>-->
 
 	<!-- 事务通知器 -->
-<!-- 	<tx:advice id="txAdivce"
-		transaction-manager="transactionManager">
+ 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 			<tx:method name="*" propagation="REQUIRED"
 				rollback-for="Exception" />
 		</tx:attributes>
-	</tx:advice> -->
+	</tx:advice>
 
 	<!-- 通过AOP实现事务，proxy-target-class="true"代表支持基于类的代理 -->
-<!-- 	<aop:config proxy-target-class="true">
+ 	<aop:config proxy-target-class="true">
 		<aop:pointcut
-			expression="execution(* cn.cm.service.*.*(..))" id="transService" />
-		<aop:advisor advice-ref="txAdivce"
+			expression="execution(* com.myclass.service.*.*.*(..))" id="transService" />
+		<aop:advisor advice-ref="txAdvice"
 			pointcut-ref="transService" />
-	</aop:config> -->
+	</aop:config>
 
 	<!-- SqlSession工厂Bean -->
 	<bean id="sqlSessionFactory"
