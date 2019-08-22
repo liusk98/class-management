@@ -47,13 +47,13 @@
     }
 
     function rowNumber(value, row, index) {
-        var options = $('#studentInfoTable').bootstrapTable('getOptions');
+        let options = $('#studentInfoTable').bootstrapTable('getOptions');
         return options.pageSize * (options.pageNumber - 1) + index + 1;
     }
 
     function rowsOperate(value, row, index) {
-        var permit = "<button class='btn btn-primary btn-xs' onclick='audit(" + row.stuNo + ",1)'><i class='glyphicon glyphicon-ok'></i> 通过</button>";
-        var ban = "<button class='btn btn-danger btn-xs' onclick='audit(" + row.stuNo + ",2)'><i class='glyphicon glyphicon-remove'></i>禁止</button>";
+        let permit = "<button class='btn btn-primary btn-xs' onclick='audit(" + row.stuNo + ",1)'><i class='glyphicon glyphicon-ok'></i> 通过</button>";
+        let ban = "<button class='btn btn-danger btn-xs' onclick='audit(" + row.stuNo + ",2)'><i class='glyphicon glyphicon-remove'></i>禁止</button>";
         return permit + ban;
     }
 
@@ -68,6 +68,7 @@
             dataType: "text",
             success: function (data) {
                 alert(data);
+                myQuery();
             }
         })
     }
@@ -77,7 +78,7 @@
     }
 
     function ajaxRequest(params) {
-        var student = {isHeadPass: 0};
+        let student = {isHeadPass: 0};
         $.sendTableRequest(params, student);
     }
 </script>

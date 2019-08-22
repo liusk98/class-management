@@ -25,16 +25,23 @@
                         <label>当前头像</label>
                         <br/>
                         <img class="img-responsive avatar-view" src="
-                         <c:if test="${empty sessionScope.student.headImg}">
-                            ${pageContext.request.contextPath}/statics/images/head/goku.jpg
-                         </c:if>
-                         <c:if test="${not empty sessionScope.student.headImg and sessionScope.student.isHeadPass == 1}">
-                            ${pageContext.request.contextPath}/${sessionScope.student.headImg}
-                         </c:if>
-                         <c:if test="${sessionScope.student.isHeadPass == 0 and not empty sessionScope.student.headTemp}">
-                            ${pageContext.request.contextPath}/${sessionScope.student.headTemp}
-                         </c:if>"
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.student.headImg and sessionScope.student.isHeadPass == 1}">
+                                ${pageContext.request.contextPath}/${sessionScope.student.headImg}
+                            </c:when>
+                            <c:when test="${sessionScope.student.isHeadPass == 0 and not empty sessionScope.student.headTemp}">
+                                ${pageContext.request.contextPath}/${sessionScope.student.headTemp}
+                            </c:when>
+                            <c:otherwise>
+                                ${pageContext.request.contextPath}/statics/images/head/goku.jpg
+                            </c:otherwise>
+                        </c:choose>"
                         alt="${sessionScope.student.name}" title="${sessionScope.student.name}"/>
+                        <c:if test="${sessionScope.student.stuNo == sessionScope.student.stuNo and not empty sessionScope.student.isHeadPass and sessionScope.student.isHeadPass == 0}">
+                            <div style="color: red">
+                                待审核
+                            </div>
+                        </c:if>
                     </div>
                     <div class="form-group">
                         <label for="fileHead">上传新头像</label>
@@ -179,7 +186,7 @@
             handleWidth: "25",    //设置控件宽度
             //当开关状态改变时触发
             onSwitchChange: function (event, state) {
-                if (state == true) {
+                if (state === true) {
                     $("#sex").val("男");
                 } else {
                     $("#sex").val("女");

@@ -54,8 +54,15 @@
                 <!-- menu profile quick info -->
                 <div class="profile clearfix">
                     <div class="profile_pic">
-                        <img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg" alt="..."
-                             class="img-circle profile_img">
+                        <img src="
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.student.headImg}">
+                                ${pageContext.request.contextPath}/${sessionScope.student.headImg}
+                            </c:when>
+                             <c:otherwise>
+                                ${pageContext.request.contextPath}/statics/images/head/goku.jpg
+                            </c:otherwise>
+                        </c:choose> " alt="..." height="64px" class="img-circle profile_img">
                     </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
@@ -117,9 +124,15 @@
                         <li class="">
                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
                                aria-expanded="false">
-                                <img src="${pageContext.request.contextPath}/statics/images/initHeadImg.jpg"
-                                     alt="">${sessionScope.student.name}
-                                <span class=" fa fa-angle-down"></span>
+                                <img src="
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.student.headImg}">
+                                        ${pageContext.request.contextPath}/${sessionScope.student.headImg}
+                                    </c:when>
+                                    <c:otherwise>
+                                        ${pageContext.request.contextPath}/statics/images/head/goku.jpg
+                                    </c:otherwise>
+                                </c:choose>" alt="">${sessionScope.student.name}<span class=" fa fa-angle-down"></span>
                             </a>
                             <ul class="dropdown-menu dropdown-usermenu pull-right">
                                 <li><a href="javascript:;"> Profile</a></li>
@@ -135,7 +148,7 @@
                             </ul>
                         </li>
 
-                        <li role="presentation" class="dropdown">
+                        <%--<li role="presentation" class="dropdown">
                             <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown"
                                aria-expanded="false">
                                 <i class="fa fa-envelope-o"></i>
@@ -207,7 +220,7 @@
                                     </div>
                                 </li>
                             </ul>
-                        </li>
+                        </li>--%>
                     </ul>
                 </nav>
             </div>

@@ -41,11 +41,16 @@
         <h3>${student.name}</h3>
 
         <ul class="list-unstyled user_data">
-            <li><i class="fa fa-map-marker user-profile-icon"></i> San Francisco, California, USA
+            <!-- 地址 -->
+            <li>
+                <i class="fa fa-map-marker user-profile-icon"></i>
+                ${student.provinceName}&nbsp;${student.cityName}&nbsp;${student.areaName}
             </li>
 
+            <!-- 年级 班级 -->
             <li>
-                <i class="fa fa-briefcase user-profile-icon"></i> Software Engineer
+                <i class="fa fa-briefcase user-profile-icon"></i>
+                ${student.classId.gradeName}&nbsp;${student.classId.name}
             </li>
 
             <li class="m-top-xs">

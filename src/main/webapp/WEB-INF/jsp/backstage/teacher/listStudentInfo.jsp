@@ -86,9 +86,6 @@
            data-content-type="application/x-www-form-urlencoded"
            data-ajax="ajaxRequest"
            data-sort-name="stuNo"
-    <%--
-               data-query-params="queryParams"
-    --%>
            data-sort-order="asc"
            data-page-list="[5,10,25,50,100,200,All]"
            data-url="${pageContext.request.contextPath}/backstage/studentInfo/studentInfo.json">
@@ -115,8 +112,8 @@
 </jsp:include>
 <script type="text/javascript">
     function batchEnable() {
-        var listStuNo = $("#studentInfoTable").bootstrapTable("getSelections");
-        var arrStuNo = new Array();
+        let listStuNo = $("#studentInfoTable").bootstrapTable("getSelections");
+        let arrStuNo = [];
         $.each(listStuNo, function (index, item) {
             arrStuNo.push(item.stuNo);
         });
@@ -126,9 +123,9 @@
             type: "POST",
             dataType: "text",
             success: function (data) {
-                if (data == "true") {
+                if (data === "true") {
                     alert("成功");
-                    $("#studentInfoTable").bootstrapTable("refresh");
+                    myQuery();
                 } else {
                     alert("失败");
                 }
@@ -137,8 +134,8 @@
     }
 
     function batchDisable() {
-        var listStuNo = $("#studentInfoTable").bootstrapTable("getSelections");
-        var arrStuNo = new Array();
+        let listStuNo = $("#studentInfoTable").bootstrapTable("getSelections");
+        let arrStuNo = [];
         $.each(listStuNo, function (index, item) {
             arrStuNo.push(item.stuNo);
         });
@@ -148,9 +145,9 @@
             type: "POST",
             dataType: "text",
             success: function (data) {
-                if (data == "true") {
+                if (data === "true") {
                     alert("成功");
-                    $("#studentInfoTable").bootstrapTable("refresh");
+                    myQuery();
                 } else {
                     alert("失败");
                 }
@@ -159,10 +156,10 @@
     }
 
     function changeStatusFormat(status) {
-        var statusName = "";
-        if (status == 0) {
+        let statusName = "";
+        if (status === 0) {
             statusName = "禁用";
-        } else if (status == 1) {
+        } else if (status === 1) {
             statusName = "启用";
         }
         return statusName;
@@ -173,13 +170,13 @@
     }
 
     function ajaxRequest(params) {
-        var stuNo = $("#stuNo").val();
-        var name = $("#studentName").val();
-        var gradeID = $("#grade").val();
-        var classID = $("#classID").val();
-        var sex = $("#sex").val();
-        var phone = $("#phone").val();
-        var student = {
+        let stuNo = $("#stuNo").val();
+        let name = $("#studentName").val();
+        let gradeID = $("#grade").val();
+        let classID = $("#classID").val();
+        let sex = $("#sex").val();
+        let phone = $("#phone").val();
+        let student = {
             "stuNo": stuNo,
             "name": name,
             "sex": sex,
