@@ -50,21 +50,15 @@
             <br/>
             <div class="form-group">
                 <label for="province">省份</label>
-                <select id="province" class="form-control">
-                    <option>请选择省份</option>
-                </select>
+                <select id="province" class="form-control"></select>
             </div>
             <div class="form-group">
                 <label for="city">城市</label>
-                <select id="city" class="form-control">
-                    <option>请选择城市</option>
-                </select>
+                <select id="city" class="form-control"></select>
             </div>
             <div class="form-group">
                 <label for="area">区域</label>
-                <select id="area" class="form-control">
-                    <option>请选择区域</option>
-                </select>
+                <select id="area" class="form-control"></select>
             </div>
             <div class="form-group">
                 <button class="btn btn-primary" type="button" onclick="myQuery()">查询</button>
@@ -176,11 +170,17 @@
         let classID = $("#classID").val();
         let sex = $("#sex").val();
         let phone = $("#phone").val();
+        let provinceCode = $("#province").val();
+        let cityCode = $("#city").val();
+        let areaCode = $("#area").val();
         let student = {
             "stuNo": stuNo,
             "name": name,
             "sex": sex,
             "phone": phone,
+            "provinceCode": provinceCode,
+            "cityCode": cityCode,
+            "areaCode": areaCode,
             "classId": {
                 "id": classID,
                 "gradeID": gradeID
@@ -197,4 +197,9 @@
     <jsp:param name="gradeSelectId" value="grade"/>
     <jsp:param name="classSelectId" value="classID"/>
     <jsp:param name="gradeID" value="0"/>
+</jsp:include>
+<jsp:include page="../common/pca.jsp">
+    <jsp:param name="provinceSelectID" value="province"/>
+    <jsp:param name="citySelectID" value="city"/>
+    <jsp:param name="areaSelectID" value="area"/>
 </jsp:include>

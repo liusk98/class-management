@@ -91,8 +91,7 @@ public class StudentInfoController {
      */
     @PostMapping("studentInfo.json")
     public PageData<StudentInfo> jsonStudentInfo(@RequestBody TableParams<StudentInfo> tableParams) {
-        PageData<StudentInfo> studentInfoPageData = studentInfoService.pageDataStudentInfo(tableParams.getData(), tableParams.getPageNumber(), tableParams.getPageSize(), tableParams.getSortName(), tableParams.getSortOrder());
-        return studentInfoPageData;
+        return studentInfoService.pageDataStudentInfo(tableParams.getData(), tableParams.getPageNumber(), tableParams.getPageSize(), tableParams.getSortName(), tableParams.getSortOrder());
     }
 
     /**

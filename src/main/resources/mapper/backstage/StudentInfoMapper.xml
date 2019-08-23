@@ -206,7 +206,7 @@
         modifyTime,
         remark
         from (
-        <include refid="queryFull"></include>
+        <include refid="queryFull"/>
         ) t1
         <where>
             <!--<if test="studentInfo != null">-->
@@ -273,7 +273,7 @@
         modifyTime,
         remark
         from (
-        <include refid="queryFull"></include>
+        <include refid="queryFull"/>
         ) t1
         <where>
             <if test="studentInfo != null">
@@ -291,6 +291,15 @@
                 </if>
                 <if test="studentInfo.isHeadPass != null">
                     and isHeadPass = #{studentInfo.isHeadPass}
+                </if>
+                <if test="studentInfo.provinceCode != null and studentInfo.provinceCode > 0">
+                    and provinceCode = #{studentInfo.provinceCode}
+                </if>
+                <if test="studentInfo.cityCode != null and studentInfo.cityCode > 0">
+                    and cityCode = #{studentInfo.cityCode}
+                </if>
+                <if test="studentInfo.areaCode != null and studentInfo.areaCode > 0">
+                    and areaCode = #{studentInfo.areaCode}
                 </if>
                 <if test="studentInfo.classId != null">
                     <if test="studentInfo.classId.id != 0 and studentInfo.classId.id != null">
