@@ -8,7 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="classmanager" />
-        <module name="MyClassManager" />
+        <module name="classmanagement" />
       </profile>
     </annotationProcessing>
   </component>

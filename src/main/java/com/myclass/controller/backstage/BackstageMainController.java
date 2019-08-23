@@ -35,7 +35,7 @@ public class BackstageMainController {
      *
      * @return 登录页面
      */
-    @GetMapping("loginTeacherInfo.html")
+    @GetMapping("login/teacher.html")
     public ModelAndView login(String backUri, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("backstage/login");
         if (SysConfig.getRootPath() == null) {
@@ -45,9 +45,9 @@ public class BackstageMainController {
         return modelAndView;
     }
 
-    @PostMapping("loginTeacherInfo.do")
+    @PostMapping("login/teacher.do")
     public ModelAndView login(String loginName, String pwd, HttpServletRequest request, ModelAndView modelAndView) {
-        modelAndView.setViewName("redirect:indexTeacherInfo.html");
+        modelAndView.setViewName("redirect:/index/teacher.html");
         TeacherInfo teacherInfo = null;
         try {
             teacherInfo = teacherInfoService.login(loginName, pwd);
@@ -70,7 +70,7 @@ public class BackstageMainController {
     }
 
 
-    @RequestMapping("indexTeacherInfo.html")
+    @RequestMapping("index/teacher.html")
     public ModelAndView index(ModelAndView modelAndView) {
         modelAndView.setViewName("backstage/index");
         return modelAndView;

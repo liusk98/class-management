@@ -1,12 +1,10 @@
 package com.myclass.controller.student;
 
 import com.myclass.entity.backstage.StudentInfo;
-import com.myclass.entity.backstage.TeacherInfo;
 import com.myclass.service.backstage.StudentInfoService;
 import org.apache.log4j.Logger;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -30,22 +28,22 @@ public class StudentMainController {
     @Resource
     StudentInfoService studentInfoService;
 
-    @GetMapping("loginStudentInfo.html")
+    @GetMapping("login/student.html")
     public ModelAndView login(ModelAndView modelAndView, String backUri, HttpServletRequest request) {
         modelAndView.setViewName("student/login");
         request.getSession().setAttribute("backUri", backUri);
         return modelAndView;
     }
 
-    @GetMapping("indexStudentInfo.html")
+    @GetMapping("index/student.html")
     public ModelAndView index(ModelAndView modelAndView) {
         modelAndView.setViewName("student/index");
         return modelAndView;
     }
 
-    @PostMapping("loginStudentInfo.do")
+    @PostMapping("login/student.do")
     public ModelAndView login(String loginName, String pwd, HttpServletRequest request, ModelAndView modelAndView) {
-        modelAndView.setViewName("redirect:indexStudentInfo.html");
+        modelAndView.setViewName("redirect:/index/student.html");
         StudentInfo studentInfo = null;
         try {
             studentInfo = studentInfoService.login(loginName, pwd);
@@ -69,10 +67,10 @@ public class StudentMainController {
 
     @GetMapping("logout")
     public ModelAndView logout(HttpServletRequest request) {
-        ModelAndView modelAndView = new ModelAndView("redirect:loginStudentInfo.html");
+        ModelAndView modelAndView = new ModelAndView("redirect:login/student.html");
         StudentInfo studentInfo = (StudentInfo) request.getSession().getAttribute("student");
         if (studentInfo == null) {
-            modelAndView.setViewName("redirect:loginTeacherInfo.html");
+            modelAndView.setViewName("redirect:login/teacher.html");
         }
         request.getSession().invalidate();
         return modelAndView;

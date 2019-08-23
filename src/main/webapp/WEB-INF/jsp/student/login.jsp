@@ -28,7 +28,7 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form action="${pageContext.request.contextPath}/loginStudentInfo.do" method="post">
+                <form action="${pageContext.request.contextPath}/login/student.do" method="post">
                     <h1>学生登录</h1>
                     <div class="error"><span>${requestScope.error}</span></div>
                     <div>
@@ -67,16 +67,22 @@
                 <form>
                     <h1>Create Account</h1>
                     <div>
-                        <input type="text" class="form-control" placeholder="Username" required="" />
+                        <label>
+                            <input type="text" class="form-control" placeholder="Username" required="" />
+                        </label>
                     </div>
                     <div>
-                        <input type="email" class="form-control" placeholder="Email" required="" />
+                        <label>
+                            <input type="email" class="form-control" placeholder="Email" required="" />
+                        </label>
                     </div>
                     <div>
-                        <input type="password" class="form-control" placeholder="Password" required="" />
+                        <label>
+                            <input type="password" class="form-control" placeholder="Password" required="" />
+                        </label>
                     </div>
                     <div>
-                        <a class="btn btn-default submit" href="indexTeacherInfo.html">Submit</a>
+                        <a class="btn btn-default submit" href="index/teacher.html">Submit</a>
                     </div>
 
                     <div class="clearfix"></div>

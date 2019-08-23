@@ -19,7 +19,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
         TeacherInfo teacherInfo = (TeacherInfo) request.getSession().getAttribute("teacher");
         if (teacherInfo == null) {
             String backUri = request.getServletPath();
-            response.sendRedirect(String.valueOf(request.getContextPath()) + "/loginTeacherInfo.html?backUri="+backUri);
+            response.sendRedirect(String.valueOf(request.getContextPath()) + "/login/teacher.html?backUri="+backUri);
             return false;
         }
         return true;

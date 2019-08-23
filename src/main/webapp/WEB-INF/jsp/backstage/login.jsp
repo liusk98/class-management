@@ -28,7 +28,7 @@
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
-                <form action="${pageContext.request.contextPath}/loginTeacherInfo.do" method="post">
+                <form action="${pageContext.request.contextPath}/login/teacher.do" method="post">
                     <h1>教师管理后台登录</h1>
                     <div class="error"><span>${requestScope.error}</span></div>
                     <div>
@@ -39,7 +39,7 @@
                     </div>
                     <div>
                         <button class="btn btn-default submit" type="submit">登录</button>
-                        <button type="button" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/loginStudentInfo.html'">转到学生登录</button>
+                        <button type="button" class="btn btn-warning" onclick="location.href='${pageContext.request.contextPath}/login/student.html'">转到学生登录</button>
                     </div>
 
                     <div class="clearfix"></div>
@@ -76,7 +76,7 @@
                         <input type="password" class="form-control" placeholder="Password" required=""/>
                     </div>
                     <div>
-                        <a class="btn btn-default submit" href="indexTeacherInfo.html">Submit</a>
+                        <a class="btn btn-default submit" href="index/teacher.html">Submit</a>
                     </div>
 
                     <div class="clearfix"></div>
