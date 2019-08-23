@@ -174,5 +174,5 @@
   "otherColumn" : null,
   "savePackageName" : "com.myclass",
   "savePath" : "./src/main/java/com/myclass",
-  "saveModelName" : "MyClassManager"
+  "saveModelName" : "classmanagement"
 }
