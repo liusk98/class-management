@@ -79,11 +79,12 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         StudentInfo studentInfo = studentInfoMapper.getStudentInfo(login);
         if (studentInfo == null) {
             throw new Exception("用户名或密码错误!");
-        }
-        if (studentInfo.getStatus() == 0) {
-            throw new Exception("该用户已被封禁,请联系管理员");
-        } else if (studentInfo != null) {
-            studentInfoMapper.updateLastLoginTimeByStuNo(studentInfo.getStuNo());
+        } else {
+            if (studentInfo.getStatus() == 0) {
+                throw new Exception("该用户已被封禁,请联系管理员");
+            } else {
+                studentInfoMapper.updateLastLoginTimeByStuNo(studentInfo.getStuNo());
+            }
         }
         return studentInfo;
     }
