@@ -7,7 +7,7 @@
         <result property="remark" column="remark" jdbcType="VARCHAR"/>
         <result property="classID" column="classID" jdbcType="INTEGER"/>
         <association property="createTeacher" column="createTeacher" javaType="TeacherInfo">
-            <id property="id" column="createTeacher"></id>
+            <id property="id" column="createTeacher"/>
             <result property="name" column="teacherName" jdbcType="VARCHAR"/>
         </association>
         <association property="classId" column="classID" javaType="ClassInfo">

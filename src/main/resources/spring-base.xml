@@ -10,7 +10,10 @@
 	<!-- 读取数据库配置文件 -->
         <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 	        <property name="location" value="classpath:database.properties"/>
-        </bean> 
+        </bean>
+
+	<!-- 扫描切面注解 -->
+	<aop:aspectj-autoproxy/>
 
 	<!-- 数据源 -->
 
@@ -41,9 +44,6 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-
-	<!-- 扫描切面注解 -->
-<!--	<aop:aspectj-autoproxy/>-->
 
 	<!-- 事务通知器 -->
  	<tx:advice id="txAdvice" transaction-manager="transactionManager">

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myclass.dao.backstage.OperateLogMapper">
+    <resultMap id="OperateLogMap" type="OperateLog">
+        <id property="id" column="id"/>
+        <association property="studentInfo" resultMap="StudentInfoMap"/>
+        <association property="objStudentInfo" resultMap="ObjStudentInfoMap"/>
+    </resultMap>
+    <resultMap type="StudentInfo" id="StudentInfoMap">
+        <result property="stuNo" column="stuNo" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="classID" column="classID" jdbcType="INTEGER"/>
+        <association property="createTeacher" column="createTeacher" javaType="TeacherInfo">
+            <id property="id" column="createTeacher"/>
+            <result property="name" column="teacherName" jdbcType="VARCHAR"/>
+        </association>
+        <association property="classId" column="classID" javaType="ClassInfo">
+            <id property="id" column="classID" jdbcType="INTEGER"/>
+            <result property="name" column="className" jdbcType="VARCHAR"/>
+            <result property="gradeID" column="gradeID" jdbcType="INTEGER"/>
+            <result property="gradeName" column="gradeName" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+    <resultMap type="StudentInfo" id="ObjStudentInfoMap">
+        <result property="stuNo" column="objStu" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="classID" column="classID" jdbcType="INTEGER"/>
+        <association property="createTeacher" column="createTeacher" javaType="TeacherInfo">
+            <id property="id" column="createTeacher"/>
+            <result property="name" column="teacherName" jdbcType="VARCHAR"/>
+        </association>
+        <association property="classId" column="classID" javaType="ClassInfo">
+            <id property="id" column="classID" jdbcType="INTEGER"/>
+            <result property="name" column="className" jdbcType="VARCHAR"/>
+            <result property="gradeID" column="gradeID" jdbcType="INTEGER"/>
+            <result property="gradeName" column="gradeName" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <insert id="insertOperateLog">
+        insert into OperateLog(id, stuNo, teacherId, createTime, logType, contentType, logDesc, logIP, result, objStu, objClassId, remark)
+        values (0,#{operateLog.studentInfo.stuNo},#{operateLog.teacherInfo.id},now(),#{operateLog.logType},#{operateLog.contentType},#{operateLog.logDesc},#{operateLog.logIP},#{operateLog.result},#{operateLog.objStudentInfo.stuNo},#{operateLog.objClassInfo.id},#{operateLog.remark});
+    </insert>
+</mapper>
