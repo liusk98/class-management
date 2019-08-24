@@ -55,7 +55,6 @@ null
 |数据库|[MySQL5.7](https://mysql.com)|  
 |项目框架|SSM|  
 |ORM|[MyBatis](https://www.mybatis.org/mybatis-3/zh/index.html)|  
-|安全框架|SpringSecurity|  
 |项目构建|[Maven](https://maven.apache.org)|  
 |运行环境|[Ubuntu18.04](http://releases.ubuntu.com/18.04/)| 
 - 结构设计  
