@@ -4,6 +4,8 @@
     <resultMap id="OperateLogMap" type="OperateLog">
         <id property="id" column="id"/>
         <association property="studentInfo" resultMap="StudentInfoMap"/>
+        <association property="teacherInfo" resultMap="TeacherInfoMap"/>
+        <association property="classInfo" resultMap="ClassInfoMap"/>
         <association property="objStudentInfo" resultMap="ObjStudentInfoMap"/>
     </resultMap>
     <resultMap type="StudentInfo" id="StudentInfoMap">
@@ -36,9 +38,48 @@
             <result property="gradeName" column="gradeName" jdbcType="VARCHAR"/>
         </association>
     </resultMap>
+    <resultMap type="ClassInfo" id="ClassInfoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="gradeID" column="gradeID" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <association property="createTeacher" column="createTeacher" javaType="TeacherInfo">
+            <id property="id" column="createTeacher" jdbcType="INTEGER"/>
+            <result property="name" column="teacherName" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+    <resultMap type="TeacherInfo" id="TeacherInfoMap">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="loginName" column="loginName" jdbcType="VARCHAR"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="pwd" column="pwd" jdbcType="VARCHAR"/>
+        <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+        <result property="lastLoginTime" column="lastLoginTime" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
 
     <insert id="insertOperateLog">
         insert into OperateLog(id, stuNo, teacherId, createTime, logType, contentType, logDesc, logIP, result, objStu, objClassId, remark)
         values (0,#{operateLog.studentInfo.stuNo},#{operateLog.teacherInfo.id},now(),#{operateLog.logType},#{operateLog.contentType},#{operateLog.logDesc},#{operateLog.logIP},#{operateLog.result},#{operateLog.objStudentInfo.stuNo},#{operateLog.objClassInfo.id},#{operateLog.remark});
     </insert>
+
+    <select id="listOperateLog" resultMap="OperateLogMap">
+        select id, stuNo, teacherId, createTime, logType, contentType, logDesc, logIP, result, objStu, objClassId, remark from OperateLog
+        <where>
+            <if test="operateLog.studentInfo != null">
+                <if test="operateLog.studentInfo.stuNo != null and operateLog.studentInfo.stuNo != ''">
+                    and stuNo = #{operateLog.studentInfo.stuNo}
+                </if>
+            </if>
+            <if test="operateLog.teacherInfo != null">
+                <if test="operateLog.teacherInfo.id != null">
+                    and teacherId = #{operateLog.teacherInfo.id}
+                </if>
+            </if>
+            <if test="operateLog.createTime != null">
+                and createTime &lt; #{operateLog.createTime}
+            </if>
+        </where>
+    </select>
 </mapper>
