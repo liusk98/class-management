@@ -11,11 +11,11 @@
     <jsp:param name="pageTitle" value="首页"/>
 </jsp:include>
 <div class="x_content">
-    <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+    <div class="col-md-6 col-sm-6 col-xs-12 profile_left">
         <div class="profile_img">
             <div id="crop-avatar">
                 <!-- 头像 -->
-                <img class="img-responsive avatar-view" src="
+                <img class="img-responsive avatar-view" width="250" height="140" src="
                 <c:if test="${sessionScope.student.stuNo == student.stuNo}">
                     <c:choose>
                         <c:when test="${student.isHeadPass == 0}">${pageContext.request.contextPath}/${student.headTemp}</c:when>
@@ -66,5 +66,83 @@
         <!-- start skills -->
         <!-- end of skills -->
     </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                    <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Home</a>
+                        </li>
+                        <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Profile</a>
+                        </li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                            <ul id="ulLog" class="list-unstyled timeline">
+
+                            </ul>
+                            <a id="aMore" href="javascript:loadLog()">更多...</a>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                            <p>${student.signature}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 <%@include file="common/footer.jsp" %>
+<script type="text/javascript">
+    let queryTime;
+
+    /**
+     * 创建新的日期节点
+     * @param date
+     * @returns {string}
+     */
+    function createNewDate(date) {
+        let li = $("<li d='" + date + "'><div class='block'><div class='tags'><a href='' class='tag'>" + date + "</a></div></div></li>");
+        $("#ulLog").append(li);
+        return li;
+    }
+
+    /**
+     * 为时间线增加一条数据
+     * @param date 所属日期
+     * @param time  操作时间
+     * @param content 内容描述
+     */
+    function addLogContent(date, time, content) {
+        // 找到对应的日期节点
+        let li = $("#ulLog").children("li[d='" + date + "']");
+        // 日期还不存在
+        if (li.length == 0) {
+            li = createNewDate(date);
+        }
+        var div = $(li.children()[0]);
+        div.append($("<div class='block_content'><div class='byline'><span>" + time + "</span></div><p class='excerpt'>" + content + "</p></div>"))
+    }
+    function loadLog() {
+        $.getJSON("${pageContext.request.contextPath}/operate/query", "createTime="+queryTime+"&stuNo="+${student.stuNo}, function (data) {
+            if (data.length > 0) {
+                $(data).each(function (index, item) {
+                    let dateTemp = item.createTime.split(" ")[0];
+                    let timeTemp = item.createTime.split(" ")[1];
+                    addLogContent(dateTemp, timeTemp, item.logDesc);
+                    queryTime = item.createTime;
+                });
+                if (data.length < 10) {
+                    $("#aMore").hide();
+                }
+            }
+        });
+    }
+
+    $(function () {
+        let day2 = new Date();
+        queryTime = day2.getFullYear()+"-"+(day2.getMonth() + 1)+"-"+day2.getDate()+" "+day2.getHours()+":"+day2.getMinutes()+":"+day2.getSeconds();
+        loadLog();
+    })
+</script>
