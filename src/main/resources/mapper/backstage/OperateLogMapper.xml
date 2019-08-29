@@ -5,7 +5,7 @@
         <id property="id" column="id"/>
         <association property="studentInfo" resultMap="StudentInfoMap"/>
         <association property="teacherInfo" resultMap="TeacherInfoMap"/>
-        <association property="classInfo" resultMap="ClassInfoMap"/>
+        <association property="objClassInfo" resultMap="ClassInfoMap"/>
         <association property="objStudentInfo" resultMap="ObjStudentInfoMap"/>
     </resultMap>
     <resultMap type="StudentInfo" id="StudentInfoMap">

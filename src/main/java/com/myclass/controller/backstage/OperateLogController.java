@@ -27,7 +27,7 @@ public class OperateLogController {
     @RequestMapping("query")
     public List<OperateLog> query(OperateLog operateLog, String stuNo, HttpServletRequest request) {
         StudentInfo studentInfo = null;
-        if (stuNo == null || stuNo == "") {
+        if (stuNo == null || stuNo.equals("")) {
             studentInfo = (StudentInfo) request.getSession().getAttribute("student");
         } else {
             studentInfo = new StudentInfo();

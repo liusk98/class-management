@@ -47,14 +47,14 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/backstage/**"/>
-            <mvc:mapping path="/indexTeacherInfo.html"/>
+            <mvc:mapping path="/index/teacher.html"/>
             <!-- 不拦截 -->
             <mvc:exclude-mapping path="/login*"/>
             <bean class="com.myclass.interceptor.backstage.SessionInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/student/**"/>
-            <mvc:mapping path="/indexStudentInfo.html"/>
+            <mvc:mapping path="/index/student.html"/>
             <!-- 不拦截 -->
             <mvc:exclude-mapping path="/login*"/>
             <bean class="com.myclass.interceptor.student.SessionInterceptor"/>
