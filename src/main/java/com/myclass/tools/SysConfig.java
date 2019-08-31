@@ -2,7 +2,9 @@ package com.myclass.tools;
 
 import com.myclass.entity.backstage.DataDictionary;
 import com.myclass.service.backstage.DataDictionaryService;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
@@ -11,20 +13,62 @@ import javax.annotation.Resource;
  * @author joe
  * @Date 2019/8/1
  */
+@Component
 public class SysConfig {
 
     /**
      * 服务对象
      */
     @Resource
-    private static DataDictionaryService dataDictionaryService;
+    private DataDictionaryService dataDictionaryService;
+
+    private static DataDictionary dataDictionaryRePwd ;
+    /**
+     * 静态化工具类变量
+     */
+    public static SysConfig sysConfig;
 
     /**
      * 初始密码
      */
-    private final static String RESET_PWD;
+    private static String resetPwd;
+    /**
+     * 教师session会话存储值
+     */
+    public final static String SESSION_TEACHER;
+
+    /**
+     * 学生session会话存储值
+     */
+    public final static String SESSION_STUDENT;
 
     private static String rootPath;
+
+    /**
+     * 功能描述:
+     * 〈注解用于告诉此代码在 Spring 加载之前就运行〉
+     *
+     * @param
+     * @return void
+     * @author 蜀山剑仙
+     * @date 2019/8/31 下午9:27
+     */
+    @PostConstruct
+    public void init() {
+        // 工具类的实例赋值给 sysConfig
+        sysConfig = this;
+        // 会激活 Spring 对 service 的管理并赋值
+        sysConfig.dataDictionaryService = this.dataDictionaryService;
+        System.out.println("工具类已经初始化，被纳入 Spring 管理");
+        // 我们在初始化之后调用一下静态方法
+        dataDictionaryRePwd = dataDictionaryService.getDataDictionaryByTypeCodeAndValueId("REPWD", 1);
+        SysConfig.setResetPwd();
+    }
+
+    static {
+        SESSION_TEACHER = "teacher";
+        SESSION_STUDENT = "student";
+    }
 
     public static String getRootPath() {
         return rootPath;
@@ -32,11 +76,6 @@ public class SysConfig {
 
     public static void setRootPath(String rootPath) {
         SysConfig.rootPath = rootPath;
-    }
-
-    static {
-        //DataDictionary dataDictionary = dataDictionaryService.getDataDictionaryByTypeCodeAndValueId("REPWD", 1);
-        RESET_PWD = "e10adc3949ba59abbe56e057f20f883e";
     }
 
     /**
@@ -49,6 +88,20 @@ public class SysConfig {
      * @date 2019/8/1 下午6:08
      */
     public static String getRestPwd() {
-       return RESET_PWD;
+        return resetPwd;
     }
+
+    /**
+     * 功能描述:
+     * 〈调用SET方法为 resetPwd 赋值〉
+     *
+     * @param
+     * @return void
+     * @author 蜀山剑仙
+     * @date 2019/8/31 下午9:10
+     */
+    public static void setResetPwd() {
+        resetPwd = dataDictionaryRePwd.getValueName();
+    }
+
 }
