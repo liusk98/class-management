@@ -5,8 +5,8 @@ import com.github.pagehelper.PageHelper;
 import com.myclass.dao.backstage.TeacherInfoMapper;
 import com.myclass.entity.backstage.TeacherInfo;
 import com.myclass.service.backstage.TeacherInfoService;
+import com.myclass.tools.EncryptTool;
 import com.myclass.tools.PageData;
-import com.young.encrypt.EncryptTool;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 

@@ -38,9 +38,6 @@ public class BackstageMainController {
     @GetMapping("login/teacher.html")
     public ModelAndView login(String backUri, HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("backstage/login");
-        if (SysConfig.getRootPath() == null) {
-            SysConfig.setRootPath(request.getSession().getServletContext().getRealPath(""));
-        }
         request.getSession().setAttribute("backUri", backUri);
         return modelAndView;
     }

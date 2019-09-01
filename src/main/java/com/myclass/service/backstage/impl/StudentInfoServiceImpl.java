@@ -7,10 +7,10 @@ import com.myclass.dao.backstage.StudentInfoMapper;
 import com.myclass.entity.backstage.ClassInfo;
 import com.myclass.entity.backstage.StudentInfo;
 import com.myclass.service.backstage.StudentInfoService;
+import com.myclass.tools.EncryptTool;
 import com.myclass.tools.HeadTools;
 import com.myclass.tools.PageData;
 import com.myclass.tools.SysConfig;
-import com.young.encrypt.EncryptTool;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -30,6 +30,9 @@ public class StudentInfoServiceImpl implements StudentInfoService {
 
     @Resource
     private ClassInfoMapper classInfoMapper;
+
+    @Resource
+    SysConfig sysConfig;
 
     /**
      * 功能描述:
@@ -56,7 +59,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         String stuNo = prefix.append(String.format("%03d", ((maxStuNo == null) ? 1 : maxStuNo + 1))).toString();
         studentInfo.setStuNo(stuNo);
         studentInfo.setLoginName(stuNo);
-        studentInfo.setPwd(SysConfig.getRestPwd());
+        studentInfo.setPwd(sysConfig.getRestPwd());
         studentInfo.setStatus(1);
         return studentInfoMapper.insertStudentInfo(studentInfo) > 0;
     }
