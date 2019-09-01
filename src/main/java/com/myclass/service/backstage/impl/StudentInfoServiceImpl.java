@@ -31,6 +31,9 @@ public class StudentInfoServiceImpl implements StudentInfoService {
     @Resource
     private ClassInfoMapper classInfoMapper;
 
+    @Resource
+    SysConfig sysConfig;
+
     /**
      * 功能描述:
      * 〈新增一名学生〉
@@ -56,7 +59,7 @@ public class StudentInfoServiceImpl implements StudentInfoService {
         String stuNo = prefix.append(String.format("%03d", ((maxStuNo == null) ? 1 : maxStuNo + 1))).toString();
         studentInfo.setStuNo(stuNo);
         studentInfo.setLoginName(stuNo);
-        studentInfo.setPwd(SysConfig.getRestPwd());
+        studentInfo.setPwd(sysConfig.getRestPwd());
         studentInfo.setStatus(1);
         return studentInfoMapper.insertStudentInfo(studentInfo) > 0;
     }

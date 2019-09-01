@@ -61,8 +61,7 @@ public class SysConfig {
         sysConfig.dataDictionaryService = this.dataDictionaryService;
         System.out.println("工具类已经初始化，被纳入 Spring 管理");
         // 我们在初始化之后调用一下静态方法
-        dataDictionaryRePwd = dataDictionaryService.getDataDictionaryByTypeCodeAndValueId("REPWD", 1);
-        SysConfig.setResetPwd();
+        sysConfig.setResetPwd();
     }
 
     static {
@@ -87,7 +86,8 @@ public class SysConfig {
      * @author 蜀山剑仙
      * @date 2019/8/1 下午6:08
      */
-    public static String getRestPwd() {
+    public String getRestPwd() {
+        setResetPwd();
         return resetPwd;
     }
 
@@ -100,8 +100,12 @@ public class SysConfig {
      * @author 蜀山剑仙
      * @date 2019/8/31 下午9:10
      */
-    public static void setResetPwd() {
+    private void setResetPwd() {
+        this.setDataDictionaryRePwd();
         resetPwd = dataDictionaryRePwd.getValueName();
     }
 
+    private void setDataDictionaryRePwd() {
+        SysConfig.dataDictionaryRePwd = dataDictionaryService.getDataDictionaryByTypeCodeAndValueId("REPWD", 1);
+    }
 }
